@@ -13,20 +13,52 @@
 \usepackage{sectsty}
 %Überschrift \section uandern
 \definecolor{orange}{RGB}{76 , 92, 153}
-\allsectionsfont{\sffamily\color{orange}}
-\titlefont{\sffamily\color{orange}}
-\author{Jan Germann - Matrikelummer 4131658}
+\allsectionsfont{\color{orange}}
+%\font{\sffamily\color{orange}}
+
+\author{Jan Germann - Matrikelummer 4131658\\Christian Ratz - Matrikelnummer 123456}
 \title{Relationale Datenbanken 1\\ Aufgabenblatt 1}
 
 \begin{document}
 \maketitle
-\paragraph{1.1.a} % (fold)
-\label{par:1_1_a}
 
-% paragraph 1_1_a (end)
-\textrm{ 
-Blah
-}
 
-blub
+
+1.2.a Datenbank
+Eine Sammlung von Daten
+1.2.b DBMS
+Ein DMBS ist eine Sammlung von Programmen zur Verwaltung von einer Datenbank
+Zuständigkeiten sind unter anderem Physische Abbildung, Strukturierung, Manipulation der Daten,
+1.2.c Filesysteme
+Sind Physikalische Interfaces die es erlauben auf daten zuzugreifen uuber einen Pfad. Das Filesystem gibt nur den Pfad an. Kümmert sich nicht um Konsistenz oder Backups. Filesysteme machen nur die physische Verwaltung.
+Eine Datenbankhingegen sind logische Interfaces.. Sie kümmert sich auch um Backups, kümmert sich auch um logische kohärenz. Kontrolliert Redundanz, Backup und Recovery. Sowie erlauby sie im gegensatz zu einem FS den zugriff auf Daten aufgrund von DatenSemantik.
+1.2.d
+
+Ein DBMS ist im Bankengeschäft durchaus Sinnvoll. Hier wurden FS durch DBMS ersetzt, da Banken stetig gewachsen sind und die verwaltung sehr unübersichtlich wurde. 
+Ein DBMS erlaubt simultanen Zugriff auf die Daten.  (Kunde in Hamburg will nicht auf Kunden in Frankfurt warten)
+Der Verlust von Daten ist nicht zu tollerieren.
+Daten müssen grundsätzlich Konsistent bleiben. (Viele Zugriffe in sehr kurzen Intervallen. 100000 Kunden wollen verschiedenes machen)
+
+
+1.3.a
+Gleiche Daten an mehreren Stellen gespeichert.
+1.3.b
+Probleme die Konsistenszu erhalten wenn sie veränder werten.
+Verschwendung von Speicherplatz
+1.3.c
+Die gleichen daten werden aus sicht von applikationen an einem ort gespeichert, die datenbank speichert es aber zur sicherheit an mehrere stellen
+Zugriff über ein einzelnen Interface, welches vom DBMS gestellt wird.
+Redundanz kann geielt eingesetzt werden um die geschwindigkeit von zugriffen zu erhöhen. (Materialized Views)
+1.4.a Views erlauben  einen unterschiedliche perspektive auf die Datenbank.  Für Applikationen gibt es einen Kunterschied zwischen ein Tabelle und einem View. Auch kann ein View eine Teilmenge  der Daten umfassen oder auch virtuelle, Daten.  Hierbei kann ein dynamisch erstelle werden sobald ein Query kommt, oder aber auch materialisiert werden.
+1.4.b  Eine Transaktion ist eine serie von Datenbankoperationen die als eine logische durchgeführt werden. Hierbei wird auch Concurrencycontrol gestellt, dies ist  erlaubt somit also die consistenz der daten zu erhalten. Transaktionen müssen also Atomar und von einandern isoliert sein.
+1.4.c spezifiziert nur was gewollt ist aber nicht woher
+abgespalten von der physikalischen positionen, organization und speicherung von daten. Beispiel
+\texttt{SELECT first\_name FROM data WHERE first_name=\'Smith\'}
+
+
+
+
+
+
+
 \end{document}
