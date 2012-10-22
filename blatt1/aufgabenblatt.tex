@@ -64,23 +64,19 @@ Zuständigkeiten sind unter anderem Physische Abbildung, Strukturierung, Manipul
   Bei unkontrollierter Redundanz kann es zur Inkonsistenz der redundanten Daten kommen. Sowie zur Verschwendung von Speicherplatz aufgrund von überflüssiger Redundanz.
 
 \teil{c}
-  Die gleichen daten werden aus sicht von applikationen an einem ort gespeichert, die datenbank speichert es aber zur sicherheit an mehrere stellen
-
-  Zugriff über ein einzelnen Interface, welches vom DBMS gestellt wird.
-
-  Redundanz kann geielt eingesetzt werden um die geschwindigkeit von zugriffen zu erhöhen. (Materialized Views)
+  Kontrollierte Redundanz kann den Vorteil haben, dass die Daten zwar redundant (sicherheitshalber auch an verschiendenen Orten) gespeichert werden, aus Sicht der zugreifenden Applikation allerdings nur einmal vorhanden sind. Hierbei kümmert sich das DBMS um die Konsistenz der mehrfach vorhandenen Daten. 
+  Hierbei kann Redundanz auch eingesetzt werden, um die Geschwindigkeit von Zugriffen zu erhöhen, weil die Daten zum Beispiel auf verschiedenen Festplatten gespeichert werden, oder durch materialisierte Views angesprochen werden.
+  Applikationen greifen hierbei optimalerweise über ein einzelnes Interface auf diese Daten zu.
 
 \aufgabe{4}
 \teil{a}
-  Views erlauben  einen unterschiedliche perspektive auf die Datenbank.  Für Applikationen gibt es einen Kunterschied zwischen ein Tabelle und einem View. Auch kann ein View eine Teilmenge  der Daten umfassen oder auch virtuelle, Daten.  Hierbei kann ein dynamisch erstelle werden sobald ein Query kommt, oder aber auch materialisiert werden.
+  Views erlauben unterschiedliche Perspektiven auf die Datenbank. Ein View kann daher eine Teilmenge  der Daten darstellen oder auch virtuelle Daten enthalten welche dynamische auf realen erstellt werden. Es muss zwischen zwei Arten von Views unterschieden werden, den dynamsichen welche bei jeder Abfrage erneut zusammengestellt werden und den materialisierten welche von DBMS auch ohne eine direkt Abfrage aktualisiert werden. Für Applikationen gibt es keinen Unterschied zwischen der Benutzung ein Tabelle und einem View. 
 
 \teil{b}
-  Eine Transaktion ist eine serie von Datenbankoperationen die als eine logische durchgeführt werden. Hierbei wird auch Concurrencycontrol gestellt, dies ist  erlaubt somit also die consistenz der daten zu erhalten. Transaktionen müssen also Atomar und von einandern isoliert sein.
+  Eine Transaktion bezeichnet eine Serie von Datenbankoperationen die logisch als eine einzelne Behandelt werden. So wird die Konsistenz der Daten, bei voneinander abhängigen Abfragen, gewährleistet. Ein entsprechendes DBMS kann bei der Benutzung von Transationen auch die Nebenläufig verwalten und somit bei erhaltung der Konsitenz die Geschwindigkeit der Zugriffe optimieren. Transaktionen müssen atomar und von einandern isoliert sein.
 
 \teil{c}
-  spezifiziert nur was gewollt ist aber nicht woher
-
-  abgespalten von der physikalischen positionen, organization und speicherung von daten.
+  Eine deklarative Abfrage spezifiziert nur, welche Daten gewollt sind, allerdings nicht woher sie kommen sollen. Diese Art von Abfrage ist also abgespalten von der physikalischen Positionen, Organization und Speicherung der abgefragten Daten.
 
 \paragraph{Beispiel} \texttt{SELECT first\_name FROM data WHERE first\_name='Smith'}
 
