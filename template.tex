@@ -1,0 +1,51 @@
+\documentclass[12pt,a4paper,DIV=9]{scrartcl}
+%\documentclass{article}
+\usepackage{pgf}
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata}
+\usepackage{ngerman}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb}
+
+% Schriftart ändern
+\renewcommand{\rmdefault}{ppl}
+%Möglichkeit zur Änderung von Überschriften
+\usepackage{sectsty}
+%Überschrift \section uandern
+\definecolor{blue}{RGB}{76 , 92, 153}
+\allsectionsfont{\color{blue}}
+\paragraphfont{\color{blue}}
+
+\newcommand{\blatt}{11}
+\newcounter{temp}
+\newcommand{\aufgabe}[1]{
+  \setcounter{temp}{\value{subsection}}
+  \setcounter{subsection}{#1}
+  \addtocounter{subsection}{-1}
+  \subsection{}
+  \setcounter{subsection}{\value{temp}}
+}
+\newcommand{\teil}[2][]{
+  \subsubsection*{#2) #1}
+}
+
+\setcounter{section}{\blatt}
+
+\author{Jan Germann - Matrikelummer 4131658\\Christian Ratz - Matrikelnummer 123456}
+\title{Relationale Datenbanken 1\\ Aufgabenblatt \blatt}
+
+\begin{document}
+\maketitle
+
+\aufgabe{1}
+\teil{a}
+\teil{b}
+
+\aufgabe{2}
+\teil{a}
+
+
+
+
+
+\end{document}
