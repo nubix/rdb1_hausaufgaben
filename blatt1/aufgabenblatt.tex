@@ -42,42 +42,47 @@
 Eine Sammlung von Daten.
 
 \teil[DBMS]{b}
-Ein DMBS ist eine Sammlung von Programmen zur Verwaltung von einer Datenbank
+  Ein DMBS ist eine Sammlung von Programmen zur Verwaltung von einer Datenbank
 Zuständigkeiten sind unter anderem Physische Abbildung, Strukturierung, Manipulation der Daten,
+
 \teil[Filesysteme]{c}
-Sind Physikalische Interfaces die es erlauben auf daten zuzugreifen uuber einen Pfad. Das Filesystem gibt nur den Pfad an. Kümmert sich nicht um Konsistenz oder Backups. Filesysteme machen nur die physische Verwaltung.
-Eine Datenbankhingegen sind logische Interfaces.. Sie kümmert sich auch um Backups, kümmert sich auch um logische kohärenz. Kontrolliert Redundanz, Backup und Recovery. Sowie erlauby sie im gegensatz zu einem FS den zugriff auf Daten aufgrund von DatenSemantik.
+  Filesystem sind physikalische Interfaces die es erlauben auf Daten zu über einen Pfad zugreifen. Das Filesystem erlaubt nur den Zugriff über den Pfad, kümmert sich allerdings nicht um die Konsistenz oder Backups dieser Daten. Filesysteme machen also nur die physische Verwaltung der Daten.
+
+  Ein DBMS hingegen stellt logische Interfaces, zum Zugriff auf die in einer Datenbank gespeicherten Daten. Es kümmert sich im Gegensatz zum Filesystem auch um die physikalische Konsitenz und logische kohärenz der gespeicherten Daten. Desweiteren erlaubt ein solches System auch die Redundanz verwaltung sowie Backup und Recovery. Der auffälligste Unterschied von einem DBMS zu einem Filesystem ist allerdings der Zugriff auf Daten aufgrund von Datensemantik und nicht durch einen spezifizierten Pfad.
+
 \teil{d}
+  Ein DBMS ist im zum Beispiel Bankengeschäft sinnvoll. Hier wurde auch schon in der Vergangenheit die Datenverwaltung in Filesystemen durch DBMS ersetzt. Diese technologische Transitionen war durch das stetige Wachstum der Banken bedingt. Mit mehreren tausend Kunden ist das finden einen Datensatzes im Filesystem schwierig, die Erstellungen von Statistiken über alle Kunden eher schwierig durchzuführen.
 
-Ein DBMS ist im Bankengeschäft durchaus Sinnvoll. Hier wurden FS durch DBMS ersetzt, da Banken stetig gewachsen sind und die verwaltung sehr unübersichtlich wurde. 
-Ein DBMS erlaubt simultanen Zugriff auf die Daten.  (Kunde in Hamburg will nicht auf Kunden in Frankfurt warten)
-Der Verlust von Daten ist nicht zu tollerieren.
-Daten müssen grundsätzlich Konsistent bleiben. (Viele Zugriffe in sehr kurzen Intervallen. 100000 Kunden wollen verschiedenes machen)
+  Gerade im Bankgeschäft ist die Inkonsistenz oder gar der Verlust von Daten nicht zu tollerieren.Durch das Transaktionenkonzept wurde bei dieser riesigen Menge von Datensätze auch das erste mal möglich die Konsistenz der Daten auch bei hohen Zugriffsvolumina gewährleistet.
 
+  Mit der Einführung von DBMS wurde der Grundstein für die Einführung von Geldautomaten gelegt. Erst durch diese wurde erst sicherer simultaner Zugriff auf gleiche Datenbeständge ermöglicht. Man stelle sich vor, dass ein Kunde in Frankfurt und ein Kunde der in Hamburg bei der selben Bank abheben wollen. Diese müssten bei einem sequenziellen Zugriff auf den gleichen Datenbestand aufeinander warten. Datenbankmanagementsysteme erlauben die Konsistenzerhaltung auch bei dieser Starken Belastung.
 
 \aufgabe{3}
 \teil{a}
-Gleiche Daten an mehreren Stellen gespeichert.
+  Redundanz bezeichnet das mehrfache Vorhandensein von gleichen Entitäten (in diesem Fall »Daten«).
 \teil{b}
-Probleme die Konsistenszu erhalten wenn sie veränder werten.
-Verschwendung von Speicherplatz
+  Bei unkontrollierter Redundanz kann es zur Inkonsistenz der redundanten Daten kommen. Sowie zur Verschwendung von Speicherplatz aufgrund von überflüssiger Redundanz.
+
 \teil{c}
-Die gleichen daten werden aus sicht von applikationen an einem ort gespeichert, die datenbank speichert es aber zur sicherheit an mehrere stellen
-Zugriff über ein einzelnen Interface, welches vom DBMS gestellt wird.
-Redundanz kann geielt eingesetzt werden um die geschwindigkeit von zugriffen zu erhöhen. (Materialized Views)
+  Die gleichen daten werden aus sicht von applikationen an einem ort gespeichert, die datenbank speichert es aber zur sicherheit an mehrere stellen
+
+  Zugriff über ein einzelnen Interface, welches vom DBMS gestellt wird.
+
+  Redundanz kann geielt eingesetzt werden um die geschwindigkeit von zugriffen zu erhöhen. (Materialized Views)
+
 \aufgabe{4}
 \teil{a}
-Views erlauben  einen unterschiedliche perspektive auf die Datenbank.  Für Applikationen gibt es einen Kunterschied zwischen ein Tabelle und einem View. Auch kann ein View eine Teilmenge  der Daten umfassen oder auch virtuelle, Daten.  Hierbei kann ein dynamisch erstelle werden sobald ein Query kommt, oder aber auch materialisiert werden.
-\teil{b}
-Eine Transaktion ist eine serie von Datenbankoperationen die als eine logische durchgeführt werden. Hierbei wird auch Concurrencycontrol gestellt, dies ist  erlaubt somit also die consistenz der daten zu erhalten. Transaktionen müssen also Atomar und von einandern isoliert sein.
-\teil{c}
-spezifiziert nur was gewollt ist aber nicht woher
-abgespalten von der physikalischen positionen, organization und speicherung von daten.
-\paragraph{Beispiel} % (fold)
-\label{par:beispiel}
+  Views erlauben  einen unterschiedliche perspektive auf die Datenbank.  Für Applikationen gibt es einen Kunterschied zwischen ein Tabelle und einem View. Auch kann ein View eine Teilmenge  der Daten umfassen oder auch virtuelle, Daten.  Hierbei kann ein dynamisch erstelle werden sobald ein Query kommt, oder aber auch materialisiert werden.
 
-\texttt{SELECT first\_name FROM data WHERE first\_name='Smith'}
-% paragraph beispiel (end)Beispiel
+\teil{b}
+  Eine Transaktion ist eine serie von Datenbankoperationen die als eine logische durchgeführt werden. Hierbei wird auch Concurrencycontrol gestellt, dies ist  erlaubt somit also die consistenz der daten zu erhalten. Transaktionen müssen also Atomar und von einandern isoliert sein.
+
+\teil{c}
+  spezifiziert nur was gewollt ist aber nicht woher
+
+  abgespalten von der physikalischen positionen, organization und speicherung von daten.
+
+\paragraph{Beispiel} \texttt{SELECT first\_name FROM data WHERE first\_name='Smith'}
 
 
 
