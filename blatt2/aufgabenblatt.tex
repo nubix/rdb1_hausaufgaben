@@ -1,10 +1,11 @@
 \documentclass[12pt,a4paper,DIV=9]{scrartcl}
 \usepackage{pgf}
 \usepackage{tikz}
-\usetikzlibrary{arrows,automata}
+\usetikzlibrary{arrows,automata,positioning}
 \usepackage{ngerman}
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath,amssymb}
+\usetikzlibrary{shapes,snakes}
 % Schriftart ändern
 \renewcommand{\rmdefault}{ppl}
 %Möglichkeit zur Änderung von Überschriften
@@ -79,13 +80,22 @@
 
 \aufgabe{2}
 \teil{a}
-  Eine Entität kann vieles sein. Es beschreibt
+  Ein Entitätstyp ist eine »Struktur« welche allen der Entitäten diesen Typs gemein ist. So ist ein Entitätstyp durch seinen Namen und die Menge seiner Attribute beschrieben.
+  Eine Entität repräsentiert ein reales Objekt mit einer unabhängigen Existenz. Die einzelne Entität ist immer eine Instanz eines Entitätstyps.
+  \paragraph{Bespiel} Ein Stift, ein Auto, der Nachbar mit Namen »Dieter«, u.v.m.
 \teil{b}
 \teil{c}
 \teil{d}
 \teil{a}
 \aufgabe{3}
-  
+  \begin{tikzpicture}[scale=1]
+
+  \tikzset{every node/.style={draw, thick, fill=blue!20}}
+    \node (a) [diamond] {};
+    \node (b) [diamond] at (45:1cm) {};
+    \node (b) [diamond] at (90:1.5cm) {};
+  %  \node (b) [diamond, above=3em of a] {};
+\end{tikzpicture}
 
 \aufgabe{4}
 \aufgabe{5}
