@@ -97,8 +97,10 @@
 
   \pgfdeclarelayer{background}
   \pgfsetlayers{background,main}
-  \begin{tikzpicture}[scale=1, every entity/.style={fill=blue,minimum height=5mm,minimum width=10mm},every relationship/.style={fill=green,minimum height=5mm,minimum width=5mm}]
+  \begin{tikzpicture}[scale=1, every entity/.style={fill=blue,line width=2pt,minimum height=5mm,minimum width=10mm, draw=darkblue},every relationship/.style={fill=green,line width=2pt,minimum height=5mm,minimum width=5mm, draw=darkgreen}]
     \definecolor{blue}{RGB}{81, 128, 194}
+    \definecolor{darkblue}{RGB}{57, 91, 141}
+    \definecolor{darkgreen}{RGB}{116, 137, 50}
     \definecolor{green}{RGB}{158, 188, 71}
 
     \node[entity] (e00) {};
@@ -121,11 +123,11 @@
       (e00) edge (r0)
       (e00) edge (r1)
       (e01) edge (r2)
-      (e02) edge [red] (r2)
+      (e02) edge [red,line width=1.5pt] (r2)
 
       (e10) edge (r0)
       (e10) edge (r2)
-      (e11) edge [red] (r0)
+      (e11) edge [red,line width=1.5pt] (r0)
       (e11) edge (r1)
 
       (e20) edge (r0)
@@ -134,32 +136,36 @@
 
     
     \begin{pgfonlayer}{background}
-        \path (e00)+(-1.5,1.0) node (g) {a};
+        \path (e00)+(-1.5,1.0) node (g) {};
         \path (e02)+(1.5,-1.0) node (h) {};
          
         \path[rounded corners=5mm, draw=blue, line width=3pt]
             (g) rectangle (h);
+        \node at ([shift={(-45:0.6)}]g) {a}; 
     \end{pgfonlayer}
     \begin{pgfonlayer}{background}
-        \path (e10)+(-1.5,1.0) node (g) {b};
+        \path (e10)+(-1.5,1.0) node (g) {};
         \path (e11)+(1.5,-1.0) node (h) {};
          
         \path[rounded corners=5mm, draw=blue, line width=3pt]
             (g) rectangle (h);
+        \node at ([shift={(-45:0.6)}]g) {b};
     \end{pgfonlayer}
     \begin{pgfonlayer}{background}
-        \path (e20)+(-1.5,1.0) node (g) {c};
+        \path (e20)+(-1.5,1.0) node (g) {};
         \path (e22)+(1.5,-1.0) node (h) {};
          
         \path[rounded corners=5mm, draw=blue, line width=3pt]
             (g) rectangle (h);
+        \node at ([shift={(-45:0.6)}]g) {c};
     \end{pgfonlayer}
     \begin{pgfonlayer}{background}
-        \path (r0)+(-1.5,1.0) node (g) {r};
+        \path (r0)+(-1.5,1.0) node (g) {};
         \path (r2)+(2.5,-1.0) node (h) {};
          
         \path[rounded corners=5mm, draw=green!100, line width=3pt]
             (g) rectangle (h);
+        \node at ([shift={(-45:0.6)}]g) {r};
     \end{pgfonlayer}
 
   \end{tikzpicture}
