@@ -70,9 +70,15 @@ Tikz library]
 %%%%
 % Personalisierung
 %%%%
-\tikzstyle{every entity} = [top color=white, bottom color=blue!30, draw=blue!50!black!100,]
+\definecolor{blue}{RGB}{81, 128, 194}
+\definecolor{darkblue}{RGB}{57, 91, 141}
+\definecolor{darkgreen}{RGB}{116, 137, 50}
+\definecolor{green}{RGB}{158, 188, 71}
+\definecolor{darkyellow}{RGB}{175, 119, 0}
+
+\tikzstyle{every entity} = [fill=blue!50, draw=darkblue]
 \tikzstyle{every weak entity} = []
-\tikzstyle{every attribute} = [top color=white, bottom color=yellow!20, draw=black, node distance=1cm]
-\tikzstyle{every relationship} = [top color=white, bottom color=red!20, draw=red!50!black!100]
+\tikzstyle{every attribute} = [fill=yellow!50, draw=darkyellow, node distance=1cm]
+\tikzstyle{every relationship} = [fill=green!50, draw=darkgreen]
 \tikzstyle{every isa} = [top color=white, bottom color=green!20, draw=green!50!black!100]
 

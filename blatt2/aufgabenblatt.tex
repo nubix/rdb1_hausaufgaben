@@ -176,7 +176,7 @@
 \aufgabe{4}
   \tt{Student = (matno, name, (address(street, no, zip, city)), {telephone(prefno, no)})}
 
-  \begin{tikzpicture}[scale=1]
+  \begin{tikzpicture}[scale=1, every edge/.style={draw=blue, very thick}]
     \node[entity] (student) {Student};
 
     \node[attribute] (matno) at ([shift={(60:2)}]student) {matno} edge (student);
@@ -195,6 +195,28 @@
 
 \aufgabe{5}
 
+  \begin{tikzpicture}[scale=1,every edge/.style={draw=blue, very thick}]
+    \node[entity] (halle) {Halle};
+      \node[attribute] [above right=of halle] {Id} edge (halle);
+      \node[attribute] [right=of halle] {Name} edge (halle);
+
+    \node[relationship] (r1) [below=of halle] {enthält} edge node[right]{1} (halle);
+
+    \node[entity] (stand) [below=of r1] {Stand} edge[double, line width=1pt] node[right]{N} (r1);
+      \node[attribute] [below=of stand] {Nummer} edge (stand);
+
+    \node[relationship] (r2) [right=of stand] {mietet} edge[double, line width=1pt] node[above]{N} (stand);
+
+    \node[entity] (firma) [below=of r2] {Firma} edge node[right]{1} (r2);
+      \node[attribute] [right=of firma] {Name} edge (firma);
+
+    \node[relationship] (r3) [below=of firma] {belegt um} edge node[right]{N} (firma);
+      \node[attribute] [below left=of r3] {Beginn} edge (r3);
+      \node[attribute] [below=of r3] {Ende} edge (r3);
+
+    \node[entity] (raum) [right=of r3] {Raum} edge node[above]{M} (r3);
+      \node[attribute] [above right=of raum] {Nummer} edge (raum);
+  \end{tikzpicture}
 
 
 \end{document}
