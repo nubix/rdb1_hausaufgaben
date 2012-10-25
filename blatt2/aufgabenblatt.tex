@@ -1,10 +1,11 @@
-\documentclass[12pt,a4paper,DIV=9]{scrartcl}
+\documentclass[11pt,a4paper,DIV=9]{scrartcl}
 \usepackage{pgf}
 \usepackage{tikz}
-\usetikzlibrary{arrows,automata,positioning}
+\usetikzlibrary{arrows,automata,positioning,shadows}
 \usepackage{ngerman}
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath,amssymb}
+\usepackage{tikz-er2}
 \usetikzlibrary{shapes,snakes}
 % Schriftart ändern
 \renewcommand{\rmdefault}{ppl}
@@ -69,11 +70,11 @@
 \teil{a}
   Die ANSI-SPARC Architektur separiert die Benutzeranwendungen und Views von der physikalischen Datenbank. Sie besteht aus den drei Ebenen 
   \begin{enumerate}
-    \item \bf{Darstellungsebene} \\
+    \item \textbf{Darstellungsebene} \\
       Diese Schicht ist extern und nicht direkt ein Teil des DBMS
-    \item \bf{logische Ebene} \\
+    \item \textbf{logische Ebene} \\
       Hat einen Menschen,  alter, ganz Zahl 
-    \item \bf{physikalische Ebene}
+    \item \textbf{physikalische Ebene} \\
       Bestimmt wie, wo daten gespeichert werden und was dort gespeichert wird. Zum Beispiel bestimmt es ob die daten auf platte eins oder platte x liegen. Interne representation von daten, z.B. Integer wird in n Bits abgelegt
     \end{enumerate}
 \teil{b}
@@ -81,23 +82,108 @@
 \aufgabe{2}
 \teil{a}
   Ein Entitätstyp ist eine »Struktur« welche allen der Entitäten diesen Typs gemein ist. So ist ein Entitätstyp durch seinen Namen und die Menge seiner Attribute beschrieben.
-  Eine Entität repräsentiert ein reales Objekt mit einer unabhängigen Existenz. Die einzelne Entität ist immer eine Instanz eines Entitätstyps.
+  \paragraph{Beispiel} Ein Entitätstyp beschreibt  wie Katzen generell aussehen. Allerdings nicht die einzelne Katze.
+  \paragraph{} Eine Entität repräsentiert ein reales Objekt mit einer unabhängigen Existenz. Die einzelne Entität ist immer eine Instanz eines Entitätstyps.
   \paragraph{Bespiel} Ein Stift, ein Auto, der Nachbar mit Namen »Dieter«, u.v.m.
 \teil{b}
+  Ein »abgeleitetes« Attribut wird nicht in der Datenbank gespeichert sondern bei einer Abfrage dynamisch von DBMS aufgrund von vorhandenen Daten generiert.
+  \paragraph{Beispiel} Hierbei kann es sich zum Beispiel um ein Attribut »age« handeln welches von dem Attribut »birthday« abgeleitet wird.
 \teil{c}
 \teil{d}
-\teil{a}
+  Schlüsselattribute dienen zur eindeutigen identifikation von Datensätzen. Da es in einer Tabelle keine doppelten Datensätze geben darf, muss, für den Fall das dies vorkommen kann, ein Schlüssel für diese Datensätze definiert werden.
+  \paragraph{Beispiel} Man stelle sich eine Tabelle vor in der die Adresse von Personen speichert werden. Nun kann es aber mehr als eine Person mit der selben Adresse geben.
 \aufgabe{3}
-  \begin{tikzpicture}[scale=1]
+  Nach dem gegebenen ER Diagramm, aus der Aufgabenstellung, muss von den Beziehungslosen Element aus der Menge \texttt{a} eine Verbindung in die Menge \texttt{r} geben. In der Menge \texttt{b} müssen alle Elemente mindestens zwei Verbindungen in die Menge \texttt{r} haben, dies wurde hier ergänzt. \\
 
-  \tikzset{every node/.style={draw, thick, fill=blue!20}}
-    \node (a) [diamond] {};
-    \node (b) [diamond] at (45:1cm) {};
-    \node (b) [diamond] at (90:1.5cm) {};
-  %  \node (b) [diamond, above=3em of a] {};
-\end{tikzpicture}
+  \pgfdeclarelayer{background}
+  \pgfsetlayers{background,main}
+  \begin{tikzpicture}[scale=1, every entity/.style={fill=blue,minimum height=5mm,minimum width=10mm},every relationship/.style={fill=green,minimum height=5mm,minimum width=5mm}]
+    \definecolor{blue}{RGB}{81, 128, 194}
+    \definecolor{green}{RGB}{158, 188, 71}
+
+    \node[entity] (e00) {};
+    \node[entity] (e01) at ([shift={(-90:1.5)}]e00) {};
+    \node[entity] (e02) at ([shift={(-90:1.5)}]e01) {};
+  
+
+    \node[entity] (e10) at ([shift={(35:4)}]e00) {};
+    \node[entity] (e11) at ([shift={(0:3)}]e10) {};
+
+    \node[entity] (e20) at ([shift={(-35:4)}]e11) {};
+    \node[entity] (e21) at ([shift={(-90:1.5)}]e20) {};
+    \node[entity] (e22) at ([shift={(-90:1.5)}]e21) {};
+
+    \node[relationship] (r0) at ([shift={(-70:3)}]e10) {};
+    \node[relationship] (r1) at ([shift={(-65:5)}]e10) {};
+    \node[relationship] (r2) at ([shift={(-80:6)}]e10) {};
+   
+    \path[every edge/.style={draw=blue, very thick}]
+      (e00) edge (r0)
+      (e00) edge (r1)
+      (e01) edge (r2)
+      (e02) edge [red] (r2)
+
+      (e10) edge (r0)
+      (e10) edge (r2)
+      (e11) edge [red] (r0)
+      (e11) edge (r1)
+
+      (e20) edge (r0)
+      (e21) edge (r1)
+      (e21) edge (r2);
+
+    
+    \begin{pgfonlayer}{background}
+        \path (e00)+(-1.5,1.0) node (g) {a};
+        \path (e02)+(1.5,-1.0) node (h) {};
+         
+        \path[rounded corners=5mm, draw=blue, line width=3pt]
+            (g) rectangle (h);
+    \end{pgfonlayer}
+    \begin{pgfonlayer}{background}
+        \path (e10)+(-1.5,1.0) node (g) {b};
+        \path (e11)+(1.5,-1.0) node (h) {};
+         
+        \path[rounded corners=5mm, draw=blue, line width=3pt]
+            (g) rectangle (h);
+    \end{pgfonlayer}
+    \begin{pgfonlayer}{background}
+        \path (e20)+(-1.5,1.0) node (g) {c};
+        \path (e22)+(1.5,-1.0) node (h) {};
+         
+        \path[rounded corners=5mm, draw=blue, line width=3pt]
+            (g) rectangle (h);
+    \end{pgfonlayer}
+    \begin{pgfonlayer}{background}
+        \path (r0)+(-1.5,1.0) node (g) {r};
+        \path (r2)+(2.5,-1.0) node (h) {};
+         
+        \path[rounded corners=5mm, draw=green!100, line width=3pt]
+            (g) rectangle (h);
+    \end{pgfonlayer}
+
+  \end{tikzpicture}
 
 \aufgabe{4}
+  \tt{Student = (matno, name, (address(street, no, zip, city)), {telephone(prefno, no)})}
+
+  \begin{tikzpicture}[scale=1]
+    \node[entity] (student) {Student};
+
+    \node[attribute] (matno) at ([shift={(60:2)}]student) {matno} edge (student);
+    \node[attribute] (name) at ([shift={(20:3)}]student) {name} edge (student);
+    \node[attribute] (adress) at ([shift={(-5:5)}]student) {address} edge (student);
+      \node[attribute] (street) at ([shift={(30:3)}]adress) {street} edge (adress);
+      \node[attribute] (no) at ([shift={(10:3)}]adress) {no} edge (adress);
+      \node[attribute] (zip) at ([shift={(-10:3)}]adress) {zip} edge (adress);
+      \node[attribute] (city) at ([shift={(-33:3)}]adress) {city} edge (adress);
+
+    \node[multi attribute] (telephone) at ([shift={(-30:4)}]student) {telehpone} edge (student);
+        \node[attribute] (prefno) at ([shift={(-60:2.5)}]telephone) {prefno} edge (telephone);
+        \node[attribute] (no) at ([shift={(-120:2.5)}]telephone) {no} edge (telephone);    
+  \end{tikzpicture}
+
+
 \aufgabe{5}
 
 
