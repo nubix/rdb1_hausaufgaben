@@ -93,7 +93,10 @@
   Schlüsselattribute dienen zur eindeutigen identifikation von Datensätzen. Da es in einer Tabelle keine doppelten Datensätze geben darf, muss, für den Fall das dies vorkommen kann, ein Schlüssel für diese Datensätze definiert werden.
   \paragraph{Beispiel} Man stelle sich eine Tabelle vor in der die Adresse von Personen speichert werden. Nun kann es aber mehr als eine Person mit der selben Adresse geben.
 \aufgabe{3}
-  Nach dem gegebenen ER Diagramm, aus der Aufgabenstellung, muss von den Beziehungslosen Element aus der Menge \texttt{a} eine Verbindung in die Menge \texttt{r} geben. In der Menge \texttt{b} müssen alle Elemente mindestens zwei Verbindungen in die Menge \texttt{r} haben, dies wurde hier ergänzt. \\
+  Nach dem gegebenen ER Diagramm, aus der Aufgabenstellung, muss von den Beziehungslosen Element aus der Menge \texttt{a} eine Verbindung in die Menge \texttt{r} geben. In der Menge \texttt{b} müssen alle Elemente mindestens zwei Verbindungen in die Menge \texttt{r} haben, dies wurde hier ergänzt.
+
+  Die ergänzten Verbindungen werden hier durch rote Linien gekennzeichnet.
+  \\
 
   \pgfdeclarelayer{background}
   \pgfsetlayers{background,main}
@@ -141,7 +144,7 @@
          
         \path[rounded corners=5mm, draw=blue, line width=3pt]
             (g) rectangle (h);
-        \node at ([shift={(-45:0.6)}]g) {a}; 
+        \node[font=\large\ttfamily] at ([shift={(-45:0.6)}]g) {a}; 
     \end{pgfonlayer}
     \begin{pgfonlayer}{background}
         \path (e10)+(-1.5,1.0) node (g) {};
@@ -149,7 +152,7 @@
          
         \path[rounded corners=5mm, draw=blue, line width=3pt]
             (g) rectangle (h);
-        \node at ([shift={(-45:0.6)}]g) {b};
+        \node[font=\large\ttfamily] at ([shift={(-45:0.6)}]g) {b};
     \end{pgfonlayer}
     \begin{pgfonlayer}{background}
         \path (e20)+(-1.5,1.0) node (g) {};
@@ -157,7 +160,7 @@
          
         \path[rounded corners=5mm, draw=blue, line width=3pt]
             (g) rectangle (h);
-        \node at ([shift={(-45:0.6)}]g) {c};
+        \node[font=\large\ttfamily] at ([shift={(-45:0.6)}]g) {c};
     \end{pgfonlayer}
     \begin{pgfonlayer}{background}
         \path (r0)+(-1.5,1.0) node (g) {};
@@ -165,7 +168,7 @@
          
         \path[rounded corners=5mm, draw=green!100, line width=3pt]
             (g) rectangle (h);
-        \node at ([shift={(-45:0.6)}]g) {r};
+        \node[font=\large\ttfamily] at ([shift={(-45:0.6)}]g) {r};
     \end{pgfonlayer}
 
   \end{tikzpicture}
