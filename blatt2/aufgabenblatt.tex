@@ -194,6 +194,7 @@
 
 \newpage
 \aufgabe{5}
+
   \texttt{
   Halle = (\underline{Id}, Name)\\
   Stand = (Nummer)\\
@@ -206,21 +207,21 @@
       \node[attribute] [above right=of halle] {\underline{Id}} edge (halle);
       \node[attribute] [right=of halle] {Name} edge (halle);
 
-    \node[relationship] (r1) [below=of halle] {enthält} edge node[right]{1} (halle);
+    \node[relationship] (r1) [below=of halle] {enthält} edge node[right]{(1,1)} (halle);
 
-    \node[entity] (stand) [below=of r1] {Stand} edge[double, line width=1pt] node[right]{N} (r1);
+    \node[entity] (stand) [below=of r1] {Stand} edge[double, line width=1pt] node[right]{(1,*)} (r1);
       \node[attribute] [below=of stand] {Nummer} edge (stand);
 
-    \node[relationship] (r2) [right=of stand] {mietet} edge[double, line width=1pt] node[above]{N} (stand);
+    \node[relationship] (r2) [right=of stand] {mietet} edge[double, line width=1pt] node[above]{(1,*)} (stand);
 
-    \node[entity] (firma) [below=of r2] {Firma} edge node[right]{1} (r2);
+    \node[entity] (firma) [below=of r2] {Firma} edge node[right]{(1,1)} (r2);
       \node[attribute] [right=of firma] {\underline{Name}} edge (firma);
 
-    \node[ident relationship] (r3) [below=of firma] {belegt um} edge node[right]{N} (firma);
+    \node[ident relationship] (r3) [below=of firma] {belegt um} edge node[right]{(0,*)} (firma);
       \node[attribute] [below left=of r3] {Beginn} edge (r3);
       \node[attribute] [below=of r3] {Ende} edge (r3);
 
-    \node[entity] (raum) [right=of r3] {Raum} edge node[above]{M} (r3);
+    \node[entity] (raum) [right=of r3] {Raum} edge node[above]{(0,*)} (r3);
       \node[attribute] [above right=of raum] {Nummer} edge (raum);
   \end{tikzpicture}
 
