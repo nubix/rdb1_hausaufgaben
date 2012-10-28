@@ -192,12 +192,18 @@
         \node[attribute] (no) at ([shift={(-120:2.5)}]telephone) {no} edge (telephone);    
   \end{tikzpicture}
 
-
+\newpage
 \aufgabe{5}
+  \texttt{
+  Halle = (\underline{Id}, Name)\\
+  Stand = (Nummer)\\
+  Firma = (\underline{Name})\\
+  Raum = (\underline{Nummer})\\
+  }
 
   \begin{tikzpicture}[scale=1,every edge/.style={draw=blue, very thick}]
     \node[entity] (halle) {Halle};
-      \node[attribute] [above right=of halle] {Id} edge (halle);
+      \node[attribute] [above right=of halle] {\underline{Id}} edge (halle);
       \node[attribute] [right=of halle] {Name} edge (halle);
 
     \node[relationship] (r1) [below=of halle] {enthält} edge node[right]{1} (halle);
@@ -208,9 +214,9 @@
     \node[relationship] (r2) [right=of stand] {mietet} edge[double, line width=1pt] node[above]{N} (stand);
 
     \node[entity] (firma) [below=of r2] {Firma} edge node[right]{1} (r2);
-      \node[attribute] [right=of firma] {Name} edge (firma);
+      \node[attribute] [right=of firma] {\underline{Name}} edge (firma);
 
-    \node[relationship] (r3) [below=of firma] {belegt um} edge node[right]{N} (firma);
+    \node[ident relationship] (r3) [below=of firma] {belegt um} edge node[right]{N} (firma);
       \node[attribute] [below left=of r3] {Beginn} edge (r3);
       \node[attribute] [below=of r3] {Ende} edge (r3);
 
