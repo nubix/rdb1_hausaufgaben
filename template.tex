@@ -1,10 +1,12 @@
-\documentclass[12pt,a4paper,DIV=9]{scrartcl}
+\documentclass[11pt,a4paper,DIV=9]{scrartcl}
 \usepackage{pgf}
 \usepackage{tikz}
-\usetikzlibrary{arrows,automata}
+\usetikzlibrary{arrows,automata,positioning,shadows}
 \usepackage{ngerman}
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath,amssymb}
+\usepackage{tikz-er2}
+\usetikzlibrary{shapes,snakes}
 % Schriftart ändern
 \renewcommand{\rmdefault}{ppl}
 %Möglichkeit zur Änderung von Überschriften
@@ -33,10 +35,10 @@
 \renewcommand{\author}[1]{\renewcommand{\author}{#1}}
 \renewcommand{\title}[1]{\renewcommand{\title}{#1}}
 \newcommand{\makehomeworktitle}{
-  \begin{minipage}{6.5cm}
+  \begin{minipage}[t]{6.5cm}
     \sf{\author}
   \end{minipage}
-  \begin{minipage}{6.5cm}
+  \begin{minipage}[t]{6.5cm}
     \begin{flushright}
       \sf{\title\\\today}
     \end{flushright}
@@ -54,11 +56,11 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%
 %%% Statisch
-\author{{[}4131658{]} Jan Germann \\{[}1234567{]} Christian Ratz}
-\title{Relationale Datenbanken 1}
+\author{{[}4131658{]} Jan Germann \\{[}1234567{]} Christian Ratz\\Übungsgruppe 1}
+\title{Relationale Datenbanken}
 
 %%% Auf jedes Hausaufgabenblatt anpassen
-\blatt{1}
+\blatt{999}
 %%%%%%%%%%%%%%%%%%%%%%%%
 \setcounter{section}{\blattnr}
 \begin{document}
