@@ -68,30 +68,59 @@
 
 \aufgabe{1}
 \teil{a}
-  Die ANSI-SPARC Architektur separiert die Benutzeranwendungen und Views von der physikalischen Datenbank. Sie besteht aus den drei Ebenen 
+  Die ANSI-SPARC Architektur (Drei-Schema-Architektur) separiert die Benutzeranwendungen und Views von der physikalischen Datenbank. Die Präsentationsschicht, die den Endnutzern und Anwendungen individuelle Benutzersichten bereitstellt. Die logische Schicht (auch konzeptuelle Schicht genannt), die beschreibt welche Daten in der Datenbank gespeichert werden, in welcher Relation sie zueinander stehen. Ziel ist hierbei auch eine redundanzfreie Darstellung aller Informationen. Zuletzt die physische Schicht, wie und wo Daten in der Datenbank gespeichert werden. Ziel ist hier einen effizienten Zugriff auf die Daten zu ermöglichen.
   \begin{enumerate}
     \item \textbf{Darstellungsebene} \\
-      Diese Schicht ist extern und nicht direkt ein Teil des DBMS
+      Diese Schicht ist extern und nicht direkt ein Teil des DBMS. Hier werden aus dem komplexen Datenmodell bestimmte Teile für den Endnutzer zur Verfügung gestellt. Es kommt darauf an, welcher Nutzer welche Daten für seine Aufgaben benötigt (z. B. benötigt die Personalabteilung die Daten der Mitarbeiter, nicht aber die Verkaufsdaten). Hier spielen auch Sicherheitsaspekte eine wichtige Rolle, denn es soll nicht jeder auf sensible Daten (Personaldaten) zugreifen können. Den Produktionsarbeiter gehen die Personaldaten der Angestellten nichts an. Die Datenbank wird aus Sicht des Endnutzers gesehen.
+
     \item \textbf{logische Ebene} \\
-      Hat einen Menschen,  alter, ganz Zahl 
+      In dieser Ebene wird der logische Zusammenhang der gespeicherten Daten definiert. Das logische Schema basiert dabei auf dem konzeptuellen Modell des Datenbankdesigners. Das konzeptuelle Modell wird auf der Grundlage der Aussagen der Benutzer erstellt, es bestimmt welche Rahmenbedingungen vorherrschen sollen. Das logische Schema hat dabei die Aufgabe, zwischen der „Welt“ (Ansicht der Benutzer) un der Ansicht der Datenbank zu vermitteln.
     \item \textbf{physikalische Ebene} \\
-      Bestimmt wie, wo daten gespeichert werden und was dort gespeichert wird. Zum Beispiel bestimmt es ob die daten auf platte eins oder platte x liegen. Interne representation von daten, z.B. Integer wird in n Bits abgelegt
+      Bestimmt wo welche und in welcher Form Daten gespeichert werden. Zum Beispiel es ob die Daten auf Festplatte N oder Festplatte M liegen, oder wie die interne Representation, beispielsweise einem Integer auszusehen hat. Die Struktur der logischen Ebene wird hier auf die Technik abgebildet.
     \end{enumerate}
 \teil{b}
+  \paragraph{Physische Datenunabhängigkeit} % (fold)
+  \label{par:physische_datenunabh_ngigkeit}
+    Dies bedeutet, dass es einer Applikation, die bestimmte Daten benötigt, egal ist, wo diese Daten gespeichert sind. Es wird der Datenbank überlassen, wo sie bestimmte Daten, z.B. bei einem Ausfall einer Festplatte oder häufigem Zugriff auf gleiche Daten, hinschiebt. Eine Änderung des physikalischen Datenschemas soll sich nicht auf die des logischen Datenschemas auswirken.
+  % paragraph physische_datenunabh_ngigkeit (end)
+  \paragraph{Logische Datenunabhängigkeit} % (fold)
+  \label{par:logische_datenunabh_ngigkeit}
+  (zwischen externe Schicht und Logischer Schicht) \\
+
+  Darunter versteht man, dass sich die Sichtweise auf die Daten ändern kann, dies aber keinen Einfluss auf die Applikation hat. Es ist also egal, ob ich das Alter direkt gespeichert habe oder ob das Alter aus dem das Geburtsdatum errechnet wird. Zudem kann ich Datensätze ergänzen und Daten hinzufügen, ohne dass es die Applikation interessiert. (Beispiel: Fuhrpark wird den Personendaten zugefügt, hat aber keinen Einfluss auf die Applikation die das Alter ausgeben soll) Problematisch ist es, wenn Datensätze verändert werden. Dies hat einen Einfluss auf die Applikation, denn es macht einen Unterschied ob ich nach dem Alter einer Person suche oder den Lebensabschnitt. Zudem können auch Datensätze gelöscht werden, was wiederum dazu führt, dass Applikationen nicht mehr funktionieren.
+  % paragraph logische_datenunabh_ngigkeit (end)
+
 
 \aufgabe{2}
 \teil{a}
   Ein Entitätstyp ist eine »Struktur« welche allen der Entitäten diesen Typs gemein ist. So ist ein Entitätstyp durch seinen Namen und die Menge seiner Attribute beschrieben.
-  \paragraph{Beispiel} Ein Entitätstyp beschreibt  wie Katzen generell aussehen. Allerdings nicht die einzelne Katze.
+  \paragraph{Beispiel} Ein Entitätstyp beschreibt wie Katzen generell aussehen. Allerdings nicht die einzelne Katze.
   \paragraph{} Eine Entität repräsentiert ein reales Objekt mit einer unabhängigen Existenz. Die einzelne Entität ist immer eine Instanz eines Entitätstyps.
   \paragraph{Bespiel} Ein Stift, ein Auto, der Nachbar mit Namen »Dieter«, u.v.m.
+
 \teil{b}
-  Ein »abgeleitetes« Attribut wird nicht in der Datenbank gespeichert sondern bei einer Abfrage dynamisch von DBMS aufgrund von vorhandenen Daten generiert.
+  Ein »abgeleitetes« Attribut wird nicht in der Datenbank gespeichert sondern bei einer Abfrage dynamisch von DBMS aus vorhandenen Daten generiert.
   \paragraph{Beispiel} Hierbei kann es sich zum Beispiel um ein Attribut »age« handeln welches von dem Attribut »birthday« abgeleitet wird.
+
 \teil{c}
+  \paragraph{Beziehungstyp} % (fold)
+  \label{par:beziehungstyp}
+   Benannte Menge von ähnlichen Beziehungen die mit Entitätstypen in Beziehung stehen, die dieselben Attribute besitzen.
+  % paragraph beziehungstyp (end)
+  \paragraph{Beziehung} % (fold)
+  \label{par:beziehung}
+   Eine Beziehung beschreibt, dass Entitäten zueinander eine Verbindung haben. Zum Beispiel, dass der Schüler einen Lehrer hat. 
+  % paragraph beziehung (end)
+  \paragraph{Beziehungsmenge} % (fold)
+  \label{par:beziehungsmenge}
+    Menge aller Beziehungsinstanzen eines bestimmten Beziehungstyps.
+  % paragraph beziehungsmenge (end)
+
 \teil{d}
   Schlüsselattribute dienen zur eindeutigen identifikation von Datensätzen. Da es in einer Tabelle keine doppelten Datensätze geben darf, muss, für den Fall das dies vorkommen kann, ein Schlüssel für diese Datensätze definiert werden.
-  \paragraph{Beispiel} Man stelle sich eine Tabelle vor in der die Adresse von Personen speichert werden. Nun kann es aber mehr als eine Person mit der selben Adresse geben.
+  \paragraph{Beispiel} Man stelle sich eine Tabelle vor in der die Namen von Studenten der TU-Braunschweig speichert werden. Nun kann es aber mehr als eine Person mit dem selben Namen geben es würde also ein weiteres Schlüsselattribut benötigt werden. Denkbar ist hierbei die Matrikelnummer des jeweiligen Studenten.
+
+
 \aufgabe{3}
   Nach dem gegebenen ER Diagramm, aus der Aufgabenstellung, muss von den Beziehungslosen Element aus der Menge \texttt{a} eine Verbindung in die Menge \texttt{r} geben. In der Menge \texttt{b} müssen alle Elemente mindestens zwei Verbindungen in die Menge \texttt{r} haben, dies wurde hier ergänzt.
 
