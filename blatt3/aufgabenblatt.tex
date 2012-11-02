@@ -69,20 +69,30 @@
 \aufgabe{1}
 \begin{itemize}
  \item Inheritance
+ \\ Vererbung bedeutet, dass eine Klasse in mehrere weitere Klassen unterteilt wird, die dieselben Eigenschaften wie die Oberklasse besitzen, da die Unterklassen die Attribute und Beschr\"ankungen der in der Oberklasse regelnden Eigenschaften vererben. \\
  \item Subclass
+ \\ Eine Unterklasse beschreibt eine Ableitung der Oberklasse. Sie erbt alle Attribute und Beschr\"ankungen der Oberklasse, kann diese jedoch noch verfeinern. Beispiel: Oberklasse ist Auto, eine m\"ogliche Unterklassen w\"aren Limousine, Kombi, Coupe etc. \\
  \item Union Type
  \\Manchmal ist es besser, dass die Unterklasse nur von einer einzigen Oberklasse erbt. Dies wird durch ein umkreistes \texttt{u} gekennzeichnet. \\Beispiel: Jedes Auto hat nur einen Besitzer.
 \end{itemize}
 \aufgabe{2}
-
+Animal can be specialized into dog and cat. Is this specialization overlapping or disjoint? Is it total or partial? Briefly explain your answer. \\
+\\ Die Spezialisierung von Tier in Katze und Hund ist disjunkt, da es zwei verschiedene Lebewesen sind, die verschiedene Eigenschaften haben, die sie unterschiedlich machen.
+\\ Die Spezialisierung ist ebenfalls total, da es entweder eine Katze sein kann, oder ein Hund. Jedoch nicht eine Mischung aus beidem oder irgendwas anderes.
 \aufgabe{3}
 \begin{itemize}
  \item Deleting an entity from a superclass deletes it from all subclasses
+ \\ Wird eine Entit\"at in der Oberklasse gel\"oscht, wird sie immer automatisch aus der Unterklasse entfernt. \\
  \item A subclass has more attributes than a superclass
+ \\ Es ist m\"oglich, dass die Unterklasse mehr Attribute als die Oberklasse besitzt, dies muss jedoch nicht immer der Fall sein. \\
  \item In a lattice, there is at least one overlapping specialization
+ \\ In einem Gitter muss immer mindestens eine \"uberlappende Spezialisierung vorhanden sein, da es sonst nicht als Gitter bezeichnet werden kann, sondern als Hierarchie. \\
  \item Multi inheritance in an EER-Diagram causes problems
+ \\ Mehrfache Vererbung bedeutet, dass eine Unterklasse von mehreren Oberklassen erben kann. Wenn jedoch die Oberklassen gleiche Attribute oder Beziehungen anders definieren, ist nicht klar, von welcher Oberklasse man welche Definition erben soll, ob beide Definitionen ben\"otigt werden etc. \\
  \item The number of entities in a superclass is equal to the number of entities in its subclasses
+ \\ Die Zahl der Entit\"aten in der Oberklasse ist immer gleich zu der Zahl der Entit\"aten einer Unterklasse, da
  \item A lattice contains at least 4 entity types
+ \\ Ein Gitter besteht immer mindestens aus 4 Entit\"atstypen, da
 \end{itemize}
 \aufgabe{4}
 
