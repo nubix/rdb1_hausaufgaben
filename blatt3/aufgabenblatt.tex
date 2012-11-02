@@ -77,7 +77,7 @@
   Wir haben uns für die Verbindung von \texttt{Villain} zu \texttt{Person} entschiedene, weil wir nicht ausschließen können, dass ein \texttt{Hero} auch (zumindest temporär) ein \texttt{Underling} eines Bösewichts sein kann.\\
 
   \begin{tikzpicture}[scale=1,every edge/.style={draw=blue, very thick}]
-    \node[entity] (person) {Person};
+    \node[entity] (person) {person};
       \node[attribute] () [above left=of person] {\underline{id}}edge node[right]{} (person);
       \node[attribute] () [above =of person] {power-level}edge node[right]{} (person);
       \node[attribute] () [above right=of person] {evilness-level}edge node[right]{} (person);
@@ -88,10 +88,10 @@
  
 
 
-    \node[entity] (villain) [below left=of r1] {Villain} edge node[right]{(1,*)} (r3);
+    \node[entity] (villain) [below left=of r1] {villain} edge node[right]{(1,*)} (r3);
     
-  
-    \node[entity] (hero) [below right=of r1] {Hero};
+
+    \node[entity] (hero) [below right=of r1] {hero};
       \node[relationship] (r2) [right=of hero] {hat} edge node[below]{(0,2)} (hero);
     \node[entity] (sidekick) [above=of r2] {Sidekick} edge node[right]{(1,1)} (r2);
 
@@ -112,6 +112,24 @@
 
     \node[entity] (weapon) [below=of r5] {weapon} edge node[right]{(1,1)} (r5);
     \node[entity] (outfit) [below=of r6] {outfit} edge node[right]{(1,1)} (r6);
+
+
+    \node[relationship] (r7) [left=of evillair] {wohnt in} edge node[left]{(1,1)} (villain);
+      \path[every edge/.style={draw=blue, very thick}]
+      (r7) edge node[below]{(1,1)} (evillair);
+
+    \node[relationship] (r8) at ([shift={(90:4.5)}]secretbase) {wohnt in} edge node[right]{(1,1)} (secretbase);
+
+    \path[every edge/.style={draw=blue, very thick}]
+      (r8) edge node[right]{(1,1)} (hero);
+
+    % Verberbungen
+    \path[every edge/.style={draw=blue, very thick}]
+      (r1) edge node{} (villain)
+      (r1) edge node{} (hero)
+      (r1) edge node{} (sidekick)
+      (r4) edge node{} (secretbase)
+      (r4) edge node{} (evillair);
   \end{tikzpicture}
 
 
