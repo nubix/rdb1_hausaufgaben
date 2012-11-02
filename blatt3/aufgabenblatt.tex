@@ -74,5 +74,45 @@
 
 \aufgabe{4}
 
+  Wir haben uns für die Verbindung von \texttt{Villain} zu \texttt{Person} entschiedene, weil wir nicht ausschließen können, dass ein \texttt{Hero} auch (zumindest temporär) ein \texttt{Underling} eines Bösewichts sein kann.\\
+
+  \begin{tikzpicture}[scale=1,every edge/.style={draw=blue, very thick}]
+    \node[entity] (person) {Person};
+      \node[attribute] () [above left=of person] {\underline{id}}edge node[right]{} (person);
+      \node[attribute] () [above =of person] {power-level}edge node[right]{} (person);
+      \node[attribute] () [above right=of person] {evilness-level}edge node[right]{} (person);
+      \node[attribute] () [right=of person] {name} edge node[right]{} (person);
+
+    \node[relationship] (r3) [left=of person] {hat} edge node[below]{(0,*)} (person);
+    \node[isa] (r1) [below=of person] {d} edge node[right]{} (person);
+ 
+
+
+    \node[entity] (villain) [below left=of r1] {Villain} edge node[right]{(1,*)} (r3);
+    
+  
+    \node[entity] (hero) [below right=of r1] {Hero};
+      \node[relationship] (r2) [right=of hero] {hat} edge node[below]{(0,2)} (hero);
+    \node[entity] (sidekick) [above=of r2] {Sidekick} edge node[right]{(1,1)} (r2);
+
+
+
+
+    \node[entity] (home) at ([shift={(-90:4.5)}]hero) {Home};
+      \node[attribute] () [below left=of home] {\underline{id}} edge node[right]{} (home);
+      \node[attribute] () [left =of home] {power-level} edge node[right]{} (home);
+      \node[attribute] () [above left=of home] {evilness-level}edge node[right]{} (home);
+      \node[attribute] () [above=of home] {name}edge node[right]{} (home);
+    \node[isa] (r4) [below=of home] {o} edge node{} (home);
+    \node[entity] (evillair) [below left=of r4] {evil lair};
+    \node[entity] (secretbase) [below right=of r4] {secret base};
+
+    \node[relationship] (r5) [below=of evillair] {enthält} edge node[right]{(1,1)} (evillair);
+    \node[relationship] (r6) [below=of secretbase] {enthält} edge node[right]{(1,1)} (secretbase);
+
+    \node[entity] (weapon) [below=of r5] {weapon} edge node[right]{(1,1)} (r5);
+    \node[entity] (outfit) [below=of r6] {outfit} edge node[right]{(1,1)} (r6);
+  \end{tikzpicture}
+
 
 \end{document}
