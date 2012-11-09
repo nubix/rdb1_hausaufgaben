@@ -1,0 +1,164 @@
+\documentclass[11pt,a4paper,DIV=9]{scrartcl}
+\usepackage{pgf}
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata,positioning,shadows}
+\usepackage{ngerman}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb}
+\usepackage{tikz-er2}
+\usetikzlibrary{shapes,snakes}
+% Schriftart ändern
+\renewcommand{\rmdefault}{ppl}
+%Möglichkeit zur Änderung von Überschriften
+\usepackage{sectsty}
+%Überschrift \section uandern
+\definecolor{blue}{RGB}{76 , 92, 153}
+\allsectionsfont{\color{blue}}
+\paragraphfont{\color{blue}}
+
+%Variable Blattnummer
+\newcommand{\blatt}[1]{
+  \newcommand{\blattnr}{#1}
+}
+%Aufgabe und Aufgabenteil definieren
+\newcounter{temp}
+\newcommand{\aufgabe}[1]{
+  \setcounter{temp}{\value{subsection}}
+  \setcounter{subsection}{#1}
+  \addtocounter{subsection}{-1}
+  \subsection{Aufgabe}
+  \setcounter{subsection}{\value{temp}}
+}
+\newcommand{\teil}[2][]{
+  \subsubsection*{#2) #1}
+}
+\renewcommand{\author}[1]{\renewcommand{\author}{#1}}
+\renewcommand{\title}[1]{\renewcommand{\title}{#1}}
+\newcommand{\makehomeworktitle}{
+  \begin{minipage}[t]{6.5cm}
+    \sf{\author}
+  \end{minipage}
+  \begin{minipage}[t]{6.5cm}
+    \begin{flushright}
+      \sf{\title\\\today}
+    \end{flushright}
+  \end{minipage}
+  \\[0.2cm]
+  \begin{center}
+    \sf{
+      \color{blue}{
+        \LARGE{Aufgabenblatt \blattnr}
+      }
+    }
+  \end{center}
+  \vspace{0.1cm}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Statisch
+\author{{[}4131658{]} Jan Germann \\{[}4054962{]} Christian Ratz\\Übungsgruppe 1}
+\title{Relationale Datenbanken}
+
+%%% Auf jedes Hausaufgabenblatt anpassen
+\blatt{4}
+%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{section}{\blattnr}
+\begin{document}
+\makehomeworktitle
+
+\aufgabe{1}
+a)  Describe a scenario where view integration is necessary. \\
+Beispielsweise hat man 2 Unternehmen, die zu einem fusionieren und dessen Datenbanken nun aufeinander abgestimmt werden m\"ussen, damit z.B die Personalverwaltung auf die Daten der \"ubernommenen Firma zugreifen kann um die Konten der neuen Mitarbeiter f\"ur die Auszahlung der L\"ohne abzufragen. \\\\
+b)  Name two types of conflicts that can occur. Briefly explain them in your words. \\
+Nameskonflikte -- Gleiche Namen f\"ur verschiedene Entit\"aten \\
+Strukturelle Konflikte -- Verschiedene Kardinalit\"aten in Beziehungen, Schl\"usselkonflikte \\\\
+c)  Briefly explain the idea of entity clustering in your own words. \\
+Wenn mehrere Schemata fusioniert werden, kann das neue allgemeine Schema sehr gor{\ss} werden. Daraus folgt, dass es un\"ubersichtlich wird und ebenfalls schwer verst\"andlich f\"ur Benutzer. Es ben\"otigt viel Zeit den Aufbau nachzuvollziehen. Dass Entity clustering beschreibt das Gruppieren von semantisch zusammenh\"angenden Teilen. Dadurch erh\"alt man einen einfache und verst\"andliche \"Ubersicht des Schemas. \\\\
+d)  Explain the necessary clustering steps. Use your own words. \\
+1. Schritt: Im ersten Schritt ist es notwendig passende Gruppierung der Entit\"aten zu finden, dominante Entit\"aten herauszufiltern sowie n -- \"arige Beziehungen herauszusuchen. Sollte man jedoch keine passende Gruppierung finden -- betrachtet man die Gruppierung des gesamten Modells. \\\\
+2. Schritt: Im zweiten Schritt formt man die Entit\"atscluster bzw. Gruppen durch grundlegende Gruppierungsoperationen [Dominance grouping = auf semantisch dominante Entit\"aten bezogen | Abstraction grouping, Constraint grouping = gruppieren von Entit\"aten die durch dieselben Beschr\"ankungen in einer Relation stehen, Relationship grouping]. \\\\
+3. Schritt: Hier muss man \"Uberbegriffe f\"ur die erstellten Entit\"atsgruppen finden und weiterhin rekursiv die Gruppierungsoperationen aus Schritt 2 anwenden. \\\\
+4. Schritt: Im letzten Schritt \"uberpr\"uft man die Konsistenz der Beziehungen zwischen wesentlichen Entit\"aten nach dem Gruppieren. Ebenso sollte man \"uberpr\"ufen ob die Bedeutung der Relationen zwischen den Enti\"aten immer noch dieselbe ist wie vor dem Gruppieren. Weiterf\"uhrend k\"onnte man noch die zuk\"unftigen Endnutzer des Diagramms zur Rate ziehen.
+\aufgabe{2}
+Name the four basic steps of conceptual schema integration. What are they about? What results / documents do you get after each step? \\
+\\ 1. Schritt -- Pre-Integration analysis: \\ Die Eingangsschemata haben zu l\"osende Konflikte. Im ersten Schritt ist es notwendig diese Konflikte zu identifizieren. Zuerst wird die Anzahl und die Art der Schemata analysiert. Es existieren 2 Strategien zur Integration. [many at a time] Die einzelnen Schemata anschauen, Gemeinsamkeiten suchen und danach in ein globales Schema \"uberf\"uhren (z.B verschiedene Standorte bei Siemens, die aber alle das Thema Personalwirtschaft haben, also kann ich die Personalwirtschaft f\"ur alle Standorte verallgemeinern).
+[two at a time] Zwei Schemata nehmen, diese integrieren, das Ergebnisschema mit einem weiteren Schema integrieren bis man beim globalen Schema angelangt ist.
+Im ersten Schritt wird also eine Liste erarbeitet in der Konflikte aufgef\"uhrt werden.
+\\\\ 2. Schritt -- Comparison of schemas: \\
+Im zweiten Schritt vergleicht man die Schematas ein weiteres Mal. Es muss auf Namenskonflikte geachtet werden sowie auf strukturelle Konflikte, die die Bedeutung beeinflussen k\"onnen [z.B Kardinalit\"aten in Beziehungen, Schl\"usselkonflikte]. Zudem schaut man, welche Entit\"aten sich aufeinander abbilden lassen und ob Homonyme oder Synonyme f\"ur Entit\"aten bzw. Attribute existieren. Beide gilt es zu vermeiden, denn Synonyme meinen die gleiche Entit\"at, benutzt jedoch verschiedene Terme und Homonyme benutzen denselben Term, fokussieren jedoch auf unterschiedliche Entit\"aten [Namenskonflikte!]. Nach dem Schritt erh\"alt man eine Liste mit allen Konflikten.
+\\\\ 3. Schritt -- Conformation of schemas: \\
+In diesem Schritt \"andert man die Schemata entsprechend der aufgedeckten Konflikte aus Schritt 2 ab. Es werden die einzelnen Schemata zu einem ``gor{\ss}en`` Schema zusammengef\"ugt. Hier l\"ost man die Konflikte auf, benennt Entit\"aten und / oder Attribute um, konvertiert Attribute zu Entit\"at oder Relation und / oder passt Kardinalit\"aten an.
+Generalisierungen k\"onnen ebenfalls hilfreich sein, es muss aber auf verschiedene Beschr\"ankungen geachtet werden!
+Nach diesem Schritt erh\"alt man eine Liste mit den modifizierten Schemata.
+\\\\ 4. Schritt -- Merging and restructuring of schemas: \\
+Im letzten Schritt findet ein letztes Restrukturieren des Schemas statt. Da jedoch ein Integrationsprozess nach einem Durchlauf nicht abgeschlossen ist, wird ebenfalls das in Schritt 3 entwickelte Schema wiederholt analysiert und \"uberarbeitet. Es wird au{\ss}erdem auf Vollst\"andigkeit \"uberpr\"uft (Alle Beschr\"ankungen, Kardinalit\"aten, wesentliche Entit\"aten etc. enthalten oder fehlen z.B Attribute?). Redundanzen werden entfernt und es wird auf eine Verst\"andlichkeit f\"ur andere Personen geachtet.
+\aufgabe{3}
+a) Discuss strengths and weakness of the two diagrams. Which entity types correspond to each other? What conflicts occur? \\
+\\\\
+b) Integrate the schemas by resolving all conflicts. Document all non-trivial design decisions. \\
+  \begin{tikzpicture}[scale=1,every edge/.style={draw=blue, very thick}]
+    \node[entity] (person) {person};
+      \node[attribute] () [above left=of person] {\underline{id}}edge node[right]{} (person);
+      \node[attribute] () [above =of person] {power-level}edge node[right]{} (person);
+      \node[attribute] () [above right=of person] {evilness-level}edge node[right]{} (person);
+      \node[attribute] () [left=of person] {name} edge node[right]{} (person);
+
+ 
+    \node[isa] (r99) [below=of person] {d} edge (person);
+    \node[entity] (powered) [below=of r99] {powered person}edge node[left]{power-level$>$10} (r99);
+    \node[entity] (underling) at ([shift={(-180:3.5)}]r99) {underling}edge node[above]{sonst} (r99);
+
+
+    \
+    \node[relationship] (r3) [left=of powered] {hat} edge node[left]{(0,*)} (underling);
+    \node[isa] (r1) [below=of powered] {d} edge node[right]{} (powered);
+ 
+
+
+    \node[entity] (villain) [below left=of r1] {villain} edge node[left]{(1,*)} (r3);
+    
+
+    \node[entity] (hero) [below right=of r1] {hero};
+      \node[relationship] (r2) [right=of hero] {hat} edge node[below]{(0,2)} (hero);
+    \node[entity] (sidekick) [above=of r2] {sidekick} edge node[right]{(1,1)} (r2);
+
+
+
+
+    \node[entity] (home) at ([shift={(-90:4.5)}]hero) {Home};
+      \node[attribute] () [below left=of home] {\underline{country}} edge node[right]{} (home);
+      \node[attribute] () [left =of home] {\underline{street}} edge node[right]{} (home);
+      \node[attribute] () [above left=of home] {\underline{no}}edge node[right]{} (home);
+      \node[attribute] () [above=of home] {\underline{zip-code}}edge node[right]{} (home);
+      \node[attribute] () at ([shift={(125:3.5)}]home)  {room count} edge node[right]{} (home);
+    \node[isa] (r4) [below=of home] {o} edge node{} (home);
+    \node[entity] (evillair) [below left=of r4] {evil lair};
+    \node[entity] (secretbase) [below right=of r4] {secret base};
+
+    \node[relationship] (r5) [below=of evillair] {enthält} edge node[right]{(1,1)} (evillair);
+    \node[relationship] (r6) [right=of secretbase] {enthält} edge node[above]{(1,1)} (secretbase);
+
+    \node[entity] (weapon) [left=of r5] {weapon} edge node[below]{(1,1)} (r5);
+    \node[entity] (outfit) [above=of r6] {outfit} edge node[right]{(1,1)} (r6);
+
+
+    \node[relationship] (r7) [left=of evillair] {wohnt in} edge node[left]{(1,1)} (villain);
+      \path[every edge/.style={draw=blue, very thick}]
+      (r7) edge node[below]{(1,1)} (evillair);
+
+    \node[relationship] (r8) at ([shift={(90:4.5)}]secretbase) {wohnt in} edge node[right]{(1,1)} (secretbase);
+
+    \path[every edge/.style={draw=blue, very thick}]
+      (r8) edge node[right]{(1,1)} (hero);
+
+    % Verberbungen
+    \path[every edge/.style={draw=blue, very thick}]
+      (r1) edge node[above left]{evilness$>$0} (villain)
+      (r1) edge node[right]{evilness$<=$0 } (hero)
+      (r99) edge node[above]{sonst} (sidekick)
+      (r4) edge node{} (secretbase)
+      (r4) edge node{} (evillair);
+  \end{tikzpicture}
+
+
+\end{document}
