@@ -93,7 +93,8 @@ Nach diesem Schritt erh\"alt man eine Liste mit den modifizierten Schemata.
 \\\\ 4. Schritt -- Merging and restructuring of schemas: \\
 Im letzten Schritt findet ein letztes Restrukturieren des Schemas statt. Da jedoch ein Integrationsprozess nach einem Durchlauf nicht abgeschlossen ist, wird ebenfalls das in Schritt 3 entwickelte Schema wiederholt analysiert und \"uberarbeitet. Es wird au{\ss}erdem auf Vollst\"andigkeit \"uberpr\"uft (Alle Beschr\"ankungen, Kardinalit\"aten, wesentliche Entit\"aten etc. enthalten oder fehlen z.B Attribute?). Redundanzen werden entfernt und es wird auf eine Verst\"andlichkeit f\"ur andere Personen geachtet.
 \aufgabe{3}
-a) Discuss strengths and weakness of the two diagrams. Which entity types correspond to each other? What conflicts occur? \\
+a) Discuss strengths and weakness of the two Diagramms. Which entity types correspond to each other? What conflicts occur? \\ Der Entit\"atstyp \texttt{Tour} aus Diagramm 1 korrespondiert mit dem Entit\"atstyp \texttt{Daytrip} aus Diagramm 2. (Die Tournummer ist bei beiden das Schl\"usselattribut, der Preis ist ebenfalls als Attribut enthalten). Ebenso gibt es in beiden Diagrammen den Entit\"atstypen \texttt{Bus} der in beiden Diagrammen durch eine Busnummer identifiziert wird und eine bestimmte Anzahl von Sitzen hat. Es gibt lediglich eine Relation \texttt{with} die in beiden Diagrammen existiert und dieselbe Aussage besitzt. \\\\
+Konflikte: Die Entit\"atstypen \texttt{Date}, \texttt{Driver} und \texttt{Manufakturen} in Diagramm 1 kommen in Diagramm 2 in den Entit\"atstypen \texttt{Daytrip} und \texttt{Bus} als Attribute vor. Der Entit\"atstyp \texttt{State} aus Diagramm 1 kommt in Diagramm 2 nur als Attribut des Entit\"atstyps \texttt{City} vor.
 \\\\
 b) Integrate the schemas by resolving all conflicts. Document all non-trivial design decisions. \\
   \begin{tikzpicture}[scale=1,every edge/.style={draw=blue, very thick}]
