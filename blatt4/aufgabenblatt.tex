@@ -98,67 +98,48 @@ Konflikte: Die Entit\"atstypen \texttt{Date}, \texttt{Driver} und \texttt{Manufa
 \\\\
 b) Integrate the schemas by resolving all conflicts. Document all non-trivial design decisions. \\
   \begin{tikzpicture}[scale=1,every edge/.style={draw=blue, very thick}]
-    \node[entity] (person) {person};
-      \node[attribute] () [above left=of person] {\underline{id}}edge node[right]{} (person);
-      \node[attribute] () [above =of person] {power-level}edge node[right]{} (person);
-      \node[attribute] () [above right=of person] {evilness-level}edge node[right]{} (person);
-      \node[attribute] () [left=of person] {name} edge node[right]{} (person);
+    \node[entity] (state) {state};
+      \node[attribute] () [below=of state] {\underline{state name}}edge node[right]{} (state);
+      \node[attribute] () [above=of state] {residents}edge node[right]{} (state);
 
- 
-    \node[isa] (r99) [below=of person] {d} edge (person);
-    \node[entity] (powered) [below=of r99] {powered person}edge node[left]{power-level$>$10} (r99);
-    \node[entity] (underling) at ([shift={(-180:3.5)}]r99) {underling}edge node[above]{sonst} (r99);
-
-
-    \
-    \node[relationship] (r3) [left=of powered] {hat} edge node[left]{(0,*)} (underling);
-    \node[isa] (r1) [below=of powered] {d} edge node[right]{} (powered);
- 
-
-
-    \node[entity] (villain) [below left=of r1] {villain} edge node[left]{(1,*)} (r3);
+    \node[relationship] (r1) [right=of state] {in} edge node[above]{(1,*)} (state);
     
+    \node[entity] (city) [right=of r1] {city}edge node[above]{(1,*)} (r1);
+     \node[attribute] () [above left=of city] {\underline{name}}edge node[right]{} (city);
+     \node[attribute] () [above=of city] {residents}edge node[right]{} (city);
+    \
+    \node[relationship] (r2) [below left=of city] {from} edge node[left]{(1,*)} (city);
+    \node[relationship] (r3) [below=of city] {to} edge node[right]{(1,*)} (city);
+    
+    \node[entity] (Daytrip) [below=of r2] {Daytrip} edge node[left]{(1,1)}(r2) edge node[right]{(1,1)}(r3);
+     \node[attribute] () [left=of Daytrip] {\underline{tour number}}edge node[right]{} (Daytrip);
+     \node[attribute] () [below=of Daytrip] {price}edge node[right]{} (Daytrip);
+      
+      \node[relationship] (r4) [below left=of Daytrip] {assigned}edge node[above left]{(1,*)} (Daytrip);
+      
+      \node[relationship] (r5) [right=of Daytrip] {with}edge node[below]{(1,*)} (Daytrip);
+    
+    \node[entity] (Bus) [right=of r5] {Bus} edge node [below]{(1,*)} (r5);
+     \node[attribute] () [right=of Bus] {\underline{bus no.}}edge node[right]{} (Bus);
+     \node[attribute] () [above right=of Bus] {seats}edge node[right]{} (Bus);
+     
+      \node[relationship] (r6) [above= of Bus] {of} edge node[above right]{(1,1)} (Bus);
+      
+    \node[entity] (Manufacturer) [above=of r6] {Manufacturer} edge node [right]{(0,*)} (r6);
+     \node[attribute] () [above=of Manufacturer] {\underline{name}}edge node[right]{} (Manufacturer);
+     \node[attribute] () [above right=of Manufacturer] {city}edge node[right]{} (Manufacturer);
+    
+    \node[entity] (Date) [below=of r4] {Date} edge node [right]{(0,*)} (r4);
+     \node[attribute] () [above left=of Date] {\underline{day}}edge node[right]{} (Date);
+     \node[attribute] () [left=of Date] {\underline{month}}edge node[right]{} (Date);
+     \node[attribute] () [below left=of Date] {\underline{year}}edge node[right]{} (Date);
+    
+    \node[relationship] (r7) [below=of Bus] {drives} edge node[above right]{(1,*)} (Bus);
+    
+   \node[entity] (Driver) [below=of r7] {Driver} edge node [right]{(1,*)} (r7);
+    \node[attribute] () [below left=of Driver] {\underline{name}}edge node[right]{} (Driver);
+    \node[attribute] () [left= of Driver] {age}edge node[right]{} (Driver);
 
-    \node[entity] (hero) [below right=of r1] {hero};
-      \node[relationship] (r2) [right=of hero] {hat} edge node[below]{(0,2)} (hero);
-    \node[entity] (sidekick) [above=of r2] {sidekick} edge node[right]{(1,1)} (r2);
-
-
-
-
-    \node[entity] (home) at ([shift={(-90:4.5)}]hero) {Home};
-      \node[attribute] () [below left=of home] {\underline{country}} edge node[right]{} (home);
-      \node[attribute] () [left =of home] {\underline{street}} edge node[right]{} (home);
-      \node[attribute] () [above left=of home] {\underline{no}}edge node[right]{} (home);
-      \node[attribute] () [above=of home] {\underline{zip-code}}edge node[right]{} (home);
-      \node[attribute] () at ([shift={(125:3.5)}]home)  {room count} edge node[right]{} (home);
-    \node[isa] (r4) [below=of home] {o} edge node{} (home);
-    \node[entity] (evillair) [below left=of r4] {evil lair};
-    \node[entity] (secretbase) [below right=of r4] {secret base};
-
-    \node[relationship] (r5) [below=of evillair] {enthält} edge node[right]{(1,1)} (evillair);
-    \node[relationship] (r6) [right=of secretbase] {enthält} edge node[above]{(1,1)} (secretbase);
-
-    \node[entity] (weapon) [left=of r5] {weapon} edge node[below]{(1,1)} (r5);
-    \node[entity] (outfit) [above=of r6] {outfit} edge node[right]{(1,1)} (r6);
-
-
-    \node[relationship] (r7) [left=of evillair] {wohnt in} edge node[left]{(1,1)} (villain);
-      \path[every edge/.style={draw=blue, very thick}]
-      (r7) edge node[below]{(1,1)} (evillair);
-
-    \node[relationship] (r8) at ([shift={(90:4.5)}]secretbase) {wohnt in} edge node[right]{(1,1)} (secretbase);
-
-    \path[every edge/.style={draw=blue, very thick}]
-      (r8) edge node[right]{(1,1)} (hero);
-
-    % Verberbungen
-    \path[every edge/.style={draw=blue, very thick}]
-      (r1) edge node[above left]{evilness$>$0} (villain)
-      (r1) edge node[right]{evilness$<=$0 } (hero)
-      (r99) edge node[above]{sonst} (sidekick)
-      (r4) edge node{} (secretbase)
-      (r4) edge node{} (evillair);
   \end{tikzpicture}
 
 
