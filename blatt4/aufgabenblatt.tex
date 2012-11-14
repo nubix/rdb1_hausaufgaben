@@ -67,31 +67,41 @@
 \makehomeworktitle
 
 \aufgabe{1}
-a)  Describe a scenario where view integration is necessary. \\
-Beispielsweise hat man 2 Unternehmen, die zu einem fusionieren und dessen Datenbanken nun aufeinander abgestimmt werden m\"ussen, damit z.B die Personalverwaltung auf die Daten der \"ubernommenen Firma zugreifen kann um die Konten der neuen Mitarbeiter f\"ur die Auszahlung der L\"ohne abzufragen. \\\\
-b)  Name two types of conflicts that can occur. Briefly explain them in your words. \\
-Nameskonflikte -- Gleiche Namen f\"ur verschiedene Entit\"aten \\
-Strukturelle Konflikte -- Verschiedene Kardinalit\"aten in Beziehungen, Schl\"usselkonflikte \\\\
-c)  Briefly explain the idea of entity clustering in your own words. \\
-Wenn mehrere Schemata fusioniert werden, kann das neue allgemeine Schema sehr gor{\ss} werden. Daraus folgt, dass es un\"ubersichtlich wird und ebenfalls schwer verst\"andlich f\"ur Benutzer. Es ben\"otigt viel Zeit den Aufbau nachzuvollziehen. Dass Entity clustering beschreibt das Gruppieren von semantisch zusammenh\"angenden Teilen. Dadurch erh\"alt man einen einfache und verst\"andliche \"Ubersicht des Schemas. \\\\
-d)  Explain the necessary clustering steps. Use your own words. \\
-1. Schritt: Im ersten Schritt ist es notwendig passende Gruppierung der Entit\"aten zu finden, dominante Entit\"aten herauszufiltern sowie n -- \"arige Beziehungen herauszusuchen. Sollte man jedoch keine passende Gruppierung finden -- betrachtet man die Gruppierung des gesamten Modells. \\\\
-2. Schritt: Im zweiten Schritt formt man die Entit\"atscluster bzw. Gruppen durch grundlegende Gruppierungsoperationen [Dominance grouping = auf semantisch dominante Entit\"aten bezogen | Abstraction grouping, Constraint grouping = gruppieren von Entit\"aten die durch dieselben Beschr\"ankungen in einer Relation stehen, Relationship grouping]. \\\\
-3. Schritt: Hier muss man \"Uberbegriffe f\"ur die erstellten Entit\"atsgruppen finden und weiterhin rekursiv die Gruppierungsoperationen aus Schritt 2 anwenden. \\\\
-4. Schritt: Im letzten Schritt \"uberpr\"uft man die Konsistenz der Beziehungen zwischen wesentlichen Entit\"aten nach dem Gruppieren. Ebenso sollte man \"uberpr\"ufen ob die Bedeutung der Relationen zwischen den Enti\"aten immer noch dieselbe ist wie vor dem Gruppieren. Weiterf\"uhrend k\"onnte man noch die zuk\"unftigen Endnutzer des Diagramms zur Rate ziehen.
+\teil[Describe a scenario where view integration is necessary]{a}
+  Dies kann beispielsweise der Fall sein, wenn zwei Unternehmen zu einem fusionieren und dessen Datenbanken nun aufeinander abgestimmt werden m\"ussen, damit z.B die Personalverwaltung auf die Daten der \"ubernommenen Firma zugreifen kann um die Konten der neuen Mitarbeiter f\"ur die Auszahlung der L\"ohne abzufragen.
+\teil[Name two types of conflicts that can occur. Briefly explain them in your words]{b}
+  \begin{enumerate}
+    \item \texttt{Nameskonflikte} -- Gleiche Namen f\"ur verschiedene Entit\"aten
+    \item \texttt{Strukturelle Konflikte} -- Verschiedene Kardinalit\"aten in Beziehungen, Schl\"usselkonflikte
+  \end{enumerate}
+  
+\teil[Briefly explain the idea of entity clustering in your own words]{c}
+  Wenn mehrere Schemata fusioniert werden, kann das neue allgemeine Schema sehr gor{\ss} werden. Daraus folgt, dass es un\"ubersichtlich wird und ebenfalls schwer verst\"andlich f\"ur Benutzer. Es ben\"otigt viel Zeit den Aufbau nachzuvollziehen. Dass Entity clustering beschreibt das Gruppieren von semantisch zusammenh\"angenden Teilen. Dadurch erh\"alt man einen einfache und verst\"andliche \"Ubersicht des Schemas.
+\teil[Explain the necessary clustering steps. Use your own words]{d}
+  \begin{enumerate}
+    \item Schritt: Im ersten Schritt ist es notwendig passende Gruppierung der Entit\"aten zu finden, dominante Entit\"aten herauszufiltern sowie n -- \"arige Beziehungen herauszusuchen. Sollte man jedoch keine passende Gruppierung finden -- betrachtet man die Gruppierung des gesamten Modells.
+    \item Schritt: Im zweiten Schritt formt man die Entit\"atscluster bzw. Gruppen durch grundlegende Gruppierungsoperationen [Dominance grouping = auf semantisch dominante Entit\"aten bezogen | Abstraction grouping, Constraint grouping = gruppieren von Entit\"aten die durch dieselben Beschr\"ankungen in einer Relation stehen, Relationship grouping].
+    \item Schritt: Hier muss man \"Uberbegriffe f\"ur die erstellten Entit\"atsgruppen finden und weiterhin rekursiv die Gruppierungsoperationen aus Schritt 2 anwenden.
+    \item Schritt: Im letzten Schritt \"uberpr\"uft man die Konsistenz der Beziehungen zwischen wesentlichen Entit\"aten nach dem Gruppieren. Ebenso sollte man \"uberpr\"ufen ob die Bedeutung der Relationen zwischen den Enti\"aten immer noch dieselbe ist wie vor dem Gruppieren. Weiterf\"uhrend k\"onnte man noch die zuk\"unftigen Endnutzer des Diagramms zur Rate ziehen.
+  \end{enumerate}
+
 \aufgabe{2}
-Name the four basic steps of conceptual schema integration. What are they about? What results / documents do you get after each step? \\
-\\ 1. Schritt -- Pre-Integration analysis: \\ Die Eingangsschemata haben zu l\"osende Konflikte. Im ersten Schritt ist es notwendig diese Konflikte zu identifizieren. Zuerst wird die Anzahl und die Art der Schemata analysiert. Es existieren 2 Strategien zur Integration. [many at a time] Die einzelnen Schemata anschauen, Gemeinsamkeiten suchen und danach in ein globales Schema \"uberf\"uhren (z.B verschiedene Standorte bei Siemens, die aber alle das Thema Personalwirtschaft haben, also kann ich die Personalwirtschaft f\"ur alle Standorte verallgemeinern).
-[two at a time] Zwei Schemata nehmen, diese integrieren, das Ergebnisschema mit einem weiteren Schema integrieren bis man beim globalen Schema angelangt ist.
-Im ersten Schritt wird also eine Liste erarbeitet in der Konflikte aufgef\"uhrt werden.
-\\\\ 2. Schritt -- Comparison of schemas: \\
-Im zweiten Schritt vergleicht man die Schematas ein weiteres Mal. Es muss auf Namenskonflikte geachtet werden sowie auf strukturelle Konflikte, die die Bedeutung beeinflussen k\"onnen [z.B Kardinalit\"aten in Beziehungen, Schl\"usselkonflikte]. Zudem schaut man, welche Entit\"aten sich aufeinander abbilden lassen und ob Homonyme oder Synonyme f\"ur Entit\"aten bzw. Attribute existieren. Beide gilt es zu vermeiden, denn Synonyme meinen die gleiche Entit\"at, benutzt jedoch verschiedene Terme und Homonyme benutzen denselben Term, fokussieren jedoch auf unterschiedliche Entit\"aten [Namenskonflikte!]. Nach dem Schritt erh\"alt man eine Liste mit allen Konflikten.
-\\\\ 3. Schritt -- Conformation of schemas: \\
-In diesem Schritt \"andert man die Schemata entsprechend der aufgedeckten Konflikte aus Schritt 2 ab. Es werden die einzelnen Schemata zu einem ``gor{\ss}en`` Schema zusammengef\"ugt. Hier l\"ost man die Konflikte auf, benennt Entit\"aten und / oder Attribute um, konvertiert Attribute zu Entit\"at oder Relation und / oder passt Kardinalit\"aten an.
-Generalisierungen k\"onnen ebenfalls hilfreich sein, es muss aber auf verschiedene Beschr\"ankungen geachtet werden!
-Nach diesem Schritt erh\"alt man eine Liste mit den modifizierten Schemata.
-\\\\ 4. Schritt -- Merging and restructuring of schemas: \\
-Im letzten Schritt findet ein letztes Restrukturieren des Schemas statt. Da jedoch ein Integrationsprozess nach einem Durchlauf nicht abgeschlossen ist, wird ebenfalls das in Schritt 3 entwickelte Schema wiederholt analysiert und \"uberarbeitet. Es wird au{\ss}erdem auf Vollst\"andigkeit \"uberpr\"uft (Alle Beschr\"ankungen, Kardinalit\"aten, wesentliche Entit\"aten etc. enthalten oder fehlen z.B Attribute?). Redundanzen werden entfernt und es wird auf eine Verst\"andlichkeit f\"ur andere Personen geachtet.
+  Name the four basic steps of conceptual schema integration. What are they about? What results / documents do you get after each step?
+  \begin{enumerate}
+    \item Schritt -- Pre-Integration analysis: \\ Die Eingangsschemata haben zu l\"osende Konflikte. Im ersten Schritt ist es notwendig diese Konflikte zu identifizieren. Zuerst wird die Anzahl und die Art der Schemata analysiert. Es existieren dabei zwei Strategien zur Integration.
+    \begin{itemize}
+      \item[--] \texttt{[many at a time]} Die einzelnen Schemata anschauen, Gemeinsamkeiten suchen und danach in ein globales Schema \"uberf\"uhren (z.B verschiedene Standorte bei Siemens, die aber alle das Thema Personalwirtschaft haben, also kann ich die Personalwirtschaft f\"ur alle Standorte verallgemeinern). 
+      \item[--] \texttt{[two at a time]} Zwei Schemata nehmen, diese integrieren, das Ergebnisschema mit einem weiteren Schema integrieren bis man beim globalen Schema angelangt ist. 
+    \end{itemize}
+    Der ersten Schritt ist also eine Analysephase, welche dazu dient eventuelle Konflikte strukturiert aufzuspüren und übersichtlich zu Listen.
+    \item Schritt -- Comparison of schemas: \\
+    Im zweiten Schritt vergleicht man die Schematas ein weiteres Mal. Es muss auf Namenskonflikte geachtet werden sowie auf strukturelle Konflikte, die die Bedeutung beeinflussen k\"onnen [z.B Kardinalit\"aten in Beziehungen, Schl\"usselkonflikte]. Zudem schaut man, welche Entit\"aten sich aufeinander abbilden lassen und ob Homonyme oder Synonyme f\"ur Entit\"aten bzw. Attribute existieren. Beide gilt es zu vermeiden, denn Synonyme meinen die gleiche Entit\"at, benutzt jedoch verschiedene Terme und Homonyme benutzen denselben Term, fokussieren jedoch auf unterschiedliche Entit\"aten [Namenskonflikte!]. Nach dem Schritt erh\"alt man eine Liste mit allen Konflikten.
+    \item Schritt -- Conformation of schemas: \\
+    In diesem Schritt \"andert man die Schemata entsprechend der aufgedeckten Konflikte aus Schritt 2 ab. Es werden die einzelnen Schemata zu einem großen Schema zusammengef\"ugt. Hier l\"ost man die Konflikte auf, benennt Entit\"aten und / oder Attribute um, konvertiert Attribute zu Entit\"at oder Relation und / oder passt Kardinalit\"aten an. Generalisierungen k\"onnen ebenfalls hilfreich sein, es muss aber auf verschiedene Beschr\"ankungen geachtet werden! Nach diesem Schritt erh\"alt man eine Liste mit den modifizierten Schemata.
+    \item Schritt -- Merging and restructuring of schemas: \\
+    Im letzten Schritt findet ein letztes Restrukturieren des Schemas statt. Da jedoch ein Integrationsprozess nach einem Durchlauf nicht abgeschlossen ist, wird ebenfalls das in Schritt 3 entwickelte Schema wiederholt analysiert und \"uberarbeitet. Es wird au{\ss}erdem auf Vollst\"andigkeit \"uberpr\"uft (Alle Beschr\"ankungen, Kardinalit\"aten, wesentliche Entit\"aten etc. enthalten oder fehlen z.B Attribute?). Redundanzen werden entfernt und es wird auf eine Verst\"andlichkeit f\"ur andere Personen geachtet.
+  \end{enumerate}
+
 \aufgabe{3}
 a) Discuss strengths and weakness of the two Diagramms. Which entity types correspond to each other? What conflicts occur? \\ Der Entit\"atstyp \texttt{Tour} aus Diagramm 1 korrespondiert mit dem Entit\"atstyp \texttt{Daytrip} aus Diagramm 2. (Die Tournummer ist bei beiden das Schl\"usselattribut, der Preis ist ebenfalls als Attribut enthalten). Ebenso gibt es in beiden Diagrammen den Entit\"atstypen \texttt{Bus} der in beiden Diagrammen durch eine Busnummer identifiziert wird und eine bestimmte Anzahl von Sitzen hat. Es gibt lediglich eine Relation \texttt{with} die in beiden Diagrammen existiert und dieselbe Aussage besitzt. \\\\
 Konflikte: Die Entit\"atstypen \texttt{Date}, \texttt{Driver} und \texttt{Manufakturen} in Diagramm 1 kommen in Diagramm 2 in den Entit\"atstypen \texttt{Daytrip} und \texttt{Bus} als Attribute vor. Der Entit\"atstyp \texttt{State} aus Diagramm 1 kommt in Diagramm 2 nur als Attribut des Entit\"atstyps \texttt{City} vor.
