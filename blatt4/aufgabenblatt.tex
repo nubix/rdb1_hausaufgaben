@@ -6,6 +6,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath,amssymb}
 \usepackage{tikz-er2}
+\usepackage{pdflscape}
 \usetikzlibrary{shapes,snakes}
 % Schriftart ändern
 \renewcommand{\rmdefault}{ppl}
@@ -103,10 +104,17 @@
   \end{enumerate}
 
 \aufgabe{3}
-a) Discuss strengths and weakness of the two Diagramms. Which entity types correspond to each other? What conflicts occur? \\ Der Entit\"atstyp \texttt{Tour} aus Diagramm 1 korrespondiert mit dem Entit\"atstyp \texttt{Daytrip} aus Diagramm 2. (Die Tournummer ist bei beiden das Schl\"usselattribut, der Preis ist ebenfalls als Attribut enthalten). Ebenso gibt es in beiden Diagrammen den Entit\"atstypen \texttt{Bus} der in beiden Diagrammen durch eine Busnummer identifiziert wird und eine bestimmte Anzahl von Sitzen hat. Es gibt lediglich eine Relation \texttt{with} die in beiden Diagrammen existiert und dieselbe Aussage besitzt. \\\\
-Konflikte: Die Entit\"atstypen \texttt{Date}, \texttt{Driver} und \texttt{Manufakturen} in Diagramm 1 kommen in Diagramm 2 in den Entit\"atstypen \texttt{Daytrip} und \texttt{Bus} als Attribute vor. Der Entit\"atstyp \texttt{State} aus Diagramm 1 kommt in Diagramm 2 nur als Attribut des Entit\"atstyps \texttt{City} vor.
-\\\\
-b) Integrate the schemas by resolving all conflicts. Document all non-trivial design decisions. \\
+\teil[Discuss strengths and weakness of the two Diagramms. Which entity types correspond to each other? What conflicts occur?]{a}
+  Der Entit\"atstyp \texttt{Tour} aus Diagramm 1 korrespondiert mit dem Entit\"atstyp \texttt{Daytrip} aus Diagramm 2. (Die Tournummer ist bei beiden das Schl\"usselattribut, der Preis ist ebenfalls als Attribut enthalten). Ebenso gibt es in beiden Diagrammen den Entit\"atstypen \texttt{Bus} der in beiden Diagrammen durch eine Busnummer identifiziert wird und eine bestimmte Anzahl von Sitzen hat. Es gibt lediglich eine Relation \texttt{with} die in beiden Diagrammen existiert und dieselbe Aussage besitzt.
+  \paragraph{Konflikte} % (fold)
+  \label{par:konflikte}
+    Die Entit\"atstypen \texttt{Date}, \texttt{Driver} und \texttt{Manufakturen} in Diagramm 1 kommen in Diagramm 2 in den Entit\"atstypen \texttt{Daytrip} und \texttt{Bus} als Attribute vor. Der Entit\"atstyp \texttt{State} aus Diagramm 1 kommt in Diagramm 2 nur als Attribut des Entit\"atstyps \texttt{City} vor.
+  % paragraph konflikte (end)
+
+\teil[Integrate the schemas by resolving all conflicts. Document all non-trivial design decisions.]{b}
+Dokumentation kommt hier hin.
+
+\begin{landscape}
   \begin{tikzpicture}[scale=1,every edge/.style={draw=blue, very thick}]
     \node[entity] (state) {state};
       \node[attribute] () [left=of state] {\underline{state name}}edge node[right]{} (state);
@@ -157,6 +165,6 @@ b) Integrate the schemas by resolving all conflicts. Document all non-trivial de
     \path (state) edge node[left]{(0,*)} (asd);
 
   \end{tikzpicture}
-
+\end{landscape}
 
 \end{document}
