@@ -109,11 +109,12 @@ Konflikte: Die Entit\"atstypen \texttt{Date}, \texttt{Driver} und \texttt{Manufa
 b) Integrate the schemas by resolving all conflicts. Document all non-trivial design decisions. \\
   \begin{tikzpicture}[scale=1,every edge/.style={draw=blue, very thick}]
     \node[entity] (state) {state};
-      \node[attribute] () [below=of state] {\underline{state name}}edge node[right]{} (state);
+      \node[attribute] () [left=of state] {\underline{state name}}edge node[right]{} (state);
       \node[attribute] () [above=of state] {residents}edge node[right]{} (state);
 
     \node[relationship] (r1) [right=of state] {in} edge node[above]{(1,*)} (state);
-    
+
+
     \node[entity] (city) [right=of r1] {city}edge node[above]{(1,*)} (r1);
      \node[attribute] () [above left=of city] {\underline{name}}edge node[right]{} (city);
      \node[attribute] () [above=of city] {residents}edge node[right]{} (city);
@@ -126,7 +127,10 @@ b) Integrate the schemas by resolving all conflicts. Document all non-trivial de
      \node[attribute] () [below=of Daytrip] {price}edge node[right]{} (Daytrip);
       
       \node[relationship] (r4) [below left=of Daytrip] {assigned}edge node[above left]{(1,*)} (Daytrip);
-      
+
+    \node[relationship] (asd) [above left=of Daytrip] {visited by} edge node[left]{(1,*)} (Daytrip);
+
+
       \node[relationship] (r5) [right=of Daytrip] {with}edge node[below]{(1,*)} (Daytrip);
     
     \node[entity] (Bus) [right=of r5] {Bus} edge node [below]{(1,*)} (r5);
@@ -149,6 +153,8 @@ b) Integrate the schemas by resolving all conflicts. Document all non-trivial de
    \node[entity] (Driver) [below=of r7] {Driver} edge node [right]{(1,*)} (r7);
     \node[attribute] () [below left=of Driver] {\underline{name}}edge node[right]{} (Driver);
     \node[attribute] () [left= of Driver] {age}edge node[right]{} (Driver);
+
+    \path (state) edge node[left]{(0,*)} (asd);
 
   \end{tikzpicture}
 
