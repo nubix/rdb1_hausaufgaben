@@ -105,15 +105,15 @@
 
 \aufgabe{3}
 \teil[Discuss strengths and weakness of the two Diagramms. Which entity types correspond to each other? What conflicts occur?]{a}
-  Der Entit\"atstyp \texttt{Tour} aus Diagramm 1 korrespondiert mit dem Entit\"atstyp \texttt{Daytrip} aus Diagramm 2. (Die Tournummer ist bei beiden das Schl\"usselattribut, der Preis ist ebenfalls als Attribut enthalten). Ebenso gibt es in beiden Diagrammen den Entit\"atstypen \texttt{Bus} der in beiden Diagrammen durch eine Busnummer identifiziert wird und eine bestimmte Anzahl von Sitzen hat. Es gibt lediglich eine Relation \texttt{with} die in beiden Diagrammen existiert und dieselbe Aussage besitzt.
+  Der Entit\"atstyp \texttt{Tour} aus Diagramm (I) korrespondiert mit dem Entit\"atstyp \texttt{Daytrip} aus Diagramm (2). (Die Tournummer ist bei beiden das Schl\"usselattribut, der Preis ist ebenfalls als Attribut enthalten). Ebenso gibt es in beiden Diagrammen den Entit\"atstypen \texttt{Bus} der in beiden Diagrammen durch eine Busnummer identifiziert wird und eine bestimmte Anzahl von Sitzen hat. Es gibt lediglich eine Relation \texttt{with} die in beiden Diagrammen existiert und dieselbe Aussage besitzt.
   \paragraph{Konflikte} % (fold)
   \label{par:konflikte}
-    Die Entit\"atstypen \texttt{Date}, \texttt{Driver} und \texttt{Manufakturen} in Diagramm 1 kommen in Diagramm 2 in den Entit\"atstypen \texttt{Daytrip} und \texttt{Bus} als Attribute vor. Der Entit\"atstyp \texttt{State} aus Diagramm 1 kommt in Diagramm 2 nur als Attribut des Entit\"atstyps \texttt{City} vor.
+    Die Entit\"atstypen \texttt{Date}, \texttt{Driver} und \texttt{Manufakturen} aus Diagramm (I) kommen in Diagramm (2) in den Entit\"atstypen \texttt{Daytrip} und \texttt{Bus} als Attribute vor. Der Entit\"atstyp \texttt{State} aus Diagramm (I) kommt in Diagramm (2) nur als Attribut des Entit\"atstyps \texttt{City} vor. Des Weiteren sind alle Kardinalit\"aten unterschiedlich. Au{\ss}erdem gibt es in Modell (2) f\"ur jeden \texttt{Daytrip} auch immer einen \texttt{organizer}.
   % paragraph konflikte (end)
 
 \teil[Integrate the schemas by resolving all conflicts. Document all non-trivial design decisions.]{b}
-Dokumentation kommt hier hin.
-
+Gr\"o{\ss}tenteils haben wir das Schema des Diagramms in (I) \"ubernommen. Wird haben lediglich ``Attribut-zu-Entit\"at``-Konvertierungen vorgenommen, dadurch hat sich das endg\"ultige Schema ein wenig in der Anzahl der Attribute und Entit\"aten erh\"oht. Aus \texttt{Tour} wurde \texttt{Daytrip}, die Attribute \texttt{driver}, \texttt{manufacturer}, \texttt{date} und aus \texttt{state} aus Diagramm (2) haben wir durch die geichnamigen Entit\"aten aus (I) ersetzt und alle Attribute hinzugef\"uhrt. 
+Ein Tagesausflug (hat immer eine eindeutige \texttt{tour number} und einen \texttt{price} und kann auch einen \texttt{organizer} besitzen) kann von einer Stadt zu einer anderen Stadt gehen, sowie man auch nur einen Staat besuchen kann. (\texttt{city} und \texttt{state} werden durch den \texttt{name} identifiziert und haben bestimmte \texttt{residents}) Der Tagesausflug findet an einem bestimmten Datum (identifiziert durch \texttt{day}, \texttt{month} und \texttt{year}) mit einem Bus (hat immer eine eindeutige \texttt{bus number} und bestimmte Anzahl von \texttt{seats}) statt, der immer einen Fahrer (hat einen eindeutigen \texttt{name} und ein \texttt{age}) hat und genau einen Hersteller (hat eindeutigen \texttt{name} und den Sitz in einer \texttt{city}) besitzt.
 \begin{landscape}
   \begin{tikzpicture}[scale=1,every edge/.style={draw=blue, very thick}]
     \node[entity] (state) {state};
@@ -133,11 +133,11 @@ Dokumentation kommt hier hin.
     \node[entity] (Daytrip) [below=of r2] {Daytrip} edge node[left]{(1,1)}(r2) edge node[right]{(1,1)}(r3);
      \node[attribute] () [left=of Daytrip] {\underline{tour number}}edge node[right]{} (Daytrip);
      \node[attribute] () [below=of Daytrip] {price}edge node[right]{} (Daytrip);
+     \node[attribute] () [below right=of Daytrip] {organizer}edge node[right]{} (Daytrip);
       
       \node[relationship] (r4) [below left=of Daytrip] {assigned}edge node[above left]{(1,*)} (Daytrip);
 
-    \node[relationship] (asd) [above left=of Daytrip] {visited by} edge node[left]{(1,*)} (Daytrip);
-
+    \node[relationship] (r8) [above left=of Daytrip] {visited by} edge node[left]{(1,*)} (Daytrip);
 
       \node[relationship] (r5) [right=of Daytrip] {with}edge node[below]{(1,*)} (Daytrip);
     
@@ -162,7 +162,7 @@ Dokumentation kommt hier hin.
     \node[attribute] () [below left=of Driver] {\underline{name}}edge node[right]{} (Driver);
     \node[attribute] () [left= of Driver] {age}edge node[right]{} (Driver);
 
-    \path (state) edge node[left]{(0,*)} (asd);
+    \path (state) edge node[left]{(0,*)} (r8);
 
   \end{tikzpicture}
 \end{landscape}
