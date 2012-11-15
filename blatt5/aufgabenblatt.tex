@@ -1,0 +1,137 @@
+\documentclass[11pt,a4paper,DIV=9]{scrartcl}
+\usepackage{pgf}
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata,positioning,shadows}
+\usepackage{ngerman}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb}
+\usepackage{tikz-er2}
+\usepackage{pdflscape}
+\usetikzlibrary{shapes,snakes}
+% Schriftart ändern
+\renewcommand{\rmdefault}{ppl}
+%Möglichkeit zur Änderung von Überschriften
+\usepackage{sectsty}
+%Überschrift \section uandern
+\definecolor{blue}{RGB}{76 , 92, 153}
+\allsectionsfont{\color{blue}}
+\paragraphfont{\color{blue}}
+
+%Variable Blattnummer
+\newcommand{\blatt}[1]{
+  \newcommand{\blattnr}{#1}
+}
+%Aufgabe und Aufgabenteil definieren
+\newcounter{temp}
+\newcommand{\aufgabe}[1]{
+  \setcounter{temp}{\value{subsection}}
+  \setcounter{subsection}{#1}
+  \addtocounter{subsection}{-1}
+  \subsection{Aufgabe}
+  \setcounter{subsection}{\value{temp}}
+}
+\newcommand{\teil}[2][]{
+  \subsubsection*{#2) #1}
+}
+\renewcommand{\author}[1]{\renewcommand{\author}{#1}}
+\renewcommand{\title}[1]{\renewcommand{\title}{#1}}
+\newcommand{\makehomeworktitle}{
+  \begin{minipage}[t]{6.5cm}
+    \sf{\author}
+  \end{minipage}
+  \begin{minipage}[t]{6.5cm}
+    \begin{flushright}
+      \sf{\title\\\today}
+    \end{flushright}
+  \end{minipage}
+  \\[0.2cm]
+  \begin{center}
+    \sf{
+      \color{blue}{
+        \LARGE{Aufgabenblatt \blattnr}
+      }
+    }
+  \end{center}
+  \vspace{0.1cm}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Statisch
+\author{{[}4131658{]} Jan Germann \\{[}4054962{]} Christian Ratz\\Übungsgruppe 1}
+\title{Relationale Datenbanken}
+
+%%% Auf jedes Hausaufgabenblatt anpassen
+\blatt{5}
+%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{section}{\blattnr}
+\begin{document}
+\makehomeworktitle
+
+\aufgabe{1}
+\teil[Name and explain the three structural constraints that need to be maintained within a database. Use your own words.]{a}
+ \begin{enumerate}
+    \item \texttt{Unique Key constraint} -- Eine Relation ist immer eine Menge von Tupeln. Alle Tupel die in dieser Menge vorkommen m\"ussen unterscheidbar sein. Die Unterscheidbarkeit wird durch z.B durch einen Prim\"arschl\"ussel gew\"ahrleistet. (Einheitsschl\"usselbeschr\"ankung)
+    \item \texttt{Entity integrity constraint} -- Diese Bedingung beschreibt, dass keine Prim\"arschl\"usselspalte einer Relation den NULL-Wert annehmen kann. Des Weiteren darf muss die Eindeutigkeit jeden Prim\"arschl\"ussels gew\"ahrleistet werden. Beispiel: Relation Stadt(\underline{Name} NOT NULL, \underline{Bundesland} NOT NULL, Postleitzahl)
+    \item \texttt{Referential integrity constraint} -- Zu jedem Wert einer Fremdschl\"usselspalte einer Relation, der nicht den NULL-Wert besitzt, genau dieser Wert f\"ur die referenzierte Prim\"arschl\"usselspalte der referenzierten Relation existiert. Beziehungen existieren nur, wenn die entsprechenden Entit\"aten existieren. (Referentielle Integrit\"atsbeschr\"ankung)
+    \\\\ Alle Beschr\"ankungen sind wichtig um \underline{korrekt} neue Tupel einzuf\"ugen, zu l\"oschen oder zu \"andern.
+  \end{enumerate}
+\teil[Briefly explain what is meant by the first normal form.]{b}
+Eine Relation befindet sich in der ersten Normalform, wenn der Wert eine jeden Attributs atomisch ist, zusammengesetzte oder mengenwertige Werte sind unzul\"assig. Der \texttt{Student} darf nicht als Attribut verwendet werden, sondern muss - falls die Relation in die erste Normalform gebracht wird - in \texttt{Matrikelnummer}, \texttt{Vorname}, \texttt{Name}, etc.. aufgeteilt werden.
+  
+ \aufgabe{2}
+\teil[Translate the following conceptual schemata into a relational schemata. Please write down all additional constraints that are not represented in your relational model.]{1}
+  \begin{tikzpicture}[scale=1,every edge/.style={draw=blue, very thick}]
+    \node[entity] (A) {A};
+      \node[attribute] () [above left=of A] {\underline{a1}}edge node[right]{} (A);
+      \node[attribute] () [above=of A] {a2}edge node[right]{} (A);
+
+    \node[relationship] (r1) [right=of A] {R} edge node[above]{(0,*)} (A);
+    
+   \node[entity] (C) [above= of r1] {C}edge node[right]{(0,*)} (r1);
+    \node[attribute] () [above left=of C] {\underline{c1}}edge node[right]{} (C);
+    \node[attribute] () [above right=of C] {c2}edge node[right]{} (C);
+
+    \node[entity] (B) [right=of r1] {city}edge node[above]{(0,*)} (r1);
+     \node[attribute] () [above right=of B] {\underline{b1}}edge node[right]{} (B);
+     \node[attribute] () [above=of B] {\underline{b2}}edge node[right]{} (B);
+     
+  \end{tikzpicture}
+  \\\\
+a) 	A (\underline{a1}, a2); \\
+	B (\underline{b1}, \underline{b2}); \\
+	C (\underline{c1}, b2()); \\  
+	R (\underline{a1}, \underline{b1}, \underline{b2}, \underline{c1}); \\\\\\
+
+ \begin{tikzpicture}[scale=1, every edge/.style={draw=blue, very thick}]
+   \node[entity] (A) {A};
+    \node[attribute] () [above left= of A] {\underline{a1}}edge node[right]{} (A);
+    \node[attribute] () [above= of A] {a2}edge node[right]{} (A);
+    
+    \node[relationship] (r2) [right= of A] {R}edge node[above]{(1,1)} (A);
+    
+    \node[attribute] () [above= of r2] {r1}edge node[above]{} (r2);
+  
+  \node[entity] (B) [right= of r2] {B}edge node[above]{(1,*)} (r2);
+    \node[attribute] () [above= of B] {\underline{b1}}edge node[right]{} (B);
+    \node[attribute] () [above right= of B] {\underline{b2}}edge node[right]{} (B);
+  \end{tikzpicture}
+   \\\\
+b) 	A (\underline{a1}, a2); \\
+	B (\underline{b1}, \underline{b2}); \\
+	R (\underline{a1}, \underline{b1}, \underline{b2}, r1); \\\\\\
+ \begin{tikzpicture}[scale=1, every edge/.style={draw=blue, very thick}]
+   \node[entity] (A) {A};
+    \node[attribute] () [above left= of A] {\underline{a1}}edge node[right]{} (A);
+    \node[attribute] () [above= of A] {a2}edge node[right]{} (A);
+    
+    \node[relationship] (r2) [right= of A] {R}edge node[above]{(0,*)} (A);
+    
+  \node[entity] (B) [right= of r2] {B}edge node[above]{} (r2);
+    \node[attribute] () [above= of B] {\underline{b1}}edge node[right]{} (B);
+    \node[attribute] () [above right= of B] {\underline{b2}}edge node[right]{} (B);
+  \end{tikzpicture}
+   \\\\
+c) 	A (\underline{a1}, a2); \\
+	B (\underline{b1}, \underline{b2}); \\
+	R (\underline{a1}, \underline{b1}, \underline{b2}); \\
+\end{document}
