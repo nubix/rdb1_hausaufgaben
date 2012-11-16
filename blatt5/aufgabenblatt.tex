@@ -97,10 +97,10 @@ Eine Relation befindet sich in der ersten Normalform, wenn der Wert eine jeden A
      
   \end{tikzpicture}
   \\\\
-a) 	A (\underline{a1}: INTEGER(100), a2: INTEGER(100)); \\
-	B (\underline{b1}: INTEGER(100), \underline{b2}: INTEGER(100)); \\
-	C (\underline{c1}: INTEGER(100), c2()); \\  
-	R (\underline{a1}: INTEGER(100), \underline{b1}: INTEGER(100), \underline{b2}: INTEGER(100), \underline{c1}: INTEGER(100)); \\\\\\
+a) 	A (\underline{a1}: integer (10), a2: integer (10)); \\
+	B (\underline{c1}: integer (10), a2: integer (10)); \\
+	C (\underline{b1}: integer (10), \underline{b2}: integer (10)); \\  
+	R (\underline{a1}: integer (10), \underline{b1}: integer (10), \underline{b2}: integer (10), c2: integer (10)); \\\\\\
 
  \begin{tikzpicture}[scale=1, every edge/.style={draw=blue, very thick}]
    \node[entity] (A) {A};
@@ -116,9 +116,9 @@ a) 	A (\underline{a1}: INTEGER(100), a2: INTEGER(100)); \\
     \node[attribute] () [above right= of B] {\underline{b2}}edge node[right]{} (B);
   \end{tikzpicture}
    \\\\
-b) 	A (\underline{a1}: INTEGER(100), a2: INTEGER(100)); \\
-	B (\underline{b1}: INTEGER(100), \underline{b2}: INTEGER(100)); \\
-	R (\underline{a1}: INTEGER(100), \underline{b1}: INTEGER(100), \underline{b2}: INTEGER(100), r1: INTEGER(100)); \\\\\\
+b) 	A (\underline{a1}: integer (10), a2: integer (10)); \\
+	B (\underline{b1}: integer (10), \underline{b2}: integer (10)); \\
+	R (\underline{a1}: integer (10), \underline{b1}: integer (10), \underline{b2}: integer (10), r1: integer (10)); \\\\\\
  \begin{tikzpicture}[scale=1, every edge/.style={draw=blue, very thick}]
    \node[entity] (A) {A};
     \node[attribute] () [above left= of A] {\underline{a1}}edge node[right]{} (A);
@@ -131,7 +131,7 @@ b) 	A (\underline{a1}: INTEGER(100), a2: INTEGER(100)); \\
     \node[attribute] () [above right= of B] {\underline{b2}}edge node[right]{} (B);
   \end{tikzpicture}
    \\\\
-c) 	A (\underline{a1}: INTEGER(100), a2: INTEGER(100)); \\
-	B (\underline{b1}: INTEGER(100), \underline{b2}: INTEGER(100)); \\
-	R (\underline{a1}: INTEGER(100), \underline{b1}: INTEGER(100), \underline{b2}: INTEGER(100)); \\
+c) 	A (\underline{a1}: integer (10), a2: integer (10)); \\
+	B (\underline{b1}: integer (10), \underline{b2}: integer (10)); \\
+	R (\underline{a1}: integer (10), \underline{b1}: integer (10), \underline{b2}: integer (10)); \\
 \end{document}
