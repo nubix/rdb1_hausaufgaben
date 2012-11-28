@@ -125,12 +125,15 @@
   \end{enumerate}
 \aufgabe{2}
  \begin{enumerate}[a)]
-   \item NULL-Values werden bei der Aggregation ignoriert.
-   \item Duplikate werden bei der Aggregation ignoriert.
-   \item Damit Operationen wie Vereinigung, Schnitt oder Differenz auf zwei Relationen angewandt werden k\"onnen m\"ussen die Relationen aus denselben Attributen zusammengesetzt sein.
+   \item NULL-Values von Attributen werden bei der Aggregation ignoriert. D.h die Werte der Attribute werden wie normale Werte behandelt.
+   \item Doppelte Werte bzw. Duplikate gehen bei der Aggregation ebenfalls doppelt ein.
+   \item Vereinigung: Beide Relationen m\"ussen dieselbe Anzahl an Attributen besitzen dessen Namen \"ubereinstimmen. 
+   \\ Schnitt: M\"ussen dieselbe Anzahl an Argumenten in den einzelnen Tupeln besitzen, Namen m\"ussen \"ubereinstimmen
+   \\ Differenz: 
+
    \item \begin{displaymath} R \Join _{\theta} S =  \sigma _{\theta} (R \times S) \end{displaymath}
  \end{enumerate}
 \aufgabe{3}
-$ \pi _{s} (A\, \cap \, B) = (\pi _{s} \, A)\, \cap \,(\pi _{s}\, B)$
+$ \pi _{s}\, (A\, \cap \, B) = (\pi _{s} \, A)\, \cap \,(\pi _{s}\, B)$
 \end{document}
 
