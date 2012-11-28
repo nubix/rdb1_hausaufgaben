@@ -110,9 +110,17 @@
       (connection \Join_{connection.to = parody.from} \\ 
         (\rho_{parody(from,to,title)}\sigma_{type='pardoy'}connection)\\
       ))$
-    \item The person(s) who played the role ``relational algebra hacker`` most.
+    \item The person(s) who played the role ``relational algebra hacker`` most.\hfill\\
       $
-      \rho_{\mathfrak{F}max()}
+      Person \Join_{Person.id = count.personId}(\pi_{count.personId}\\
+      \sigma_{count.num=max(count.num)}\\
+      (
+        \rho_{count(personId,num)} (\\
+          _{Person.id}\mathfrak{F}_{count(Person.id)}(\\
+          Person\Join_{Person.id = actor.person \,\wedge\, role = '\textrm{relational algebra hacker}'}actor\\
+          )\\
+        )\\
+      ))
       $
   \end{enumerate}
 \aufgabe{2}
