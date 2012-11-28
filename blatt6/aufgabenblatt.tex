@@ -79,8 +79,8 @@
     \sigma_{Movie.title = '\textrm{Adventures with relational databases}' \,\wedge\, connection.type = 'parody'}\\ Movie\Join_{connection.to = Movie.id}connection $
 
    \item Genres that are not assigned to any movie at all.
-   \begin{displaymath} \pi _{Genre.name} (\sigma _{hasGenre.genre=Genre.name \,\wedge\, movie = NULL} hasGenre) \end{displaymath}
-   \item The titles of movies that are a ``sequel`` of a ``parody``. \\
+    \begin{displaymath} \pi _{Genre.name} ((\pi _{Genre.name} (Genre \Join _{Genre.name = hasGenre.genre} Genre )) \backslash \pi _{Genre.name} (Genre \Join _{Movie.id = hasGenre.movie} hasGenre) \sigma _{Genre.name = hasGenre.genre} Genre) \end{displaymath}
+      \item The titles of movies that are a ``sequel`` of a ``parody``. \\
     $\pi_{Movie.title} \\
     \sigma_{Movie.id = sequel.id} \\
     (\rho_{sequel(id)}\\
@@ -99,16 +99,15 @@
     % $
    \item The person(s) who played the role ``relational algebra hacker`` most.
   \end{enumerate}
-
 \aufgabe{2}
-  \begin{enumerate}[a)]
-   \item How are null-values treated, when applying an aggregation?
-   \item How are duplicates treated, when applying an aggregation?
-   \item What property must be given by two relations A and B so that set operations like \begin{displaymath}
-  \cup, \cap,    \end{displaymath} can be applied?
-  \item How can the expression \begin{displaymath}R \Join S\end{displaymath} be expressed with basic relational algebra operators?
-  \end{enumerate}
-
->>>>>>> aufgaben 6.1 a und f
+ \begin{enumerate}[a)]
+   \item NULL-Values werden bei der Aggregation ignoriert.
+   \item Duplikate werden bei der Aggregation ignoriert.
+   \item Damit Operationen wie Vereinigung, Schnitt oder Differenz auf zwei Relationen angewandt werden k\"onnen m\"ussen die Relationen aus denselben Attributen zusammengesetzt sein.
+   \item \begin{displaymath} R \Join _{\theta} S =  \sigma _{\theta} (R \times S) \end{displaymath}
+ \end{enumerate}
 \aufgabe{3}
+
 \end{document}
+
+
