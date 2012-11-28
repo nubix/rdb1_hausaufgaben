@@ -68,12 +68,17 @@
 \makehomeworktitle
 \aufgabe{1}
   \begin{enumerate}[a)]
-    \item The names of all female persons, who were born on ``01.01.1950``.
-      \[ \pi_{Person.name} \sigma_{Person.birthday = '01.01.1950'\,\wedge\,Person.gender = 'f'}Person \]
+    \item The names of all female persons, who were born on ``01.01.1950``.\hfill\\
+      $
+      \pi_{Person.name}\\
+      \sigma_{Person.birthday = '01.01.1950'\,\wedge\,Person.gender = 'f'}\\
+      Person
+      $
     \item The names of all persons, who played a role in the movie ``The legacy of Codd``. \hfill\\
-      $ \pi _{Person.id, Person.name}\\
-        \sigma _{Movie.title=`{The\, legacy\, of\, Codd`}}\\
-        (Movie\Join_{Movie.id = actor.movie} \sigma _{actor.role = \neg null} actor)
+      $
+      \pi _{Person.id, Person.name}\\
+      \sigma _{Movie.title=`{The\, legacy\, of\, Codd`}}\\
+      (Movie\Join_{Movie.id = actor.movie} \sigma _{actor.role = \neg null} actor)
       $
     \item The names of all persons, who at least once acted and directed in the same movie.\hfill\\
       $
