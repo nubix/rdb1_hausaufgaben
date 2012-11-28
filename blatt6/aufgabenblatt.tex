@@ -82,8 +82,11 @@
       (actor \times Director \times Person)
       $
     \item The number of parodies to the movie ``Adventures with relational databases``.
-      $ \pi_{\mathfrak{F}_{count(Movie.title)}} \\
-      \sigma_{Movie.title = '\textrm{Adventures with relational databases}' \,\wedge\, connection.type = 'parody'}\\ Movie\Join_{connection.to = Movie.id}connection $
+      $
+      \pi_{\mathfrak{F}_{count(Movie.title)}} \\
+      \sigma_{Movie.title = '\textrm{Adventures with relational databases}' \,\wedge\, connection.type = 'parody'}\\
+      (Movie\Join_{connection.to = Movie.id}connection)
+      $
 
     \item Genres that are not assigned to any movie at all. \hfill \\
       $
