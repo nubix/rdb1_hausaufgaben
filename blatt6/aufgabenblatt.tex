@@ -71,12 +71,15 @@
    \item The names of all female persons, who were born on ``01.01.1950``.
     \[ \pi_{Person.name} \sigma_{Person.birthday = '01.01.1950'\,\wedge\,Person.gender = 'f'}Person \]
    \item The names of all persons, who played a role in the movie ``The legacy of Codd``.
+    \begin{displaymath} \pi _{Person.id, Person.name} ( \sigma _{Movie.title=`{The\, legacy\, of\, Codd`}} Movie\Join_{Movie.id = actor.movie} \sigma _{actor.role = \neg null} actor)  \end{displaymath}
    \item The names of all persons, who at least once acted and directed in the same movie.
+    \begin{displaymath} \pi _{Person.name} (\sigma _{actor.person = director.person \,\wedge\, actor.movie = director.movie} actor \times Director \times Person) \end{displaymath}
    \item The number of parodies to the movie ``Adventures with relational databases``.
     $ \pi_{\mathfrak{F}_{count(Movie.title)}} \\
     \sigma_{Movie.title = '\textrm{Adventures with relational databases}' \,\wedge\, connection.type = 'parody'}\\ Movie\Join_{connection.to = Movie.id}connection $
 
    \item Genres that are not assigned to any movie at all.
+   \begin{displaymath} \pi _{Genre.name} (\sigma _{hasGenre.genre=Genre.name \,\wedge\, movie = NULL} hasGenre) \end{displaymath}
    \item The titles of movies that are a ``sequel`` of a ``parody``. \\
     $\pi_{Movie.title} \\
     \sigma_{Movie.id = sequel.id} \\
@@ -106,5 +109,6 @@
   \item How can the expression \begin{displaymath}R \Join S\end{displaymath} be expressed with basic relational algebra operators?
   \end{enumerate}
 
+>>>>>>> aufgaben 6.1 a und f
 \aufgabe{3}
 \end{document}
