@@ -78,8 +78,13 @@
       $ \pi_{\mathfrak{F}_{count(Movie.title)}} \\
       \sigma_{Movie.title = '\textrm{Adventures with relational databases}' \,\wedge\, connection.type = 'parody'}\\ Movie\Join_{connection.to = Movie.id}connection $
 
-    \item Genres that are not assigned to any movie at all.
-      \begin{displaymath} \pi _{Genre.name} ((\pi _{Genre.name} (Genre \Join _{Genre.name = hasGenre.genre} Genre )) \backslash \pi _{Genre.name} (Genre \Join _{Movie.id = hasGenre.movie} hasGenre) \sigma _{Genre.name = hasGenre.genre} Genre) \end{displaymath}
+    \item Genres that are not assigned to any movie at all. \hfill \\
+      $
+        \pi _{Genre.name} \\
+          ((\pi _{Genre.name}\\
+          (Genre \Join _{Genre.name = hasGenre.genre} Genre )) \backslash \pi _{Genre.name} (Genre \Join _{Movie.id = hasGenre.movie} hasGenre)\\
+          \sigma _{Genre.name = hasGenre.genre} Genre)
+      $
     \item The titles of movies that are a ``sequel`` of a ``parody``. \\
       $\pi_{Movie.title} \\
       \sigma_{Movie.id = sequel.id} \\
