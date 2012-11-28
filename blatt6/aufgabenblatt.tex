@@ -6,6 +6,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath,amssymb}
 \usepackage{tikz-er2}
+\usepackage{enumerate}
 \usetikzlibrary{shapes,snakes}
 % Schriftart ändern
 \renewcommand{\rmdefault}{ppl}
@@ -66,22 +67,44 @@
 \begin{document}
 \makehomeworktitle
 \aufgabe{1}
-\begin{itemize}
- \item The names of all female persons, who were born on ``01.01.1950``.
- \item The names of all persons, who played a role in the movie ``The legacy of Codd``.
- \item The names of all persons, who at least once acted and directed in the same movie.
- \item The number of parodies to the movie ``Adventures with relational databases``.
- \item Genres that are not assigned to any movie at all.
- \item The titles of movies that are a ``sequel`` of a ``parody``.
- \item The person(s) who played the role ``relational algebra hacker`` most.
-\end{itemize}  
+  \begin{enumerate}[a)]
+   \item The names of all female persons, who were born on ``01.01.1950``.
+    \[ \pi_{Person.name} \sigma_{Person.birthday = '01.01.1950'\,\wedge\,Person.gender = 'f'}Person \]
+   \item The names of all persons, who played a role in the movie ``The legacy of Codd``.
+   \item The names of all persons, who at least once acted and directed in the same movie.
+   \item The number of parodies to the movie ``Adventures with relational databases``.
+    $ \pi_{\mathfrak{F}_{count(Movie.title)}} \\
+    \sigma_{Movie.title = '\textrm{Adventures with relational databases}' \,\wedge\, connection.type = 'parody'}\\ Movie\Join_{connection.to = Movie.id}connection $
+
+   \item Genres that are not assigned to any movie at all.
+   \item The titles of movies that are a ``sequel`` of a ``parody``. \\
+    $\pi_{Movie.title} \\
+    \sigma_{Movie.id = sequel.id} \\
+    (\rho_{sequel(id)}\\
+    \pi_{connection.from}\sigma_{connection.type='sequel'}\\
+    (connection \Join_{connection.to = parody.from} \\ 
+      (\rho_{parody(from,to,title)}\sigma_{type='pardoy'}connection)\\
+    )\\
+    )$
+
+
+    % $connection\Join_{conne
+    % ction.from=parody.to}\sigma_{connection.type='sequel'}
+    %   (\rho_{parody(from, to, type)}
+    %    connection 
+    %    )
+    % $
+   \item The person(s) who played the role ``relational algebra hacker`` most.
+  \end{enumerate}
+
 \aufgabe{2}
-\begin{itemize}
- \item a. How are null-values treated, when applying an aggregation?
- \item b. How are duplicates treated, when applying an aggregation?
- \item c. What property must be given by two relations A and B so that set operations like \begin{displaymath}
-\cup, \cap,    \end{displaymath} can be applied?
-\item d. How can the expression \begin{displaymath}R \Join S\end{displaymath} be expressed with basic relational algebra operators?
-\end{itemize}
+  \begin{enumerate}[a)]
+   \item How are null-values treated, when applying an aggregation?
+   \item How are duplicates treated, when applying an aggregation?
+   \item What property must be given by two relations A and B so that set operations like \begin{displaymath}
+  \cup, \cap,    \end{displaymath} can be applied?
+  \item How can the expression \begin{displaymath}R \Join S\end{displaymath} be expressed with basic relational algebra operators?
+  \end{enumerate}
+
 \aufgabe{3}
 \end{document}
