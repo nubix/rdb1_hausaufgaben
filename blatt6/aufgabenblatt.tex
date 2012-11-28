@@ -70,10 +70,17 @@
   \begin{enumerate}[a)]
     \item The names of all female persons, who were born on ``01.01.1950``.
       \[ \pi_{Person.name} \sigma_{Person.birthday = '01.01.1950'\,\wedge\,Person.gender = 'f'}Person \]
-    \item The names of all persons, who played a role in the movie ``The legacy of Codd``.
-      \begin{displaymath} \pi _{Person.id, Person.name} ( \sigma _{Movie.title=`{The\, legacy\, of\, Codd`}} Movie\Join_{Movie.id = actor.movie} \sigma _{actor.role = \neg null} actor)  \end{displaymath}
-    \item The names of all persons, who at least once acted and directed in the same movie.
-      \begin{displaymath} \pi _{Person.name} (\sigma _{actor.person = director.person \,\wedge\, actor.movie = director.movie} actor \times Director \times Person) \end{displaymath}
+    \item The names of all persons, who played a role in the movie ``The legacy of Codd``. \hfill\\
+      $ \pi _{Person.id, Person.name}\\
+        \sigma _{Movie.title=`{The\, legacy\, of\, Codd`}}\\
+        (Movie\Join_{Movie.id = actor.movie} \sigma _{actor.role = \neg null} actor)
+      $
+    \item The names of all persons, who at least once acted and directed in the same movie.\hfill\\
+      $
+      \pi _{Person.name}\\
+      \sigma _{actor.person = director.person \,\wedge\, actor.movie = director.movie}\\
+      (actor \times Director \times Person)
+      $
     \item The number of parodies to the movie ``Adventures with relational databases``.
       $ \pi_{\mathfrak{F}_{count(Movie.title)}} \\
       \sigma_{Movie.title = '\textrm{Adventures with relational databases}' \,\wedge\, connection.type = 'parody'}\\ Movie\Join_{connection.to = Movie.id}connection $
@@ -82,7 +89,8 @@
       $
         \pi _{Genre.name} \\
           ((\pi _{Genre.name}\\
-          (Genre \Join _{Genre.name = hasGenre.genre} Genre )) \backslash \pi _{Genre.name} (Genre \Join _{Movie.id = hasGenre.movie} hasGenre)\\
+          (Genre \Join _{Genre.name = hasGenre.genre} Genre ))\\
+          \backslash \pi _{Genre.name} (Genre \Join _{Movie.id = hasGenre.movie} hasGenre)\\
           \sigma _{Genre.name = hasGenre.genre} Genre)
       $
     \item The titles of movies that are a ``sequel`` of a ``parody``. \\
@@ -95,6 +103,9 @@
       )\\
       )$
     \item The person(s) who played the role ``relational algebra hacker`` most.
+      $
+      \rho_{\mathfrak{F}max()}
+      $
   \end{enumerate}
 \aufgabe{2}
  \begin{enumerate}[a)]
