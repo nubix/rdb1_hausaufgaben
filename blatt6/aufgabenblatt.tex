@@ -66,22 +66,21 @@
 \begin{document}
 \makehomeworktitle
 \aufgabe{1}
-\begin{itemize}
- \item The names of all female persons, who were born on ``01.01.1950``.
- \item The names of all persons, who played a role in the movie ``The legacy of Codd``.
- \item The names of all persons, who at least once acted and directed in the same movie.
- \item The number of parodies to the movie ``Adventures with relational databases``.
- \item Genres that are not assigned to any movie at all.
- \item The titles of movies that are a ``sequel`` of a ``parody``.
- \item The person(s) who played the role ``relational algebra hacker`` most.
-\end{itemize}  
+ a. The names of all female persons, who were born on ``01.01.1950``.
+ \\\\ b. The names of all persons, who played a role in the movie ``The legacy of Codd``.
+ \begin{displaymath} \pi _{Person.id, Person.name} ( \sigma _{Movie.title=`{The\, legacy\, of\, Codd`}} Movie\Join_{Movie.id = actor.movie} \sigma _{actor.role = \neg null} actor)  \end{displaymath}
+ \\\\ c. The names of all persons, who at least once acted and directed in the same movie.
+ \begin{displaymath} \pi _{Person.name} (\sigma _{actor.person = director.person \,\wedge\, actor.movie = director.movie} actor \times Director \times Person) \end{displaymath}
+ SELECT person.names FROM Person WHERE actor.person = director.person AND WHERE actor.movie = director.movie
+ \\\\ d. The number of parodies to the movie ``Adventures with relational databases``.
+ \\\\ e. Genres that are not assigned to any movie at all.
+ \begin{displaymath} \pi _{Genre.name} (\sigma _{hasGenre.genre=Genre.name \,\wedge\, movie = NULL} hasGenre) \end{displaymath}
+ \\\\ f. The titles of movies that are a ``sequel`` of a ``parody``.
+ \\\\ g. The person(s) who played the role ``relational algebra hacker`` most.
 \aufgabe{2}
-\begin{itemize}
- \item a. How are null-values treated, when applying an aggregation?
- \item b. How are duplicates treated, when applying an aggregation?
- \item c. What property must be given by two relations A and B so that set operations like \begin{displaymath}
-\cup, \cap,    \end{displaymath} can be applied?
-\item d. How can the expression \begin{displaymath}R \Join S\end{displaymath} be expressed with basic relational algebra operators?
-\end{itemize}
+ a. NULL-Values werden ebenfalls mitkopiert, wenn Aggregation angewandt wird.
+ \\\\ b. Duplikate werden bei der Aggregation nicht eliminiert.
+ \\\\ c. Die Operanden m\"ussen kompatibel f\"ur die Vereinigung, Schnitt, Differenz sein. D.h Sie m\"ussen aus den selben Attributen zusammengesetzt sein.
+\\\\ d. \begin{displaymath} R \Join _{\theta} S =  \sigma _{\theta} (R \times S) \end{displaymath}
 \aufgabe{3}
 \end{document}
