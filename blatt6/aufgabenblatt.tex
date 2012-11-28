@@ -64,6 +64,7 @@
 \blatt{6}
 %%%%%%%%%%%%%%%%%%%%%%%%
 \setcounter{section}{\blattnr}
+
 \begin{document}
 \makehomeworktitle
 \aufgabe{1}
@@ -95,11 +96,11 @@
 
     \item Genres that are not assigned to any movie at all. \hfill \\
       $
-        \pi _{Genre.name} \\
-          ((\pi _{Genre.name}\\
-          (Genre \Join _{Genre.name = hasGenre.genre} Genre ))\\
-          \backslash \pi _{Genre.name} (Genre \Join _{Movie.id = hasGenre.movie} hasGenre)\\
-          \sigma _{Genre.name = hasGenre.genre} Genre)
+      \pi _{Genre.name} \\
+      (\pi _{Genre.name}(Genre \Join _{Genre.name = hasGenre.genre} Genre )\\
+      \backslash
+        \\
+        \pi _{Genre.name} \sigma _{Genre.name = hasGenre.genre} (Genre \Join _{Movie.id = hasGenre.movie} hasGenre))
       $
     \item The titles of movies that are a ``sequel`` of a ``parody``. \\
       $\pi_{Movie.title} \\
