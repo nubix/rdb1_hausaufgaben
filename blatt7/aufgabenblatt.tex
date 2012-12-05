@@ -82,11 +82,11 @@
                     \{ p.name\,|\,& Person(p) \wedge ( \\
                         &\forall a (actor(a) \wedge a.person = p.id) \\
                         &\wedge ( \exists hg ( hasGenre(hg) \wedge a.movie=hg.movie) \\
-                        &  hg.genre = 'action') \\
+                        &  hg.genre = \textrm{'action'}) \\
                         \vee & \\
                         &\forall a (director(a) \wedge a.person = p.id) \\
                         &\wedge ( \exists hg ( hasGenre(hg) \wedge a.movie=hg.movie) \\
-                        &  hg.genre = 'action') \\
+                        &  hg.genre = \textrm{'action'}) \\
                       )\}
                     \end{align*}
 
@@ -100,7 +100,7 @@
         \end{align*}
       \end{description}
     \item The name of all person who only played in the movie ``The mighty Oracle`` but apart from that in no other movie.\hfill\\
-        \begin{enumerate}
+        \begin{description}
           \item [RA]  \begin{align*}
                         \pi_{name} (&\\
                             &(\pi_{id,name}(Person\Join_{Person.id = actor.id}actor)\\
@@ -121,8 +121,30 @@
                      & \neg(t_4.id = t_1.id)
                       \}
                       \end{align*}
-          \item [DRC] 
-        \end{enumerate}
+          \item [DRC] \begin{align*}
+                      \{ name | & \\
+                      & (\exists id, gender, birth (Person(id, name, gender, birth))\\
+                      &\wedge \\
+                      & \exists person,movie,role(actor(person, movie, role) \wedge id = person))\\
+                      \wedge &\\
+                      & (\exists id, title, year (Movie(id, title, year)\\
+                      & \wedge id = movie \wedge title=\textit{'The mighty Oracle'}))\\
+                      &\\
+                      \wedge\,\,\,\,\, &\\
+                      &\\
+                      & (\exists id1, gender1, birth1 (Person(id1, name, gender1, birth1))\\
+                      &\wedge \\
+                      & \exists person1,movie1,role1(actor(person1, movie1, role1) \wedge id1 = person1))\\
+                      \wedge &\\
+                      & (\exists id1, title1, year1 (Movie(id1, title1, year1)\\
+                      & \wedge id1 = movie1 \wedge \neg(title1=\textit{'The mighty Oracle'}))\\
+                      &\\
+                      \wedge\,\,\,\,\, &\\
+                      &\\
+                      \neg(id = id1)
+                      \}
+                      \end{align*}
+        \end{description}
     \end{enumerate}
 \aufgabe{2}
 Express following statements in \textbf{natural} language:
