@@ -68,14 +68,13 @@
 \begin{document}
 \makehomeworktitle
 \aufgabe{1}
-  \begin{enumerate}[a)]
-    \item The title of all movies that have been created before 1970.\hfill\\
+\teil[The title of all movies that have been created before 1970]{a}.\hfill\\
       \begin{description}
         \item [RA]  $\pi_{Movie.title}\sigma_{Movie.year < 1970}Movie$
         \item [TRC] $ \{ t.title | Movie(t) \wedge t.year < 1970  \}$
         \item [DRC] $ \{ title | \exists id,year (Movie(id,title, year) \wedge year < 1970 )\}$
       \end{description}
-    \item The name of all persons who participated in an ``action`` movie. \hfill\\
+\teil[The name of all persons who participated in an »action« movie.]{b}
       \begin{description}
         \item [RA]  $_{movie} (Genre \Join_{Movie.id=hasGenre.movie} hasGenre) $
         \item [TRC] \begin{align*}
@@ -99,7 +98,7 @@
         \}
         \end{align*}
       \end{description}
-    \item The name of all person who only played in the movie ``The mighty Oracle`` but apart from that in no other movie.\hfill\\
+\teil[The name of all person who only played in the movie »The mighty Oracle« but apart from that in no other movie.]{c}
         \begin{description}
           \item [RA]  \begin{align*}
                         \pi_{name} (&\\
@@ -145,7 +144,6 @@
                       \}
                       \end{align*}
         \end{description}
-    \end{enumerate}
 \aufgabe{2}
 Express following statements in \textbf{natural} language:
  \begin{enumerate}[a)]
