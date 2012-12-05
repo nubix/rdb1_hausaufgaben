@@ -129,40 +129,18 @@ Express following statements in \textbf{natural} language:
  \begin{enumerate}[a)]
    \item 
    $ 
-   \{\, per \, | \, \exists mov, year ( 
-   $ 
-   \\ 
-   $
-   Movie(mov, ``The \, Power \, of \, Projection``, year) \,  \wedge \, 
-   $ 
-   \\ 
-   $
-   actor(per,mov, ``forest \, ranger``) 
-   $ 
-   \\ 
-   $
+   \{\, per \, | \, \exists mov, year (\\ 
+   Movie(mov, ``The \, Power \, of \, Projection``, year) \,  \wedge \, \\actor(per,mov, ``forest \, ranger``)\\ 
    ) \} \backslash \{ \,per \, | \, \exists mov, r(actor(per, mov, r) |, \wedge \, hasGenre(mov, ``comedy``))\}
    $
    \item 
    $
-   \{p.name \, | \, Person(p) \, \wedge \, \forall a( 
-   $
-   \\ 
-   $ 
-   (actor(a) \, \wedge \, a.person=p.id) \, \rightarrow \, ( 
-   $
-   \\
-   $
+   \{p.name \, | \, Person(p) \, \wedge \, \forall a(\\  
+   (actor(a) \, \wedge \, a.person=p.id) \, \rightarrow \, (\\
    \exists hg(hasGenre(hg) \, \wedge \, a.movie=hg.movie \, \wedge \, hg.genre=``drama``)
+   \\)\\)\}
    $
-   \\
-   $ 
-   )
-   $
-   \\
-   $
-   ) \}
-   $
+   Retrieve all names
  \end{enumerate}
 \aufgabe{3}
 \begin{enumerate}[a)]
