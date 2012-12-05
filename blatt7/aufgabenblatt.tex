@@ -104,13 +104,23 @@
           \item [RA]  \begin{align*}
                         \pi_{name} (&\\
                             &(\pi_{id,name}(Person\Join_{Person.id = actor.id}actor)\\
-                            &\Join_{actor.movie = movie.id}\sigma_{Movie.title='\textrm{The mighty Oracle}'}Movie)\\
+                            &\Join_{actor.movie = movie.id}\sigma_{Movie.title=\textrm{'The mighty Oracle'}}Movie)\\
                          \backslash &\\
                             &(\pi_{id,name}(Person\Join_{Person.id = actor.id}actor)\\
-                            &\Join_{actor.movie = movie.id}\sigma_{\neg(Movie.title='\textrm{The mighty Oracle}')}Movie)\\
+                            &\Join_{actor.movie = movie.id}\sigma_{\neg(Movie.title=\textrm{'The mighty Oracle'})}Movie)\\
                         )
                       \end{align*}
-          \item [TRC]
+          \item [TRC] \begin{align*}
+                      \{ t_1.name | & \\
+                      & ((Person(t_1) \wedge actor(t_2) \wedge t_1.id=t_2.person) \\
+                      & Movie(t_3) \wedge t_2.movie = t_3.id \wedge t_3.name=\textit{'The mighty Oracle'})\\
+                      \wedge\\
+                      & ((Person(t_4) \wedge actor(t_5) \wedge t_4.id=t_5.person) \\
+                      & Movie(t_6) \wedge t_5.movie = t_6.id \wedge \neg(t_3.name=\textit{'The mighty Oracle'})\\
+                      \wedge \\
+                     & \neg(t_4.id = t_1.id)
+                      \}
+                      \end{align*}
           \item [DRC] 
         \end{enumerate}
     \end{enumerate}
