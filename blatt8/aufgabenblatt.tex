@@ -1,0 +1,189 @@
+\documentclass[11pt,a4paper,DIV=9]{scrartcl}
+\usepackage{pgf}
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata,positioning,shadows}
+\usepackage{ngerman}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb}
+\usepackage{tikz-er2}
+\usepackage{enumerate}
+\usetikzlibrary{shapes,snakes}
+% Schriftart ändern
+\renewcommand{\rmdefault}{ppl}
+%Möglichkeit zur Änderung von Überschriften
+\usepackage{sectsty}
+%Überschrift \section uandern
+\definecolor{blue}{RGB}{76 , 92, 153}
+\allsectionsfont{\color{blue}}
+\paragraphfont{\color{blue}}
+
+%Variable Blattnummer
+\newcommand{\blatt}[1]{
+  \newcommand{\blattnr}{#1}
+}
+%Aufgabe und Aufgabenteil definieren
+\newcounter{temp}
+\newcommand{\aufgabe}[1]{
+  \setcounter{temp}{\value{subsection}}
+  \setcounter{subsection}{#1}
+  \addtocounter{subsection}{-1}
+  \subsection{Aufgabe}
+  \setcounter{subsection}{\value{temp}}
+}
+\newcommand{\teil}[2][]{
+  \subsubsection*{#2) #1}
+}
+\renewcommand{\author}[1]{\renewcommand{\author}{#1}}
+\renewcommand{\title}[1]{\renewcommand{\title}{#1}}
+\newcommand{\makehomeworktitle}{
+  \begin{minipage}[t]{6.5cm}
+    \sf{\author}
+  \end{minipage}
+  \begin{minipage}[t]{6.5cm}
+    \begin{flushright}
+      \sf{\title\\\today}
+    \end{flushright}
+  \end{minipage}
+  \\[0.2cm]
+  \begin{center}
+    \sf{
+      \color{blue}{
+        \LARGE{Aufgabenblatt \blattnr}
+      }
+    }
+  \end{center}
+  \vspace{0.1cm}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Statisch
+\author{{[}4131658{]} Jan Germann \\{[}4054962{]} Christian Ratz\\Übungsgruppe 1}
+\title{Relationale Datenbanken}
+
+%%% Auf jedes Hausaufgabenblatt anpassen
+\blatt{8}
+%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{section}{\blattnr}
+
+\begin{document}
+\makehomeworktitle
+\aufgabe{1}
+  \begin{enumerate}[a)]
+    \item The title of all movies that have been created before 1970.\hfill\\
+      \begin{description}
+        \item [RA]  $\pi_{Movie.title}\sigma_{Movie.year < 1970}Movie$
+        \item [TRC] $ \{ t.title | Movie(t) \wedge t.year < 1970  \}$
+        \item [DRC] $ \{ title | \exists id,year (Movie(id,title, year) \wedge year < 1970 )\}$
+      \end{description}
+    \item The name of all persons who participated in an ``action`` movie. \hfill\\
+      \begin{description}
+       \item [RA]  \begin{align*}
+                        \pi_{name} (&\\
+                            &(\pi_{name}(Person\Join_{Person.id = actor.id}actor)\\
+                            &\Join_{actor.movie = hasGenre.movie}\sigma_{hasGenre.Genre=\textrm{'action'}}hasGenre)\\
+                         \vee &\\
+                            &(\pi_{name}(Person\Join_{Person.id = director.id}director)\\
+                            &\Join_{director.movie = hasGenre.movie}\sigma_{hasGenre.Genre=\textrm{'action'}}hasGenre)\\
+                        )
+                      \end{align*}
+        \item [TRC] \begin{align*}
+                    \{ p.name\,|\,& Person(p) \wedge ( \\
+                        &\forall a (actor(a) \wedge a.person = p.id) \\
+                        &\wedge ( \exists hg ( hasGenre(hg) \wedge a.movie=hg.movie) \\
+                        &  hg.genre = \textrm{'action'}) \\
+                        \vee & \\
+                        &\forall a (director(a) \wedge a.person = p.id) \\
+                        &\wedge ( \exists hg ( hasGenre(hg) \wedge a.movie=hg.movie) \\
+                        &  hg.genre = \textrm{'action'}) \\
+                      )\}
+                    \end{align*}
+        \item [DRC]
+        \begin{align*}
+        \{ name | & \\
+                  & ( \exists id, gender, birth(Person(id, name, gender, birth)) \\
+                  & \wedge \exists person, movie, role(actor(person, movie, role) \wedge id = person) \\
+                  & \wedge \exists movie, genre(hasGenre(movie, genre) \wedge genre = \textrm('action'))) \\
+                  \wedge \\
+                  & (\exists id, gender, birth(Person(id, name, gender, birth)) \\
+                  & \wedge \exists person, movie(director(person, movie) \wedge id = person) \\
+                  & \wedge \exists movie, genre(hasGenre(movie,genre) \wedge genre = \textrm('action'))) \\
+        \}
+        \end{align*}
+      \end{description}
+    \item The name of all person who only played in the movie ``The mighty Oracle`` but apart from that in no other movie.\hfill\\
+        \begin{description}
+          \item [RA]  \begin{align*}
+                        \pi_{name} (&\\
+                            &(\pi_{id,name}(Person\Join_{Person.id = actor.id}actor)\\
+                            &\Join_{actor.movie = movie.id}\sigma_{Movie.title=\textrm{'The mighty Oracle'}}Movie)\\
+                         \backslash &\\
+                            &(\pi_{id,name}(Person\Join_{Person.id = actor.id}actor)\\
+                            &\Join_{actor.movie = movie.id}\sigma_{\neg(Movie.title=\textrm{'The mighty Oracle'})}Movie)\\
+                        )
+                      \end{align*}
+          \item [TRC] \begin{align*}
+                      \{ t_1.name | & \\
+                      & ((Person(t_1) \wedge actor(t_2) \wedge t_1.id=t_2.person) \\
+                      & Movie(t_3) \wedge t_2.movie = t_3.id \wedge t_3.name=\textit{'The mighty Oracle'})\\
+                      \wedge\\
+                      & ((Person(t_4) \wedge actor(t_5) \wedge t_4.id=t_5.person) \\
+                      & Movie(t_6) \wedge t_5.movie = t_6.id \wedge \neg(t_3.name=\textit{'The mighty Oracle'})\\
+                      \wedge \\
+                     & \neg(t_4.id = t_1.id)
+                      \}
+                      \end{align*}
+          \item [DRC] \begin{align*}
+                      \{ name | & \\
+                      & (\exists id, gender, birth (Person(id, name, gender, birth))\\
+                      &\wedge \\
+                      & \exists person,movie,role(actor(person, movie, role) \wedge id = person))\\
+                      \wedge &\\
+                      & (\exists id, title, year (Movie(id, title, year)\\
+                      & \wedge id = movie \wedge title=\textit{'The mighty Oracle'}))\\
+                      &\\
+                      \wedge\,\,\,\,\, &\\
+                      &\\
+                      & (\exists id1, gender1, birth1 (Person(id1, name, gender1, birth1))\\
+                      &\wedge \\
+                      & \exists person1,movie1,role1(actor(person1, movie1, role1) \wedge id1 = person1))\\
+                      \wedge &\\
+                      & (\exists id1, title1, year1 (Movie(id1, title1, year1)\\
+                      & \wedge id1 = movie1 \wedge \neg(title1=\textit{'The mighty Oracle'}))\\
+                      &\\
+                      \wedge\,\,\,\,\, &\\
+                      &\\
+                      \neg(id = id1)
+                      \}
+                      \end{align*}
+        \end{description}
+    \end{enumerate}
+\aufgabe{2}
+Express following statements in \textbf{natural} language:
+ \begin{enumerate}[a)]
+   \item 
+   $ 
+   \{\, per \, | \, \exists mov, year (\\ 
+   Movie(mov, ``The \, Power \, of \, Projection``, year) \,  \wedge \, \\actor(per,mov, ``forest \, ranger``)\\ 
+   ) \} \backslash \{ \,per \, | \, \exists mov, r(actor(per, mov, r) |, \wedge \, hasGenre(mov, ``comedy``))\}
+   $
+  \\ Zeige alle Person die in ``The Power of Projektion`` mitspielen und die Rolle eines ``Forest Rangers`` haben ohne die Personen die in einer Kom\"odie mitspielen.
+   \item 
+   $
+   \{p.name \, | \, Person(p) \, \wedge \, \forall a(\\  
+   (actor(a) \, \wedge \, a.person=p.id) \, \rightarrow \, (\\
+   \exists hg(hasGenre(hg) \, \wedge \, a.movie=hg.movie \, \wedge \, hg.genre=``drama``)
+   \\)\\)\}
+   $
+   \\ Zeige alle Namen von Personen die keine Schauspieler sind oder in einem Film mitspielen, dessen Genre Drama ist.
+ \end{enumerate}
+\aufgabe{3}
+\begin{enumerate}[a)]
+ \item What are unsafe queries and how can you avoid them? \\
+ Unsichere Abfragen sind Abfragen die m\"oglicherweise eine unbegrenzte Anzahl von Tupeln zur\"uckgeben. Vermeiden lassen sich unsichere Abfragen nur durch die sogenannte ``Geschlossene-Welt-Annahme``. Diese Annahme begrenzt die Tupel die f\"ur Tupelvariablen ersetzt werden k\"onnen auf die, die in den aktuell betrachteten Relationen auch wirklich vorkommen.
+ \item What is relational completeness? \\
+ Es gibt drei Abfrageparadigmen: relational Algebra, tuple relational calculus (TRC) und domain relational calculus (DRC). Eine Abfrage die in einem der drei Kalk\"ule formuliert wurde, kann auch in jedes der drei Kalk\"ule umgewandelt werden. Diese Eigenschaft nennt man relational komplett. Jede andere Abfragesprache die in eine von den drei Kalk\"ulen abgebildet werden kann ist ebenfalls relational komplett.
+ \item What is the difference between a formula and an atom? \\
+ Eine Formel besteht aus mindestens einem Atom. Ein Atom ist automatisch auch eine Formel, jedoch kann eine Formel auch aus mehreren Atomen und Operatoren bestehen.
+\end{enumerate}
+\end{document}
+
