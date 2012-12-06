@@ -77,7 +77,15 @@
       \end{description}
     \item The name of all persons who participated in an ``action`` movie. \hfill\\
       \begin{description}
-        \item [RA]  $_{movie} (Genre \Join_{Movie.id=hasGenre.movie} hasGenre) $
+       \item [RA]  \begin{align*}
+                        \pi_{name} (&\\
+                            &(\pi_{name}(Person\Join_{Person.id = actor.id}actor)\\
+                            &\Join_{actor.movie = hasGenre.movie}\sigma_{hasGenre.Genre=\textrm{'action'}}hasGenre)\\
+                         \vee &\\
+                            &(\pi_{name}(Person\Join_{Person.id = director.id}director)\\
+                            &\Join_{director.movie = hasGenre.movie}\sigma_{hasGenre.Genre=\textrm{'action'}}hasGenre)\\
+                        )
+                      \end{align*}
         \item [TRC] \begin{align*}
                     \{ p.name\,|\,& Person(p) \wedge ( \\
                         &\forall a (actor(a) \wedge a.person = p.id) \\
@@ -89,7 +97,6 @@
                         &  hg.genre = \textrm{'action'}) \\
                       )\}
                     \end{align*}
-
         \item [DRC]
         \begin{align*}
         \{ name | & \\
