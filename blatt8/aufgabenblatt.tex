@@ -79,7 +79,7 @@
        	\item Names of all persons who were born in July.\hfill\\ %%%%
 	SELECT name \\
 	FROM Person \\
-	WHERE birthday LIKE 'July';
+	WHERE MONTH(birthday)='7'
 	
            \item Titles of all movies that have been directed by more than one person.\hfill\\ %%%%
            SELECT m.title \\
