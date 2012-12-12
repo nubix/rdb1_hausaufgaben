@@ -89,7 +89,7 @@
       GROUP BY m.id; \\
 
       \item Id, name and number of movies the person acted in for each person. The result should also include those persons who never played a role in a movie yet.\hfill\\ %%%%
-      SELECT p.id, p.name, m.count \\
+      SELECT p.id, p.name, COUNT(*) AS MovieCount \\
       FROM Person p \\
       JOIN actor a ON (p.id = a.person) \\
       JOIN Movies m ON (m.id = a.movie) \\
@@ -112,8 +112,11 @@
       AND p.name = 'Ray Boyce');
 
       \item The names of all persons, who acted and directed in the same movie for at least two times.\hfill\\ %%%%
-      SELECT p.name
-      FROM Person p
+      SELECT p.name \\
+      FROM person p \\
+      JOIN actor a ON p.id = a.person \\
+      JOIN director d ON a.person = d.person \\
+      WHERE COUNT(p.id) > 1; 
 
       \item Considering the average number of movies persons played roles in. Return the names of all persons who played roles in more movies than the average.\hfill\\ %%%%
 
