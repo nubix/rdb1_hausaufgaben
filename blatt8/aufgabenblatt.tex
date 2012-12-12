@@ -81,14 +81,14 @@
       FROM Person \\
       WHERE MONTH(birthday)='7';
       	
-      \item Titles of all movies that have been directed by more than one person.\hfill\\ %%%%
+      \item Titles of all movies that have been directed by more than one person.\hfill\\
       SELECT m.title \\
       FROM Movie m \\
       JOIN director d \\
       ON (m.id = d.movie) \\
       GROUP BY m.id; \\
 
-      \item Id, name and number of movies the person acted in for each person. The result should also include those persons who never played a role in a movie yet.\hfill\\ %%%%
+      \item Id, name and number of movies the person acted in for each person. The result should also include those persons who never played a role in a movie yet.\hfill\\
       SELECT p.id, p.name, COUNT(*) AS MovieCount \\
       FROM Person p \\
       JOIN actor a ON (p.id = a.person) \\
@@ -111,15 +111,21 @@
       AND a.movie = m.id \\
       AND p.name = 'Ray Boyce');
 
-      \item The names of all persons, who acted and directed in the same movie for at least two times.\hfill\\ %%%%
+      \item The names of all persons, who acted and directed in the same movie for at least two times.\hfill\\
       SELECT p.name \\
       FROM person p \\
       JOIN actor a ON p.id = a.person \\
       JOIN director d ON a.person = d.person \\
       WHERE COUNT(p.id) $>$ 1; 
 
-      \item Considering the average number of movies persons played roles in. Return the names of all persons who played roles in more movies than the average.\hfill\\ %%%%
-
+      \item Considering the average number of movies persons played roles in. Return the names of all persons who played roles in more movies than the average.\hfill\\
+      SELECT p.name, \\
+      	((SELECT AVG(COUNT(actor.person)) \\ 
+	 FROM actor) AS average), \\
+	 COUNT(actor.person) AS played \\
+      FROM Person p \\
+      WHERE  played > average; 
+      
     \end{enumerate}
 \aufgabe{2}
 \begin{enumerate}[a.]
