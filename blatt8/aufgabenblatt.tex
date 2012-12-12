@@ -74,12 +74,12 @@
 	WHERE p.id = a.person \\
 	AND a.movie = m.id \\
 	AND m.id = hg.movie \\
- 	AND hg.genre = 'parody'
+ 	AND hg.genre = 'parody';
 
-       	\item Names of all persons who were born in July.\hfill\\ %%%%
+       	\item Names of all persons who were born in July.\hfill\\
 	SELECT name \\
 	FROM Person \\
-	WHERE MONTH(birthday)='7'
+	WHERE MONTH(birthday)='7';
 	
            \item Titles of all movies that have been directed by more than one person.\hfill\\ %%%%
            SELECT m.title \\
@@ -98,7 +98,7 @@
            WHERE a.person = p.id \\
            AND a.movie = m.id \\
            AND p.name = 'Ted Codd'
-           AND NOT p.name = 'Ray Boyce'
+           AND NOT p.name = 'Ray Boyce';
 
            \item The names of all persons, who acted and directed in the same movie for at least two times.\hfill\\ %%%%
            SELECT p.name
