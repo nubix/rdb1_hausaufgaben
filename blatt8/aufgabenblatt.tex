@@ -168,14 +168,18 @@ WHERE  played > av.average;
 \item What is the difference between the WHERE and the HAVING clause? \hfill\\\\
  Der erste Unterschied w\"are, dass die WHERE-Klausel vor der \textbf{GROUP-BY}-Klausel verwendet wird, die HAVING-Klausel immer danach benutzt wird. Bei der Verwendung von \textbf{HAVING} wird erst eine komplette Abfrage ausgef\"uhrt, dann gruppiert und am Ende der Bedingungen an die Abfrage angepasst. Bei \textbf{WHERE} werden erst die entsprechenden Zeilen herausgesucht und am Ende gruppiert zur\"uckgegeben. \\
 \item Would SQL have the same expressiveness if the HAVING clause would not exist? \hfill\\
-Nein. In der \textbf{WHERE}-Klausel werden Vorbedingungen definiert, durch die \textbf{GROUP-BY}-Klausel wird die Selektion gruppiert und optionale Nachbedingungen (z.B Funktionen) werden in der \textbf{HAVING}-Klausel beschrieben. Des Weiteren ist Aggregation in der \textbf{WHERE}-Klausel verboten. Beispielsweise will man alle Institute des Informatikzweigs der TU Braunschweig mit mehr als 10 Mitarbeitern die ein h\"oheres Monatsgehalt als 5000 Euro bekommen. \\\\
-SELECT Institut, COUNT(*) AS 'Anzahl der Mitarbeiter' \\
-FROM Mitarbeiter \\
-WHERE Monatsgehalt \textgreater 5000 \\
-GROUP BY Institut \\
-HAVING COUNT(*) \textgreater 10; \\
-W\"urde man die \textbf{HAVING}-Klausel weglassen und stattdessen die \textbf{WHERE}-Klausel folgenderma{\ss}en definieren: \\\\
-WHERE Monatsgehalt \textgreater 5000 AND COUNT(*) \textgreater 10 \\\\
+Nein. In der \textbf{WHERE}-Klausel werden Vorbedingungen definiert, durch die \textbf{GROUP-BY}-Klausel wird die Selektion gruppiert und optionale Nachbedingungen (z.B Funktionen) werden in der \textbf{HAVING}-Klausel beschrieben. Des Weiteren ist Aggregation in der \textbf{WHERE}-Klausel verboten. Beispielsweise will man alle Institute des Informatikzweigs der TU Braunschweig mit mehr als 10 Mitarbeitern die ein höheres Monatsgehalt als 5000 Euro bekommen. \\
+\begin{lstlisting}
+SELECT Institut, COUNT(*) AS 'Anzahl der Mitarbeiter'
+FROM Mitarbeiter 
+WHERE Monatsgehalt > 5000
+GROUP BY Institut
+HAVING COUNT(*) > 10;
+\end{lstlisting}
+W\"urde man die \textbf{HAVING}-Klausel weglassen und stattdessen die \textbf{WHERE}-Klausel folgenderma{\ss}en definieren: \\
+\begin{lstlisting}[numbers=none]
+WHERE Monatsgehalt > 5000 AND COUNT(*) > 10
+\end{lstlisting}
 Dann w\"urde man einen Fehler wegen Aggregation bekommen, da in der \textbf{WHERE}-Klausel Aggregation verboten ist. \\
 \item What is the difference between correlated and uncorrelated subqueries? \hfill\\\\
 Falls die WHERE-Klausel der inneren Abfrage (Subquery) ein Attribut aus einer Relation verwendet, das in der \"au{\ss}eren Abfrage deklariert wurde, sind beide Abfragen korreliert. D.h die innere Abfrage muss f\"ur jedes Tupel der \"au{\ss}eren Abfrage neu bewertet werden. Da dies ineffizient ist, sollte man Unterabfragen (Subqueries) vermeiden und falls m\"oglich, auf JOINS zur\"uckgreifen. \\
