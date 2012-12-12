@@ -119,12 +119,12 @@
       WHERE COUNT(p.id) $>$ 1; 
 
       \item Considering the average number of movies persons played roles in. Return the names of all persons who played roles in more movies than the average.\hfill\\
+      WITH \\
+        Avrg AS ((SELECT AVG(COUNT(actor.person)) FROM actor) AS average) \\
       SELECT p.name, \\
-      	((SELECT AVG(COUNT(actor.person)) \\ 
-	 FROM actor) AS average), \\
-	 COUNT(actor.person) AS played \\
-      FROM Person p \\
-      WHERE  played > average; 
+	     COUNT(actor.person) AS played \\
+      FROM Person p, Avrg a \\
+      WHERE  played $>$ a.average; 
       
     \end{enumerate}
 \aufgabe{2}
