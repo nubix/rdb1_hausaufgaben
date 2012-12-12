@@ -97,8 +97,12 @@
            FROM Movie m, Person p, actor a \\ 
            WHERE a.person = p.id \\
            AND a.movie = m.id \\
-           AND p.name = 'Ted Codd'
-           AND NOT p.name = 'Ray Boyce';
+           AND p.name = 'Ted Codd' \\
+           EXCEPT (SELECT m.title \\
+           FROM Movie m, Person p, actor a \\
+           WHERE a.person = p.id \\
+           AND a.movie = m.id \\
+           AND p.name = 'Ray Boyce');
 
            \item The names of all persons, who acted and directed in the same movie for at least two times.\hfill\\ %%%%
            SELECT p.name
