@@ -7,6 +7,7 @@
 \usepackage{amsmath,amssymb}
 \usepackage{tikz-er2}
 \usepackage{enumerate}
+\usepackage{listings}
 \usetikzlibrary{shapes,snakes}
 % Schriftart ändern
 \renewcommand{\rmdefault}{ppl}
@@ -64,67 +65,101 @@
 \blatt{8}
 %%%%%%%%%%%%%%%%%%%%%%%%
 \setcounter{section}{\blattnr}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+\lstset{ %
+  language=sql,                % the language of the code
+  basicstyle=\footnotesize,           % the size of the fonts that are used for the code
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},          % keyword style
+  commentstyle=\color{dkgreen},       % comment style
+  stringstyle=\color{mauve}}
+
 \begin{document}
 \makehomeworktitle
 \aufgabe{1}
   \begin{enumerate}[a.]
       \item Name of all persons who played a role in a »parody« of any movie.\hfill\\
-      SELECT p.name \\
-      FROM Movie m, Person p, actor a, hasGenre hg \\
-      WHERE p.id = a.person \\
-      AND a.movie = m.id \\
-      AND m.id = hg.movie \\
-      AND hg.genre = 'parody';
+\begin{lstlisting}
+SELECT p.name
+FROM Movie m, Person p, actor a, hasGenre hg
+WHERE p.id = a.person
+AND a.movie = m.id
+AND m.id = hg.movie
+AND hg.genre = 'parody';
+\end{lstlisting}
 
       \item Names of all persons who were born in July.\hfill\\
-      SELECT name \\
-      FROM Person \\
-      WHERE MONTH(birthday)='7';
-      	
+\begin{lstlisting}
+SELECT name 
+FROM Person 
+WHERE MONTH(birthday)='7';
+\end{lstlisting}
+
       \item Titles of all movies that have been directed by more than one person.\hfill\\
-      SELECT m.title \\
-      FROM Movie m \\
-      JOIN director d \\
-      ON (m.id = d.movie) \\
-      GROUP BY m.id; \\
+\begin{lstlisting}
+SELECT m.title 
+FROM Movie m 
+JOIN director d 
+ON (m.id = d.movie) 
+GROUP BY m.id; 
+\end{lstlisting}
+
 
       \item Id, name and number of movies the person acted in for each person. The result should also include those persons who never played a role in a movie yet.\hfill\\
-      SELECT p.id, p.name, COUNT(*) AS MovieCount \\
-      FROM Person p \\
-      JOIN actor a ON (p.id = a.person) \\
-      JOIN Movies m ON (m.id = a.movie) \\
+\begin{lstlisting}
+SELECT p.id, p.name, COUNT(*) AS MovieCount 
+FROM Person p 
+JOIN actor a ON (p.id = a.person) 
+JOIN Movies m ON (m.id = a.movie) 
 
-      UNION
-      SELECT p.id, p.name, '0' \\
-      FROM Person p, actor a \\
-      WHERE a.person != p.id;
+UNION
+SELECT p.id, p.name, '0' 
+FROM Person p, actor a 
+WHERE a.person <> p.id;
+\end{lstlisting}
+
 
       \item Titles of all movies in which »Ted Codd« played a role but »Ray Boyce« did not.\hfill\\
-      SELECT m.title \\
-      FROM Movie m, Person p, actor a \\ 
-      WHERE a.person = p.id \\
-      AND a.movie = m.id \\
-      AND p.name = 'Ted Codd' \\
-      EXCEPT (SELECT m.title \\
-      FROM Movie m, Person p, actor a \\
-      WHERE a.person = p.id \\
-      AND a.movie = m.id \\
-      AND p.name = 'Ray Boyce');
+\begin{lstlisting}
+SELECT m.title 
+FROM Movie m, Person p, actor a  
+WHERE a.person = p.id 
+AND a.movie = m.id 
+AND p.name = 'Ted Codd' 
+EXCEPT (SELECT m.title 
+FROM Movie m, Person p, actor a 
+WHERE a.person = p.id 
+AND a.movie = m.id 
+AND p.name = 'Ray Boyce');
+\end{lstlisting}
+
 
       \item The names of all persons, who acted and directed in the same movie for at least two times.\hfill\\
-      SELECT p.name \\
-      FROM person p \\
-      JOIN actor a ON (p.id = a.person) \\
-      JOIN director d ON (a.person = d.person) AND (a.movie = d.movie) \\
-      WHERE COUNT(p.id) $>$ 1; 
+\begin{lstlisting}
+SELECT p.name 
+FROM person p 
+JOIN actor a ON (p.id = a.person) 
+JOIN director d ON (a.person = d.person) AND (a.movie = d.movie) 
+WHERE COUNT(p.id) > 1;
+\end{lstlisting}
+ 
 
       \item Considering the average number of movies persons played roles in. Return the names of all persons who played roles in more movies than the average.\hfill\\
-      WITH \\
-        Avrg AS ((SELECT AVG(COUNT(actor.person)) FROM actor) AS average) \\
-      SELECT p.name, \\
-	     COUNT(a.person) AS played \\
-      FROM Person p, actor a, Avrg av \\
-      WHERE  played $>$ av.average; 
+\begin{lstlisting}
+WITH 
+  Avrg AS (
+    SELECT AVG(COUNT(actor.person)) as average FROM actor
+  ) 
+SELECT p.name, 
+COUNT(a.person) AS played 
+FROM Person p, actor a, Avrg av 
+WHERE  played > av.average; 
+\end{lstlisting}
+
       
     \end{enumerate}
 \aufgabe{2}
