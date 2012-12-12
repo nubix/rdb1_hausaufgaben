@@ -116,7 +116,7 @@
       FROM person p \\
       JOIN actor a ON p.id = a.person \\
       JOIN director d ON a.person = d.person \\
-      WHERE COUNT(p.id) > 1; 
+      WHERE COUNT(p.id) $>$ 1; 
 
       \item Considering the average number of movies persons played roles in. Return the names of all persons who played roles in more movies than the average.\hfill\\ %%%%
 
