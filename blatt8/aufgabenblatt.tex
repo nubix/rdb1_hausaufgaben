@@ -89,9 +89,15 @@
       GROUP BY m.id; \\
 
       \item Id, name and number of movies the person acted in for each person. The result should also include those persons who never played a role in a movie yet.\hfill\\ %%%%
-      SELECT p.id, p.name, COUNT(Movie) \\
-      FROM Person p, Movie m
-      WHERE
+      SELECT p.id, p.name, m.count \\
+      FROM Person p \\
+      JOIN actor a ON (p.id = a.person) \\
+      JOIN Movies m ON (m.id = a.movie) \\
+
+      UNION
+      SELECT p.id, p.name, '0' \\
+      FROM Person p, actor a \\
+      WHERE a.person != p.id;
 
       \item Titles of all movies in which »Ted Codd« played a role but »Ray Boyce« did not.\hfill\\
       SELECT m.title \\
