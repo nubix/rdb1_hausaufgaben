@@ -84,9 +84,9 @@
       \item Titles of all movies that have been directed by more than one person.\hfill\\ %%%%
       SELECT m.title \\
       FROM Movie m \\
-      JOIN director d
-      ON (m.id = d.movie)
-      GROUP BY m.id;
+      JOIN director d \\
+      ON (m.id = d.movie) \\
+      GROUP BY m.id; \\
 
       \item Id, name and number of movies the person acted in for each person. The result should also include those persons who never played a role in a movie yet.\hfill\\ %%%%
       SELECT p.id, p.name, COUNT(Movie) \\
