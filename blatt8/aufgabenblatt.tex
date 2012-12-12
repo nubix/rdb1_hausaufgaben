@@ -68,47 +68,47 @@
 \makehomeworktitle
 \aufgabe{1}
   \begin{enumerate}[a.]
-    	\item Name of all persons who played a role in a ``parody`` of any movie.\hfill\\
-	SELECT p.name \\
-	FROM Movie m, Person p, actor a, hasGenre hg \\
-	WHERE p.id = a.person \\
-	AND a.movie = m.id \\
-	AND m.id = hg.movie \\
- 	AND hg.genre = 'parody';
+      \item Name of all persons who played a role in a ``parody`` of any movie.\hfill\\
+      SELECT p.name \\
+      FROM Movie m, Person p, actor a, hasGenre hg \\
+      WHERE p.id = a.person \\
+      AND a.movie = m.id \\
+      AND m.id = hg.movie \\
+      AND hg.genre = 'parody';
 
-       	\item Names of all persons who were born in July.\hfill\\
-	SELECT name \\
-	FROM Person \\
-	WHERE MONTH(birthday)='7';
-	
-           \item Titles of all movies that have been directed by more than one person.\hfill\\ %%%%
-           SELECT m.title \\
-           FROM Movie m, director d \\
-           WHERE m.id = d.movie
-           AND 
+      \item Names of all persons who were born in July.\hfill\\
+      SELECT name \\
+      FROM Person \\
+      WHERE MONTH(birthday)='7';
+      	
+      \item Titles of all movies that have been directed by more than one person.\hfill\\ %%%%
+      SELECT m.title \\
+      FROM Movie m, director d \\
+      WHERE m.id = d.movie
+      AND 
 
-           \item Id, name and number of movies the person acted in for each person. The result should also include those persons who never played a role in a movie yet.\hfill\\ %%%%
-           SELECT p.id, p.name, COUNT(Movie) \\
-           FROM Person p, Movie m
-           WHERE
+      \item Id, name and number of movies the person acted in for each person. The result should also include those persons who never played a role in a movie yet.\hfill\\ %%%%
+      SELECT p.id, p.name, COUNT(Movie) \\
+      FROM Person p, Movie m
+      WHERE
 
-           \item Titles of all movies in which ``Ted Codd`` played a role but ``Ray Boyce`` did not.\hfill\\
-           SELECT m.title \\
-           FROM Movie m, Person p, actor a \\ 
-           WHERE a.person = p.id \\
-           AND a.movie = m.id \\
-           AND p.name = 'Ted Codd' \\
-           EXCEPT (SELECT m.title \\
-           FROM Movie m, Person p, actor a \\
-           WHERE a.person = p.id \\
-           AND a.movie = m.id \\
-           AND p.name = 'Ray Boyce');
+      \item Titles of all movies in which ``Ted Codd`` played a role but ``Ray Boyce`` did not.\hfill\\
+      SELECT m.title \\
+      FROM Movie m, Person p, actor a \\ 
+      WHERE a.person = p.id \\
+      AND a.movie = m.id \\
+      AND p.name = 'Ted Codd' \\
+      EXCEPT (SELECT m.title \\
+      FROM Movie m, Person p, actor a \\
+      WHERE a.person = p.id \\
+      AND a.movie = m.id \\
+      AND p.name = 'Ray Boyce');
 
-           \item The names of all persons, who acted and directed in the same movie for at least two times.\hfill\\ %%%%
-           SELECT p.name
-           FROM Person p
-           
-           \item Considering the average number of movies persons played roles in. Return the names of all persons who played roles in more movies than the average.\hfill\\ %%%%
+      \item The names of all persons, who acted and directed in the same movie for at least two times.\hfill\\ %%%%
+      SELECT p.name
+      FROM Person p
+
+      \item Considering the average number of movies persons played roles in. Return the names of all persons who played roles in more movies than the average.\hfill\\ %%%%
 
     \end{enumerate}
 \aufgabe{2}
