@@ -83,7 +83,7 @@
 \makehomeworktitle
 \aufgabe{1}
   \begin{enumerate}[a.]
-      \item Name of all persons who played a role in a »parody« of any movie.\hfill\\
+      \item Name of all persons who played a role in a »parody« of any movie.\hfill
 \begin{lstlisting}
 SELECT p.name
 FROM Movie m, Person p, actor a, hasGenre hg
@@ -110,7 +110,7 @@ GROUP BY m.id;
 \end{lstlisting}
 
 
-      \item Id, name and number of movies the person acted in for each person. The result should also include those persons who never played a role in a movie yet.\hfill\\
+      \item Id, name and number of movies the person acted in for each person. The result should also include those persons who never played a role in a movie yet.\hfill
 \begin{lstlisting}
 SELECT p.id, p.name, COUNT(*) AS MovieCount 
 FROM Person p 
@@ -124,7 +124,7 @@ WHERE a.person <> p.id;
 \end{lstlisting}
 
 
-      \item Titles of all movies in which »Ted Codd« played a role but »Ray Boyce« did not.\hfill\\
+      \item Titles of all movies in which »Ted Codd« played a role but »Ray Boyce« did not.\hfill
 \begin{lstlisting}
 SELECT m.title 
 FROM Movie m, Person p, actor a  
@@ -139,7 +139,7 @@ AND p.name = 'Ray Boyce');
 \end{lstlisting}
 
 
-      \item The names of all persons, who acted and directed in the same movie for at least two times.\hfill\\
+      \item The names of all persons, who acted and directed in the same movie for at least two times.\hfill
 \begin{lstlisting}
 SELECT p.name 
 FROM person p 
@@ -149,7 +149,7 @@ WHERE COUNT(p.id) > 1;
 \end{lstlisting}
  
 
-      \item Considering the average number of movies persons played roles in. Return the names of all persons who played roles in more movies than the average.\hfill\\
+      \item Considering the average number of movies persons played roles in. Return the names of all persons who played roles in more movies than the average.\hfill
 \begin{lstlisting}
 WITH 
   Avrg AS (
