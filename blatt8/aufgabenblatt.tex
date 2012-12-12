@@ -122,9 +122,9 @@
       WITH \\
         Avrg AS ((SELECT AVG(COUNT(actor.person)) FROM actor) AS average) \\
       SELECT p.name, \\
-	     COUNT(actor.person) AS played \\
-      FROM Person p, Avrg a \\
-      WHERE  played $>$ a.average; 
+	     COUNT(a.person) AS played \\
+      FROM Person p, actor a, Avrg av \\
+      WHERE  played $>$ av.average; 
       
     \end{enumerate}
 \aufgabe{2}
