@@ -114,8 +114,8 @@
       \item The names of all persons, who acted and directed in the same movie for at least two times.\hfill\\
       SELECT p.name \\
       FROM person p \\
-      JOIN actor a ON p.id = a.person \\
-      JOIN director d ON a.person = d.person \\
+      JOIN actor a ON (p.id = a.person) \\
+      JOIN director d ON (a.person = d.person) AND (a.movie = d.movie) \\
       WHERE COUNT(p.id) $>$ 1; 
 
       \item Considering the average number of movies persons played roles in. Return the names of all persons who played roles in more movies than the average.\hfill\\
