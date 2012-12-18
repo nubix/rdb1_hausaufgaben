@@ -142,24 +142,41 @@ CREATE TABLE worksOn (
    Based on the given statements and data, explain the consequences of the following operations:
    \begin{enumerate}[a)]
    \item \begin{lstlisting} 
-INSERT INTO connection VALUES(2, 5, 'sequel') 
+	INSERT INTO connection VALUES(2, 5, 'sequel') 
    \end{lstlisting}
    
+   
+   
+   
    \item \begin{lstlisting} 
-DELETE FROM actor WHERE role = 'forest ranger'
+	DELETE FROM actor WHERE role = 'forest ranger'
       \end{lstlisting}
+      
+   
+   
 
    \item \begin{lstlisting} 
-DELETE FROM movie WHERE title = 'Adventures with RDB'
-   \end{lstlisting
-
-   \item \begin{lstlisting} 
-INSERT INTO actor VALUES(6, 85, 'important looking man')
+	DELETE FROM movie WHERE title = 'Adventures with RDB'
    \end{lstlisting}
+   
+   
+   
 
    \item \begin{lstlisting} 
-DROP TABLE person
+	INSERT INTO actor VALUES(6, 85, 'important looking man')
    \end{lstlisting}
+   
+   
+   
+
+   \item \begin{lstlisting} 
+	DROP TABLE person
+  \end{lstlisting}
+  Die gesamte Tabelle Person wird aus der Datenbank gel\"oscht. 
+	Da diese Tabelle nur die Prim\"arschl\"usselspalte besitzt, 
+	welche mit den Spalten person aus den Relationen director und actor in Beziehung stehen, 
+	wird die Spalte person dieser beiden Tabellen, also alle Zeilen aus person aus director und actor gel\"oscht. 		Der Rest der Datenbank wird nicht in beeinflusst.
+ 
 
  \end{enumerate}   
 \end{document}
