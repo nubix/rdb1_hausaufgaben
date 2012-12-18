@@ -1,0 +1,166 @@
+\documentclass[11pt,a4paper,DIV=9]{scrartcl}
+\usepackage{pgf}
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata,positioning,shadows}
+\usepackage{ngerman}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb}
+\usepackage{tikz-er2}
+\usepackage{enumerate}
+\usepackage{listings}
+\usetikzlibrary{shapes,snakes}
+% Schriftart ändern
+\renewcommand{\rmdefault}{ppl}
+%Möglichkeit zur Änderung von Überschriften
+\usepackage{sectsty}
+%Überschrift \section uandern
+\definecolor{blue}{RGB}{76 , 92, 153}
+\allsectionsfont{\color{blue}}
+\paragraphfont{\color{blue}}
+
+%Variable Blattnummer
+\newcommand{\blatt}[1]{
+  \newcommand{\blattnr}{#1}
+}
+%Aufgabe und Aufgabenteil definieren
+\newcounter{temp}
+\newcommand{\aufgabe}[1]{
+  \setcounter{temp}{\value{subsection}}
+  \setcounter{subsection}{#1}
+  \addtocounter{subsection}{-1}
+  \subsection{Aufgabe}
+  \setcounter{subsection}{\value{temp}}
+}
+\newcommand{\teil}[2][]{
+  \subsubsection*{#2) #1}
+}
+\renewcommand{\author}[1]{\renewcommand{\author}{#1}}
+\renewcommand{\title}[1]{\renewcommand{\title}{#1}}
+\newcommand{\makehomeworktitle}{
+  \begin{minipage}[t]{6.5cm}
+    \sf{\author}
+  \end{minipage}
+  \begin{minipage}[t]{6.5cm}
+    \begin{flushright}
+      \sf{\title\\\today}
+    \end{flushright}
+  \end{minipage}
+  \\[0.2cm]
+  \begin{center}
+    \sf{
+      \color{blue}{
+        \LARGE{Aufgabenblatt \blattnr}
+      }
+    }
+  \end{center}
+  \vspace{0.1cm}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Statisch
+\author{{[}4131658{]} Jan Germann \\{[}4054962{]} Christian Ratz\\Übungsgruppe 1}
+\title{Relationale Datenbanken}
+
+%%% Auf jedes Hausaufgabenblatt anpassen
+\blatt{9}
+%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{section}{\blattnr}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{ 
+  basicstyle=\footnotesize\ttfamily,
+  language=sql,                % the language of the code
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},          % keyword style
+  commentstyle=\color{dkgreen},       % comment style
+  stringstyle=\color{mauve}}
+
+\begin{document}
+\makehomeworktitle
+   \aufgabe{1}
+   Based on the given conceptual schema, please provide SQL statements to create the according tables described in the schema.
+   \begin{enumerate}
+   \item \textbf{Employee}
+\begin{lstlisting}
+CREATE TABLE Employee (
+  empNr INTEGER NOT NULL,
+  name VARCHAR(400),
+  phone nr INTEGER,
+  project VARCHAR(100) REFERENCES Project(name),
+  ticket VARCHAR(100) REFERENCES Ticket(nr),
+  %%%%%%%%%%%
+  PRIMARY KEY(empNr)
+);
+\end{lstlisting}
+    \item \textbf{Project}
+\begin{lstlisting}
+CREATE TABLE Project (
+  name VARCHAR(100) NOT NULL, 
+  description VARCHAR(400), 
+  ticket VARCHAR(100) REFERENCES Ticket(nr),
+  PRIMARY KEY(name)
+);
+    \end{lstlisting}
+    \item \textbf{Ticket}
+\begin{lstlisting}
+CREATE TABLE Ticket (
+  nr VARCHAR(100) NOT NULL, 
+  title VARCHAR(400), 
+  description VARCHAR(400),
+  importance VARCHAR(100),
+  project VARCHAR(100) REFERENCES Project(name),
+  PRIMARY KEY(id)
+);
+\end{lstlisting}
+    \item \textbf{Department}
+\begin{lstlisting}
+CREATE TABLE Department (
+  nr INTEGER NOT NULL, 
+  house VARCHAR(100) NOT NULL,
+  budget VARCHAR(400),
+  manage
+  works in
+  PRIMARY KEY(nr, house)
+);
+\end{lstlisting}
+    \item \textbf{worksOn}
+\begin{lstlisting}
+CREATE TABLE worksOn (
+  employee INTEGER NOT NULL REFERENCES Employee(empNr),
+  ticket INTEGER NOT NULL REFERENCES Ticket(nr),
+  start DATE,
+  end DATE,
+  PRIMARY KEY(employee, ticket)
+);
+\end{lstlisting}	
+    \end{enumerate}
+   \aufgabe{2}
+   Based on the given statements and data, explain the consequences of the following operations:
+   \begin{enumerate}[a)]
+   \item \begin{lstlisting} 
+INSERT INTO connection VALUES(2, 5, 'sequel') 
+   \end{lstlisting}
+   
+   \item \begin{lstlisting} 
+DELETE FROM actor WHERE role = 'forest ranger'
+      \end{lstlisting}
+
+   \item \begin{lstlisting} 
+DELETE FROM movie WHERE title = 'Adventures with RDB'
+   \end{lstlisting
+
+   \item \begin{lstlisting} 
+INSERT INTO actor VALUES(6, 85, 'important looking man')
+   \end{lstlisting}
+
+   \item \begin{lstlisting} 
+DROP TABLE person
+   \end{lstlisting}
+
+ \end{enumerate}   
+\end{document}
+
