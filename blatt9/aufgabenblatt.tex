@@ -143,39 +143,35 @@ CREATE TABLE worksOn (
    \begin{enumerate}[a)]
    \item \begin{lstlisting} 
 	INSERT INTO connection VALUES(2, 5, 'sequel') 
-   \end{lstlisting}
-   
-   
+   \end{lstlisting} 
+   Der Prim\"arschl\"ussel der aus \texttt{from\_movie, to\_movie} besteht, ist bereits vorhanden und mit dem \texttt{connection\_type} 'parody' belegt. Daher wird bei diesem INSERT-Statement nichts ver\"andert.
    
    
    \item \begin{lstlisting} 
 	DELETE FROM actor WHERE role = 'forest ranger'
       \end{lstlisting}
-      
+      Alle Zeilen in der Relation \textbf{actor} in denen ein Schauspieler die \texttt{role} 'forest ranker' besitzt, werden gel\"oscht. Alle anderen Relationen werden nicht ver\"andert.
    
    
 
    \item \begin{lstlisting} 
 	DELETE FROM movie WHERE title = 'Adventures with RDB'
    \end{lstlisting}
-   
+   Der Eintrag \"uber den Film 'Adventures with RDB' wird nicht entfernt, da die Standardeinstellung (siehe Vorlesungsfolie 20) bei L\"oschung keine Aktion ausgef\"uhrt werden soll, sowie bei \"Anderung eines Eintrag ebenfalls nichts ausgef\"uhrt werden soll.
    
    
 
    \item \begin{lstlisting} 
 	INSERT INTO actor VALUES(6, 85, 'important looking man')
    \end{lstlisting}
-   
+   Das Einf\"ugen der Werte (6, 85, 'important looking man') in die Relation \textbf{actor} funktioniert nicht, da die \texttt{id} '6' in der Relation \textbf{person} und in der Relation \textbf{movie} die \texttt{id} '85' nicht existiert. Daher bleibt die Datenbank unver\"andert.
    
    
 
    \item \begin{lstlisting} 
 	DROP TABLE person
   \end{lstlisting}
-  Die gesamte Tabelle Person wird aus der Datenbank gel\"oscht. 
-	Da diese Tabelle nur die Prim\"arschl\"usselspalte besitzt, 
-	welche mit den Spalten person aus den Relationen director und actor in Beziehung stehen, 
-	wird die Spalte person dieser beiden Tabellen, also alle Zeilen aus person aus director und actor gel\"oscht. 		Der Rest der Datenbank wird nicht in beeinflusst.
+  Die gesamte Tabelle \textbf{person} wird aus der Datenbank gel\"oscht. Alle restlichen Relationen bleibt unver\"andert, nur die Tabelle \textbf{person} wird aus der Datenbank entfernt. 
  
 
  \end{enumerate}   
