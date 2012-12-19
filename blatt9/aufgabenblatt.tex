@@ -106,14 +106,14 @@ CREATE TABLE Department (
   budget  int(10), 
   PRIMARY KEY (house, nr));
 
--- Das Projekt wird uber eine relationentabelle mit den
--- Mitarbeitern verknupft.
+-- Das Projekt wird uber eine Relationentabelle mit den
+-- Mitarbeitern verknuepft.
 CREATE TABLE Project (
   name        varchar(255) NOT NULL, 
   description varchar(255), 
   PRIMARY KEY (name));
 
--- Relationentabelle um Mitarbeiter mit einem Projekt zu verknupfen
+-- Relationentabelle um Mitarbeiter mit einem Projekt zu verknuepfen
 CREATE TABLE Employee_Project (
   employeeempnr int(11) NOT NULL, 
   projectname   varchar(255) NOT NULL, 
@@ -144,7 +144,7 @@ CREATE TABLE Employee_Ticket (
   PRIMARY KEY (employeeempnr, 
   ticketnr));
 
--- Fremdschlusselabhangigkeiten erstellen
+-- Fremdschluesselabhaengigkeiten erstellen
 ALTER TABLE PhoneNumbers
   ADD INDEX FKPhoneNumbe658372 (employeeempnr),
   ADD CONSTRAINT FKPhoneNumbe658372
