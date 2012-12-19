@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  19 DEC 2012 10:14
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  19 DEC 2012 13:02
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -975,31 +975,33 @@ Underfull \hbox (badness 10000) in paragraph at lines 83--83
 
  []
 
-LaTeX Font Info:    Font shape `OT1/ppl/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/ppl/b/n' tried instead on input line 87.
 [1
 
 {/usr/local/texlive/2011/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-[2] (./aufgabenblatt.aux) ) 
+Overfull \hbox (26.9101pt too wide) in paragraph at lines 167--168
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[2] [3] (./aufgabenblatt.aux) ) 
 Here is how much of TeX's memory you used:
- 17034 strings out of 493633
- 334214 string characters out of 3143378
- 452909 words of memory out of 3000000
- 19967 multiletter control sequences out of 15000+200000
- 9472 words of font info for 29 fonts, out of 3000000 for 9000
+ 17045 strings out of 493633
+ 334505 string characters out of 3143378
+ 470909 words of memory out of 3000000
+ 19980 multiletter control sequences out of 15000+200000
+ 8483 words of font info for 27 fonts, out of 3000000 for 9000
  831 hyphenation exceptions out of 8191
- 56i,8n,73p,419b,1702s stack positions out of 5000i,500n,10000p,200000b,50000s
-{/usr/local/texlive/2011/texmf-dist/fonts/enc/dvips/
-base/8r.enc}</usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmss10.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/c
-mss17.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-ssbx10.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/c
-mtt9.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/urw/palatino/uplb8a.pf
-b></usr/local/texlive/2011/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb>
-Output written on aufgabenblatt.pdf (2 pages, 82031 bytes).
+ 56i,8n,73p,419b,1841s stack positions out of 5000i,500n,10000p,200000b,50000s
+{/usr/local/texlive/2011/texmf-dist/fonts/enc/dv
+ips/base/8r.enc}</usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmss10.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmss17.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmssbx10.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmtt9.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/urw/palatino/uplr8
+a.pfb>
+Output written on aufgabenblatt.pdf (3 pages, 73791 bytes).
 PDF statistics:
- 55 PDF objects out of 1000 (max. 8388607)
- 28 compressed objects within 1 object stream
+ 54 PDF objects out of 1000 (max. 8388607)
+ 27 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  109 words of extra memory for PDF output out of 10000 (max. 10000000)
 
