@@ -1,0 +1,112 @@
+\documentclass[11pt,a4paper,DIV=9]{scrartcl}
+\usepackage{pgf}
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata,positioning,shadows}
+\usepackage{ngerman}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb}
+\usepackage{tikz-er2}
+\usepackage{enumerate}
+\usepackage{listings}
+\usetikzlibrary{shapes,snakes}
+% Schriftart ändern
+\renewcommand{\rmdefault}{ppl}
+%Möglichkeit zur Änderung von Überschriften
+\usepackage{sectsty}
+%Überschrift \section uandern
+\definecolor{blue}{RGB}{76 , 92, 153}
+\allsectionsfont{\color{blue}}
+\paragraphfont{\color{blue}}
+
+%Variable Blattnummer
+\newcommand{\blatt}[1]{
+  \newcommand{\blattnr}{#1}
+}
+%Aufgabe und Aufgabenteil definieren
+\newcounter{temp}
+\newcommand{\aufgabe}[1]{
+  \setcounter{temp}{\value{subsection}}
+  \setcounter{subsection}{#1}
+  \addtocounter{subsection}{-1}
+  \subsection{Aufgabe}
+  \setcounter{subsection}{\value{temp}}
+}
+\newcommand{\teil}[2][]{
+  \subsubsection*{#2) #1}
+}
+\renewcommand{\author}[1]{\renewcommand{\author}{#1}}
+\renewcommand{\title}[1]{\renewcommand{\title}{#1}}
+\newcommand{\makehomeworktitle}{
+  \begin{minipage}[t]{6.5cm}
+    \sf{\author}
+  \end{minipage}
+  \begin{minipage}[t]{6.5cm}
+    \begin{flushright}
+      \sf{\title\\\today}
+    \end{flushright}
+  \end{minipage}
+  \\[0.2cm]
+  \begin{center}
+    \sf{
+      \color{blue}{
+        \LARGE{Aufgabenblatt \blattnr}
+      }
+    }
+  \end{center}
+  \vspace{0.1cm}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Statisch
+\author{{[}4131658{]} Jan Germann \\{[}4054962{]} Christian Ratz\\Übungsgruppe 1}
+\title{Relationale Datenbanken}
+
+%%% Auf jedes Hausaufgabenblatt anpassen
+\blatt{10}
+%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{section}{\blattnr}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{ 
+  basicstyle=\footnotesize\ttfamily,
+  language=sql,                % the language of the code
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},          % keyword style
+  commentstyle=\color{dkgreen},       % comment style
+  stringstyle=\color{mauve}}
+
+\begin{document}
+\makehomeworktitle
+   \aufgabe{1}
+   \begin{enumerate}[a.]
+   \item What is a lossless decomposition? Please explain in your own words.
+   %%%%
+   \item Give a relation schema with one single relation R(A, B, C, D) and a functional dependency B $  \rightarrow $  CD. Apply Heath's theorem to decompose R into two Relation R1 and R2 using the given functional dependency.
+   \end{enumerate}
+   \aufgabe{2}
+   Given a relation R(A, B, C, D, E) as well as some data:
+   \begin{enumerate}[a.]
+   \item Find at least 3 independent, non-trivial functional dependencies that do not conflict with the given data.
+   \item Can you be sure, if the functional dependencies found in the previous exercise are the ``real`` functional dependencies, defined on the schema? Explain your answer.
+   \end{enumerate}
+   \aufgabe{3}
+   \begin{enumerate}[a.]
+   \item What kind of modification anomalies can occur in non-normalized relation schemas?
+   %%%%
+   \item Can a violation of the first normal form be detected using functional dependencies?
+   %%%%
+   \item Given following schema. Which normal form is violated in the according schema? What exactly causes the
+   violation?
+   %%%%
+   \end{enumerate}
+   \aufgabe{4}
+   \begin{enumerate}[a.]
+   \item Find a minimal equivalent set of dependencies to F.
+   \item Normalize the schema into BCNF. Use Heath's theorem to split up the given relation and note the functional dependency used for each step. Intermediate results should include a normalized schema in 2NF (but not in 3NF) and 3NF (but not in BCNF) (Hint: The functional dependency used to decompose the relation may also be part of F+)
+  \end{enumerate}
+  \end{document}
+
