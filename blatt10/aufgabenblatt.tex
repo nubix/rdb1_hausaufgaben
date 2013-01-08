@@ -83,8 +83,8 @@
 \makehomeworktitle
    \aufgabe{1}
    \begin{enumerate}[a.]
-   \item What is a lossless decomposition? Please explain in your own words.
-   %%%%
+   \item What is a lossless decomposition? Please explain in your own words. \\\\
+   Verlustlose Dekomposition bzw. verlustlose Zerlegung bedeutet, dass man Schritt f\"ur Schritt sicher Redundanz oder auch Modifizierungsanomalien von einer Datenbank entfernt, w\"ahrend man jedoch die originalen Daten vor Verlust sch\"utzt.
    \item Give a relation schema with one single relation R(A, B, C, D) and a functional dependency B $  \rightarrow $  CD. Apply Heath's theorem to decompose R into two Relation R1 and R2 using the given functional dependency.
    \end{enumerate}
    \aufgabe{2}
@@ -95,8 +95,11 @@
    \end{enumerate}
    \aufgabe{3}
    \begin{enumerate}[a.]
-   \item What kind of modification anomalies can occur in non-normalized relation schemas?
-   %%%%
+   \item What kind of modification anomalies can occur in non-normalized relation schemas? \\\\
+   \textbf{Einf\"uge-Anomalie}: Diese Anomalie beschreibt, dass man beim Einf\"ugen ein neues Tupel nur schwer oder gar nicht eintragen kann, weil nicht zu allen Spalten bzw. nicht alle ben\"otigten Eigenschaften des Tupels vorliegen. \\\\
+   \textbf{\"Anderungs-Anomalie}: Diese Anomalie beschreibt, dass beim \"Andern eines Tupels nicht alle redundanten Tupel ge\"andert werden. \\\\
+   \textbf{L\"osch-Anomalie}: Diese Anomalie beschreibt, dass beim L\"oschen eines Tupels nicht nur die Informationen \"uber das gel\"oschte Tupel verloren gehen, sondern auch andere Informationen die noch ben\"otigt werden.
+   
    \item Can a violation of the first normal form be detected using functional dependencies?
    %%%%
    \item Given following schema. Which normal form is violated in the according schema? What exactly causes the
