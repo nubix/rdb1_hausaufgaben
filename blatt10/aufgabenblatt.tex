@@ -117,6 +117,10 @@
       Ja. Jedes Attribut einer Relation muss einen atomaren Wertebereich haben.
     \item Given following schema. Which normal form is violated in the according schema? What exactly causes the
     violation?
+      \begin{enumerate}[i.]
+        \item In diesem Fall wird die zweite Normalform verletzt. Diese verbietet es, dass Attribute nur von einem Teil der der Schlüsselkandidaten abhägig sind. Dies wird offensichtlich durch die Kombination der beiden Abhängigkeiten $\{A\} \rightarrow \{B,C\}$ und $\{A\} \rightarrow \{E\}$ verletzt.
+        \item In diesem Fall wird die dritte Normalform verletzt. Diese besagt, dass kein Attribut, welches kein Schlüssel ist, transitiv abhängig von einem Schlüsselkandidaten sein darf. Dies wird offensichtlich durch die transitive Abhängigkeit $\{A\} \rightarrow \{D\} \rightarrow \{E\}$ verletzt.
+      \end{enumerate}
     %%%%
   \end{enumerate}
 
