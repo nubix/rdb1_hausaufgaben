@@ -81,35 +81,44 @@
 
 \begin{document}
 \makehomeworktitle
-   \aufgabe{1}
-   \begin{enumerate}[a.]
-   \item What is a lossless decomposition? Please explain in your own words. \\\\
-   Verlustlose Dekomposition bzw. verlustlose Zerlegung bedeutet, dass man Schritt f\"ur Schritt sicher Redundanz oder auch Modifizierungsanomalien von einer Datenbank entfernt, wobei die gesammte Aussagekraft der original Daten erhalten bleibt.
-   \item Give a relation schema with one single relation R(A, B, C, D) and a functional dependency B $  \rightarrow $  CD. Apply Heath's theorem to decompose R into two Relation R1 and R2 using the given functional dependency.
-   \end{enumerate}
-   \aufgabe{2}
-   Given a relation R(A, B, C, D, E) as well as some data:
-   \begin{enumerate}[a.]
-   \item Find at least 3 independent, non-trivial functional dependencies that do not conflict with the given data.
-   \item Can you be sure, if the functional dependencies found in the previous exercise are the ``real`` functional dependencies, defined on the schema? Explain your answer.
-   \end{enumerate}
-   \aufgabe{3}
-   \begin{enumerate}[a.]
-   \item What kind of modification anomalies can occur in non-normalized relation schemas? \\\\
-   \textbf{Einf\"uge-Anomalie}: Diese Anomalie beschreibt, dass man beim Einf\"ugen ein neues Tupel nur schwer oder gar nicht eintragen kann, weil nicht zu allen Spalten bzw. nicht alle ben\"otigten Eigenschaften des Tupels vorliegen. \\\\
-   \textbf{\"Anderungs-Anomalie}: Diese Anomalie beschreibt, dass beim \"Andern eines Tupels nicht alle redundanten Tupel ge\"andert werden. \\\\
-   \textbf{L\"osch-Anomalie}: Diese Anomalie beschreibt, dass beim L\"oschen eines Tupels nicht nur die Informationen \"uber das gel\"oschte Tupel verloren gehen, sondern auch andere Informationen die noch ben\"otigt werden.
-   
-   \item Can a violation of the first normal form be detected using functional dependencies?
-   %%%%
-   \item Given following schema. Which normal form is violated in the according schema? What exactly causes the
-   violation?
-   %%%%
-   \end{enumerate}
-   \aufgabe{4}
-   \begin{enumerate}[a.]
-   \item Find a minimal equivalent set of dependencies to F.
-   \item Normalize the schema into BCNF. Use Heath's theorem to split up the given relation and note the functional dependency used for each step. Intermediate results should include a normalized schema in 2NF (but not in 3NF) and 3NF (but not in BCNF) (Hint: The functional dependency used to decompose the relation may also be part of F+)
+\aufgabe{1}
+  \begin{enumerate}[a.]
+    \item What is a lossless decomposition? Please explain in your own words. \\\\
+    Verlustlose Dekomposition bzw. verlustlose Zerlegung bedeutet, dass man Schritt f\"ur Schritt sicher Redundanz oder auch Modifizierungsanomalien von einer Datenbank entfernt, wobei die gesammte Aussagekraft der original Daten erhalten bleibt.
+    \item Give a relation schema with one single relation R(A, B, C, D) and a functional dependency B $  \rightarrow $  CD. Apply Heath's theorem to decompose R into two Relation R1 and R2 using the given functional dependency.
   \end{enumerate}
-  \end{document}
+
+\aufgabe{2}
+  Given a relation R(A, B, C, D, E) as well as some data:
+  \begin{enumerate}[a.]
+    \item Find at least 3 independent, non-trivial functional dependencies that do not conflict with the given data.
+
+    \begin{align}
+    A\rightarrow B
+    \end{align}
+
+   \item Can you be sure, if the functional dependencies found in the previous exercise are the »real« functional dependencies, defined on the schema? Explain your answer.
+  \end{enumerate}
+
+\aufgabe{3}
+  \begin{enumerate}[a.]
+    \item What kind of modification anomalies can occur in non-normalized relation schemas? \\\\
+    \textbf{Einf\"uge-Anomalie}: Diese Anomalie beschreibt, dass man beim Einf\"ugen ein neues Tupel nur schwer oder gar nicht eintragen kann, weil nicht zu allen Spalten bzw. nicht alle ben\"otigten Eigenschaften des Tupels vorliegen. \\\\
+    \textbf{\"Anderungs-Anomalie}: Diese Anomalie beschreibt, dass beim \"Andern eines Tupels nicht alle redundanten Tupel ge\"andert werden. \\\\
+    \textbf{L\"osch-Anomalie}: Diese Anomalie beschreibt, dass beim L\"oschen eines Tupels nicht nur die Informationen \"uber das gel\"oschte Tupel verloren gehen, sondern auch andere Informationen die noch ben\"otigt werden.
+
+    \item Can a violation of the first normal form be detected using functional dependencies?
+    %%%%
+    \item Given following schema. Which normal form is violated in the according schema? What exactly causes the
+    violation?
+    %%%%
+  \end{enumerate}
+
+\aufgabe{4}
+  \begin{enumerate}[a.]
+    \item Find a minimal equivalent set of dependencies to F.
+    \item Normalize the schema into BCNF. Use Heath's theorem to split up the given relation and note the functional dependency used for each step. Intermediate results should include a normalized schema in 2NF (but not in 3NF) and 3NF (but not in BCNF) (Hint: The functional dependency used to decompose the relation may also be part of F+)
+  \end{enumerate}
+
+\end{document}
 
