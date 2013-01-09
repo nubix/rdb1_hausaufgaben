@@ -106,12 +106,13 @@
 \aufgabe{3}
   \begin{enumerate}[a.]
     \item What kind of modification anomalies can occur in non-normalized relation schemas? \\\\
-    \textbf{Einf\"uge-Anomalie}: Diese Anomalie beschreibt, dass man beim Einf\"ugen ein neues Tupel nur schwer oder gar nicht eintragen kann, weil nicht zu allen Spalten bzw. nicht alle ben\"otigten Eigenschaften des Tupels vorliegen. \\\\
-    \textbf{\"Anderungs-Anomalie}: Diese Anomalie beschreibt, dass beim \"Andern eines Tupels nicht alle redundanten Tupel ge\"andert werden. \\\\
-    \textbf{L\"osch-Anomalie}: Diese Anomalie beschreibt, dass beim L\"oschen eines Tupels nicht nur die Informationen \"uber das gel\"oschte Tupel verloren gehen, sondern auch andere Informationen die noch ben\"otigt werden.
-
+      \begin{description}
+        \item[Einf\"uge-Anomalie]  Diese Anomalie beschreibt, dass man beim Einf\"ugen ein neues Tupel nur schwer oder gar nicht eintragen kann, weil nicht zu allen Spalten bzw. nicht alle ben\"otigten Eigenschaften des Tupels vorliegen.
+        \item[\"Anderungs-Anomalie] Diese Anomalie beschreibt, dass beim \"Andern eines Tupels nicht alle redundanten Tupel ge\"andert werden. 
+        \item[L\"osch-Anomalie] Diese Anomalie beschreibt, dass beim L\"oschen eines Tupels nicht nur die Informationen \"uber das gel\"oschte Tupel verloren gehen, sondern auch andere Informationen die noch ben\"otigt werden.
+      \end{description}
     \item Can a violation of the first normal form be detected using functional dependencies?
-    %%%%
+      Ja. Jedes Attribut einer Relation muss einen atomaren Wertebereich haben.
     \item Given following schema. Which normal form is violated in the according schema? What exactly causes the
     violation?
     %%%%
