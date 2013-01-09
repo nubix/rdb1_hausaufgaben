@@ -127,9 +127,15 @@
 \aufgabe{4}
   \begin{enumerate}[a.]
     \item Find a minimal equivalent set of dependencies to F. \\
-    $ F = \{{BC\} \rightarrow \{D}\}, \{{BC\} \rightarrow \{C}\}, \{{B\} \rightarrow \{E}\}, \{{D\} \rightarrow \{E}\}, \{{D\} \rightarrow \{F}\}, \{{C\} \rightarrow \{A}\} $
-    
-        $ F = \{{B\} \rightarrow \{A}\}, \{{B\} \rightarrow \{C}\}, \{{B\} \rightarrow \{D}\}, \{{B\} \rightarrow \{E}\}, \{{B\} \rightarrow \{F}\} $
+    $ F = \{{BC\} \rightarrow \{D}\}, \{{BC\} \rightarrow \{C}\}, \{{B\} \rightarrow \{E}\}, \{{D\} \rightarrow \{E}\}, \{{D\} \rightarrow \{F}\}, \{{C\} \rightarrow \{A}\} $ \\\\
+    $ \{{BC}\} \rightarrow \{{C}\} $ k\"urzen auf 
+    $ \{{B}\} \rightarrow \{{C}\} $ \\\\
+    $ F = \{{BC\} \rightarrow \{D}\}, \{{B\} \rightarrow \{C}\}, \{{B\} \rightarrow \{E}\}, \{{D\} \rightarrow \{E}\}, \{{D\} \rightarrow \{F}\}, \{{C\} \rightarrow \{A}\} $ \\\\
+    Aus $ \{{BC}\} \rightarrow \{{D}\} $ somit $ \{{B}\} \rightarrow \{{D}\} $ und da $ \{{D}\} \rightarrow \{{E}\} $ und $ \{{D}\} \rightarrow \{{F}\} $ gilt somit auch $ \{{B}\} \rightarrow \{{E}\} $ und $ \{{B}\} \rightarrow \{{F}\}  $ \\\\
+    $ F = \{{BC\} \rightarrow \{D}\}, \{{B\} \rightarrow \{C}\}, \{{B\} \rightarrow \{D}\}, \{{B\} \rightarrow \{E}\}, \{{B\} \rightarrow \{F}\}, \{{C}\} \rightarrow \{{A}\} $ \\\\
+    Da $ \{{B}\} \rightarrow \{{C}\} $ und $ \{{C}\} \rightarrow \{{A}\} $ gilt auch $ \{{B}\} \rightarrow \{{A}\} $ \\\\ $ F = \{{BC\} \rightarrow \{D}\}, \{{B\} \rightarrow \{C}\}, \{{B\} \rightarrow \{D}\}, \{{B\} \rightarrow \{E}\}, \{{B\} \rightarrow \{F}\}, \{{B}\} \rightarrow \{{A}\} $ \\\\
+    Da $ \{{B}\} \rightarrow \{{C}\}  $ und $ \{{B}\} \rightarrow \{{D}\} $ l\"asst sich $ \{{BC}\} \rightarrow \{{D}\} $ ebenfalls k\"urzen und man erh\"alt als minimales \"Aquivalent zu F Folgendes: \\\\
+        $ F = \{{B\} \rightarrow \{A}\}, \{{B\} \rightarrow \{C}\}, \{{B\} \rightarrow \{D}\}, \{{B\} \rightarrow \{E}\}, \{{B\} \rightarrow \{F}\} $ \\\\
     \item Normalize the schema into BCNF. Use Heath's theorem to split up the given relation and note the functional dependency used for each step. Intermediate results should include a normalized schema in 2NF (but not in 3NF) and 3NF (but not in BCNF) (Hint: The functional dependency used to decompose the relation may also be part of F+)
   \end{enumerate}
 
