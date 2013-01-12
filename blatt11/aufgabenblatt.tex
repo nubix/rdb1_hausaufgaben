@@ -62,7 +62,7 @@
 \title{Relationale Datenbanken}
 
 %%% Auf jedes Hausaufgabenblatt anpassen
-\blatt{9}
+\blatt{11}
 %%%%%%%%%%%%%%%%%%%%%%%%
 \setcounter{section}{\blattnr}
 
@@ -82,143 +82,36 @@
 \begin{document}
 \makehomeworktitle
    \aufgabe{1}
-   Based on the given conceptual schema, please provide SQL statements to create the according tables described in the schema.
-\begin{lstlisting}
--- Employee gehort zu einer bestimmten Abteilung.
-CREATE TABLE Employee (
-  empNr        int(11) NOT NULL AUTO_INCREMENT, 
-  name         varchar(255), 
-  department   int(10) NOT NULL, 
-  departmentnr int(10) NOT NULL, 
-  PRIMARY KEY (empNr));
-
--- Telefonnummer kann mehrwertig sein. 
--- Also Tabelle fur Telefonnummer erstellen
-CREATE TABLE PhoneNumbers (
-  employeeempnr int(11) NOT NULL, 
-  phoneNr       varchar(255));
-
--- Die Abteilung hat einen Leiter
-CREATE TABLE Department (
-  house   int(10) NOT NULL, 
-  nr      int(10) NOT NULL, 
-  manager int(11) NOT NULL, 
-  budget  int(10), 
-  PRIMARY KEY (house, nr));
-
--- Das Projekt wird uber eine Relationentabelle mit den
--- Mitarbeitern verknuepft.
-CREATE TABLE Project (
-  name        varchar(255) NOT NULL, 
-  description varchar(255), 
-  PRIMARY KEY (name));
-
--- Relationentabelle um Mitarbeiter mit einem Projekt zu verknuepfen
-CREATE TABLE Employee_Project (
-  employeeempnr int(11) NOT NULL, 
-  projectname   varchar(255) NOT NULL, 
-  PRIMARY KEY (employeeempnr, projectname));
-
--- Die offenen Tickets werden hier gespeichert.
-CREATE TABLE Ticket (
-  nr          int(10) NOT NULL AUTO_INCREMENT, 
-  title       varchar(255), 
-  description varchar(255), 
-  importance  int(10), 
-  PRIMARY KEY (nr));
-
--- Relationentabelle um Tickets einem Projekt zuzuordnen
-CREATE TABLE Project_Ticket (
-  projectname varchar(255) NOT NULL, 
-  ticketnr    int(10) NOT NULL, 
-  PRIMARY KEY (projectname, 
-  ticketnr));
-
--- Relationentabelle um die Arbeit eines Mitarbeiters
--- an einem Ticket zu dokumentieren.
-CREATE TABLE Employee_Ticket (
-  employeeempnr int(11) NOT NULL, 
-  ticketnr      int(10) NOT NULL, 
-  start         timestamp NOT NULL, 
-  end           timestamp NULL, 
-  PRIMARY KEY (employeeempnr, 
-  ticketnr));
-
--- Fremdschluesselabhaengigkeiten erstellen
-ALTER TABLE PhoneNumbers
-  ADD INDEX FKPhoneNumbe658372 (employeeempnr),
-  ADD CONSTRAINT FKPhoneNumbe658372
-  FOREIGN KEY (employeeempnr) REFERENCES Employee (empNr);
-ALTER TABLE Employee_Project
-  ADD INDEX FKEmployee_P990046 (employeeempnr),
-  ADD CONSTRAINT FKEmployee_P990046
-  FOREIGN KEY (employeeempnr) REFERENCES Employee (empNr);
-ALTER TABLE Employee_Project
-  ADD INDEX FKEmployee_P943600 (projectname),
-  ADD CONSTRAINT FKEmployee_P943600
-  FOREIGN KEY (projectname) REFERENCES Project (name);
-ALTER TABLE Department
-  ADD INDEX FKDepartment689529 (manager),
-  ADD CONSTRAINT FKDepartment689529
-  FOREIGN KEY (manager) REFERENCES Employee (empNr);
-ALTER TABLE Employee
-  ADD INDEX FKEmployee366382 (department, departmentnr),
-  ADD CONSTRAINT FKEmployee366382
-  FOREIGN KEY (department, departmentnr) REFERENCES Department (house, nr);
-ALTER TABLE Project_Ticket
-  ADD INDEX FKProject_Ti16548 (projectname),
-  ADD CONSTRAINT FKProject_Ti16548
-FOREIGN KEY (projectname) REFERENCES Project (name);
-ALTER TABLE Project_Ticket
-  ADD INDEX FKProject_Ti360860 (ticketnr),
-  ADD CONSTRAINT FKProject_Ti360860
-  FOREIGN KEY (ticketnr) REFERENCES Ticket (nr);
-ALTER TABLE Employee_Ticket
-  ADD INDEX FKEmployee_T249102 (employeeempnr),
-  ADD CONSTRAINT FKEmployee_T249102
-  FOREIGN KEY (employeeempnr) REFERENCES Employee (empNr);
-ALTER TABLE Employee_Ticket
-  ADD INDEX FKEmployee_T659766 (ticketnr),
-  ADD CONSTRAINT FKEmployee_T659766
-  FOREIGN KEY (ticketnr) REFERENCES Ticket (nr);
-\end{lstlisting}
-
+     \begin{enumerate}[a.]
+ \item Please create a view called 'movie2000' that contains all movies (id, title) from year 2000.
+ \item Given that there is no movie with id 100 contained in the movie table, will the following statements work? Explain your answer.
+ \item Is the data contained in the view created in exercise 11.1a physically stored or calculated at query time? How you influence, if the data is stored or calculated?
+ \end{enumerate}
 \aufgabe{2}
-   Based on the given statements and data, explain the consequences of the following operations:
-   \begin{enumerate}[a)]
-   \item \begin{lstlisting} 
-	INSERT INTO connection VALUES(2, 5, 'sequel') 
-   \end{lstlisting} 
-   Der Prim\"arschl\"ussel der aus \texttt{from\_movie, to\_movie} besteht, ist bereits vorhanden und mit dem \texttt{connection\_type} 'parody' belegt. Daher wird bei diesem INSERT-Statement nichts ver\"andert.
-   
-   
-   \item \begin{lstlisting} 
-	DELETE FROM actor WHERE role = 'forest ranger'
-      \end{lstlisting}
-      Alle Zeilen in der Relation \textbf{actor} in denen ein Schauspieler die \texttt{role} 'forest ranker' besitzt, werden gel\"oscht. Alle anderen Relationen werden nicht ver\"andert.
-   
-   
-
-   \item \begin{lstlisting} 
-	DELETE FROM movie WHERE title = 'Adventures with RDB'
-   \end{lstlisting}
-   Der Eintrag \"uber den Film 'Adventures with RDB' wird nicht entfernt, da die Standardeinstellung (siehe Vorlesungsfolie 20) bei L\"oschung keine Aktion ausgef\"uhrt werden soll, sowie bei \"Anderung eines Eintrag ebenfalls nichts ausgef\"uhrt werden soll.
-   
-   
-
-   \item \begin{lstlisting} 
-	INSERT INTO actor VALUES(6, 85, 'important looking man')
-   \end{lstlisting}
-   Das Einf\"ugen der Werte (6, 85, 'important looking man') in die Relation \textbf{actor} funktioniert nicht, da die \texttt{id} '6' in der Relation \textbf{person} und in der Relation \textbf{movie} die \texttt{id} '85' nicht existiert. Daher bleibt die Datenbank unver\"andert.
-   
-   
-
-   \item \begin{lstlisting} 
-	DROP TABLE person
-  \end{lstlisting}
-  Die gesamte Tabelle \textbf{person} wird aus der Datenbank gel\"oscht. Alle restlichen Relationen bleibt unver\"andert, nur die Tabelle \textbf{person} wird aus der Datenbank entfernt. 
- 
-
- \end{enumerate}   
+  \begin{enumerate}[a.]
+  \item Are the views \textit{females} and \textit{females\_born\_in\_july} as symmetric? Explain your answer.
+  \item Given that there is no person with id higher than 4 stored in the persons table. Which of the following tuples can be inserted into the \textit{females\_born\_in\_july} view? Explain your answer.
+  \begin{enumerate}[1.] 
+  \item (5, 'Bill', 'm', '19.07.1980')
+  \item (6, 'Jill', 'w', '21.11.1985')
+  \item (7, 'Ann', 'w', '02.07.1979')
+  \end{enumerate}
+  \end{enumerate}
+  \aufgabe{3}
+    \begin{enumerate}[a.]
+    \item Create. an index on the name column in the person table.
+    \item Where is an index more useful? Explain your answer
+    \begin{enumerate}[1.]
+    \item in a table with high write ratio and low read ratio
+    \item in a table with read ratio and low write ratio
+    \end{enumerate}
+    \item Does it make sense to create an index on the primary key columns of a table? Explain your answer.
+    \end{enumerate}
+    \aufgabe{4}
+      \begin{enumerate}[a.]
+      \item How do you suppress the behavior that every statement is executed separately in the first place?
+      \item During the transaction you discover an exceptional state and you want to discard all operations you have done until now. How can you do that?
+      \item If all operations have been executed successfully, how can you express that you want to save all changes persistently and close the transaction afterrwards? 
+      \end{enumerate}
 \end{document}
 
