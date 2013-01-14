@@ -84,14 +84,36 @@
    \aufgabe{1}
      \begin{enumerate}[a.]
  \item Please create a view called 'movie2000' that contains all movies (id, title) from year 2000.
+ \begin{lstlisting}
+ CREATE VIEW movie2000 (movie) AS
+ SELECT id, title
+ FROM movie
+ WHERE year = '2000';
+ \end{lstlisting}
  \item Given that there is no movie with id 100 contained in the movie table, will the following statements work? Explain your answer.
+ \begin{enumerate}[1.]
+ \item 
+ \begin{lstlisting}
+ INSERT INTO movie2000(id, title) VALUES (100, 'new movie')
+ \end{lstlisting}
+ Es ver\"andert nichts, weil man einen View nicht modifizieren kann.
+ \item
+ \begin{lstlisting}
+ UPDATE movie2000 SET title='something else'
+ WHERE id=5
+ \end{lstlisting}
+ Siehe Antwort aus 1.
+ \end{enumerate}
  \item Is the data contained in the view created in exercise 11.1a physically stored or calculated at query time? How you influence, if the data is stored or calculated?
+ Der erstellte View wird jedes mal bei einer neuen Abfrage ebenfalls neu berechnet, d.h er wird nicht physikalisch gespeichert.
  \end{enumerate}
 \aufgabe{2}
   \begin{enumerate}[a.]
-  \item Are the views \textit{females} and \textit{females\_born\_in\_july} as symmetric? Explain your answer.
+  \item Are the views \textit{females} and \textit{females\_born\_in\_july} as symmetric? Explain your answer. \\
+  Im ersten CREATE-VIEW-Statement wird ein VIEW f\"ur alle Personen erstellt die weiblich sind.
+  Im zweiten CREATE-VIEW-Statement wird ein VIEW f\"ur den ersten VIEW erstellt, der alle weiblichen Personen raussucht, die im Juli Geburtstag haben. Nebenbei enth\"alt das erste Statement eine einfache WHERE-Klausel f\"ur den VIEW, das zweite Statement enth\"alt eine erweiterte WHERE-Klausel mit LIKE. Des Weiteren enth\"alt das zweite Statement ein CHECK-OPTION. Ist also nicht symmetrisch.
   \item Given that there is no person with id higher than 4 stored in the persons table. Which of the following tuples can be inserted into the \textit{females\_born\_in\_july} view? Explain your answer.
-  \begin{enumerate}[1.] 
+  \begin{enumerate}[1.]  %%%%
   \item (5, 'Bill', 'm', '19.07.1980')
   \item (6, 'Jill', 'w', '21.11.1985')
   \item (7, 'Ann', 'w', '02.07.1979')
