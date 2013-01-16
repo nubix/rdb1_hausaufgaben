@@ -121,13 +121,18 @@
   \end{enumerate}
   \aufgabe{3}
     \begin{enumerate}[a.]
-    \item Create. an index on the name column in the person table.
+    \item Create an index on the name column in the person table.
+    \begin{lstlisting}
+    CREATE INDEX person_name
+    ON person (name);
+    \end{lstlisting}
     \item Where is an index more useful? Explain your answer
     \begin{enumerate}[1.]
     \item in a table with high write ratio and low read ratio
     \item in a table with read ratio and low write ratio
     \end{enumerate}
     \item Does it make sense to create an index on the primary key columns of a table? Explain your answer.
+    Prim\"arschl\"ussel haben standardm\"a{\ss}ig schon einen Index. Also braucht man keinen Index mehr auf den Prim\"arschl\"ussel.
     \end{enumerate}
     \aufgabe{4}
       \begin{enumerate}[a.]
