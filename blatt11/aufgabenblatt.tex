@@ -85,10 +85,10 @@
      \begin{enumerate}[a.]
  \item Please create a view called 'movie2000' that contains all movies (id, title) from year 2000.
  \begin{lstlisting}
- CREATE VIEW movie2000 (movie) AS
+ CREATE VIEW movie2000 AS
  SELECT id, title
  FROM movie
- WHERE year = '2000';
+ WHERE year = 2000;
  \end{lstlisting}
  \item Given that there is no movie with id 100 contained in the movie table, will the following statements work? Explain your answer.
  \begin{enumerate}[1.]
@@ -96,27 +96,29 @@
  \begin{lstlisting}
  INSERT INTO movie2000(id, title) VALUES (100, 'new movie')
  \end{lstlisting}
- Es ver\"andert nichts, weil man einen View nicht modifizieren kann.
- \item
+ 
+ \item 
  \begin{lstlisting}
  UPDATE movie2000 SET title='something else'
  WHERE id=5
  \end{lstlisting}
- Siehe Antwort aus 1.
+ Nicht nur der Titel im View \textbf{movie2000} wird ver\"andert, sondern auch der Titel in der Originaltabelle \textbf{movie} wird ver\"andert.
  \end{enumerate}
- \item Is the data contained in the view created in exercise 11.1a physically stored or calculated at query time? How you influence, if the data is stored or calculated?
+ \item Is the data contained in the view created in exercise 11.1a physically stored or calculated at query time? How you influence, if the data is stored or calculated? \\\\
  Der erstellte View wird jedes mal bei einer neuen Abfrage ebenfalls neu berechnet, d.h er wird nicht physikalisch gespeichert.
  \end{enumerate}
 \aufgabe{2}
   \begin{enumerate}[a.]
   \item Are the views \textit{females} and \textit{females\_born\_in\_july} as symmetric? Explain your answer. \\
   Im ersten CREATE-VIEW-Statement wird ein VIEW f\"ur alle Personen erstellt die weiblich sind.
-  Im zweiten CREATE-VIEW-Statement wird ein VIEW f\"ur den ersten VIEW erstellt, der alle weiblichen Personen raussucht, die im Juli Geburtstag haben. Nebenbei enth\"alt das erste Statement eine einfache WHERE-Klausel f\"ur den VIEW, das zweite Statement enth\"alt eine erweiterte WHERE-Klausel mit LIKE. Des Weiteren enth\"alt das zweite Statement ein CHECK-OPTION. Ist also nicht symmetrisch.
-  \item Given that there is no person with id higher than 4 stored in the persons table. Which of the following tuples can be inserted into the \textit{females\_born\_in\_july} view? Explain your answer.
+  Im zweiten CREATE-VIEW-Statement wird ein VIEW f\"ur den ersten VIEW erstellt, der alle weiblichen Personen raussucht, die im Juli Geburtstag haben. Nebenbei enth\"alt das erste Statement eine einfache WHERE-Klausel f\"ur den VIEW, das zweite Statement enth\"alt eine erweiterte WHERE-Klausel mit LIKE. Des Weiteren enth\"alt das zweite Statement ein CHECK-OPTION. Eine Sicht hit Pr\"ufoption veranlasst die Verarbeitung aller Zeilen die in der Selektion f\"ur diese Sicht ge\"andert oder eingef\"ugt wurden.  \item Given that there is no person with id higher than 4 stored in the persons table. Which of the following tuples can be inserted into the \textit{females\_born\_in\_july} view? Explain your answer.
   \begin{enumerate}[1.]  %%%%
   \item (5, 'Bill', 'm', '19.07.1980')
+  \\\\Wird nicht eingef\"ugt weil Bill nicht weiblich, sondern m\"annlich ist. Da also die Spalte Geschlecht nicht erf\"ullt wurde, findet auch kein 'INSERT' statt.
   \item (6, 'Jill', 'w', '21.11.1985')
+  \\\\Wird ebenfalls nicht eingef\"ugt, weil Jill zwar im Gegensatz zu Bill weiblich ist, jedoch hat sie im November und nicht im Juli ihren Geburtstag. Es findet ebenfalls kein 'INSERT' statt.
   \item (7, 'Ann', 'w', '02.07.1979')
+  \\\\Ann wird als einzige Person eingef\"ugt, da sie weiblich ist und im Monat Juli Geburtstag hat. Ihre Daten werden ebenfalls in die Tabelle \textbf{person} und in den View \textbf{females} eingef\"ugt.
   \end{enumerate}
   \end{enumerate}
   \aufgabe{3}
@@ -124,21 +126,22 @@
     \item Create an index on the name column in the person table.
     \begin{lstlisting}
     CREATE INDEX person_name
-    ON person (name);
+    ON person (name)
     \end{lstlisting}
     \item Where is an index more useful? Explain your answer
     \begin{enumerate}[1.]
     \item in a table with high write ratio and low read ratio
-    \item in a table with read ratio and low write ratio
+    \item in a table with high read ratio and low write ratio
+    \\\\Da ein Index dazu verwendet wird die Datenbankabfrage bzw. den Datenbankabruf schneller zu machen, ist es logischerweise sinnvoller einen Index in einer Tabellen zu erstellen, die nicht so ein schnellen Datenabruf besitzt. Also Tabelle (1).
     \end{enumerate}
-    \item Does it make sense to create an index on the primary key columns of a table? Explain your answer.
+    \item Does it make sense to create an index on the primary key columns of a table? Explain your answer. \\\\
     Prim\"arschl\"ussel haben standardm\"a{\ss}ig schon einen Index. Also braucht man keinen Index mehr auf den Prim\"arschl\"ussel.
     \end{enumerate}
     \aufgabe{4}
       \begin{enumerate}[a.]
       \item How do you suppress the behavior that every statement is executed separately in the first place?
       \item During the transaction you discover an exceptional state and you want to discard all operations you have done until now. How can you do that?
-      \item If all operations have been executed successfully, how can you express that you want to save all changes persistently and close the transaction afterrwards? 
+      \item If all operations have been executed successfully, how can you express that you want to save all changes persistently and close the transaction afterwards? 
       \end{enumerate}
 \end{document}
 
