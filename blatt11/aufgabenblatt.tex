@@ -96,16 +96,16 @@
  \begin{lstlisting}
  INSERT INTO movie2000(id, title) VALUES (100, 'new movie')
  \end{lstlisting}
- 
+ Das Jahr darf beim 'INSERT'-Statement ebenfalls nicht NULL sein, da jedoch der VIEW movie2000 nur die ID und den Titel eines Films zul\"asst und das Jahr nicht relevant ist, wird nichts eingef\"ugt. 
  \item 
  \begin{lstlisting}
  UPDATE movie2000 SET title='something else'
  WHERE id=5
  \end{lstlisting}
- Nicht nur der Titel im View \textbf{movie2000} wird ver\"andert, sondern auch der Titel in der Originaltabelle \textbf{movie} wird ver\"andert.
+ Nicht nur der Titel des Films mit der \textit{id} 5 im View \textbf{movie2000} wird ver\"andert, sondern auch der Titel des Films in der Originaltabelle \textbf{movie} wird ver\"andert.
  \end{enumerate}
  \item Is the data contained in the view created in exercise 11.1a physically stored or calculated at query time? How you influence, if the data is stored or calculated? \\\\
- Der erstellte View wird jedes mal bei einer neuen Abfrage ebenfalls neu berechnet, d.h er wird nicht physikalisch gespeichert.
+ Der erstellte View wird jedes mal bei einer neuen Abfrage ebenfalls neu berechnet, nur der Abfragecode wird physikalisch gespeichert, nicht aber das Ergebnis der Abfrage.
  \end{enumerate}
 \aufgabe{2}
   \begin{enumerate}[a.]
@@ -139,9 +139,32 @@
     \end{enumerate}
     \aufgabe{4}
       \begin{enumerate}[a.]
-      \item How do you suppress the behavior that every statement is executed separately in the first place?
-      \item During the transaction you discover an exceptional state and you want to discard all operations you have done until now. How can you do that?
-      \item If all operations have been executed successfully, how can you express that you want to save all changes persistently and close the transaction afterwards? 
+      \item How do you suppress the behavior that every statement is executed separately in the first place? \\\\
+      Durch Speicherpunkte (Savepoints) kann man eine Transaktion in mehrere Teile unterteilen, um Schritt f\"ur Schritt die Datenbank zu ver\"andern. \\\\
+      Beispiel:
+      \begin{lstlisting}
+      DELETE FROM held
+      WHERE id = 1;
+      
+      SAVEPOINT deleted1;
+      
+      DELETE FROM held
+      WHERE id = 2;
+      
+      ROLLBACK TO deleted1;
+      COMMIT;
+      \end{lstlisting}
+      \item During the transaction you discover an exceptional state and you want to discard all operations you have done until now. How can you do that? \\\\
+      Mit einem sogenannten ROLLBACK-Statement (oder auch ROLLBACK WORK). Dadurch wird die aktuelle Transaktion abgebrochen, und die Datenbank wird in den Zustand zur\"uckgesetzt, in dem sie sich vor der Transaktion befand.     
+      \item If all operations have been executed successfully, how can you express that you want to save all changes persistently and close the transaction afterwards? \\\\
+      Mit einem einfachen COMMIT-Statement (oder auch COMMIT WORK) wird die Transaktion mit Erfolg beendet, alle ge\"anderten Daten in der Datenbank werden gespeichert. \\\\
+      Beispiel:
+      \begin{lstlisting}
+      UPDATE held
+      	SET name = 'Karl Heinz-Mueller'
+	WHERE name = 'Karl Mueller'
+      COMMIT;
+      \end{lstlisting}
       \end{enumerate}
 \end{document}
 
