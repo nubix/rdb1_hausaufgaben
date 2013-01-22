@@ -72,8 +72,7 @@ public class MovieExplorer {
 		insertPersonStmt = conn.prepareStatement("INSERT INTO person(id, name, gender, birthday) VALUES (?, ?, ?, ?)");
 		insertActorStmt = conn.prepareStatement("INSERT INTO actor(person, movie, role) VALUES (?, ?, ?)");
 
-		// TODO Exercise 12.1f prepare the SELECT statements here 
-		getActorsToAMovieStmt = conn.prepareStatement("SELECT id, name, gender, birthday FROM person WHERE (?)");
+		getActorsToAMovieStmt = conn.prepareStatement("SELECT p.id, p.name, p.gender, p.birthday FROM person p, actor a WHERE a.movie = ? AND p.id = a.person");
 	}
 	
 	public void insertMovie(Movie movie) throws SQLException {
