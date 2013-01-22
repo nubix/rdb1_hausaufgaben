@@ -3,6 +3,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,25 +24,22 @@ public class MovieExplorer {
 	public static void createSchema(Connection conn) throws SQLException {
 		Statement st = conn.createStatement();
 
-		String movie = "CREATE TABLE movie(
-		      id INTEGER NOT NULL PRIMARY KEY,
-		      title VARCHAR(255) NOT NULL,
-		      "year" INTEGER
-		  )";
+		String movie = "CREATE TABLE movie("
+		      		   +"id INTEGER NOT NULL PRIMARY KEY,"
+		     		   +"title VARCHAR(255) NOT NULL,"
+		      		   +"\"year\" INTEGER)";
 		  
-		String person = "CREATE TABLE person(
-		      id INTEGER NOT NULL PRIMARY KEY,
-		      name VARCHAR(255) NOT NULL,
-		      gender CHAR(1) CHECK (gender IN ('f', 'm')),
-		      birthday CHAR(10)
-		  )";
+		String person = "CREATE TABLE person("
+		     		 	+"id INTEGER NOT NULL PRIMARY KEY,"
+		      			+"name VARCHAR(255) NOT NULL,"
+		      			+"gender CHAR(1) CHECK (gender IN ('f', 'm')),"
+		      			+"birthday CHAR(10))";
 		  
-		String actor = "CREATE TABLE actor(
-		      person INTEGER NOT NULL REFERENCES person,
-		      movie INTEGER NOT NULL REFERENCES movie,
-		      role VARCHAR(255) NOT NULL,
-		      PRIMARY KEY (person, movie)
-		  )";
+		String actor =	"CREATE TABLE actor("
+		      			+"person INTEGER NOT NULL REFERENCES person,"
+		      			+"movie INTEGER NOT NULL REFERENCES movie,"
+		      			+"role VARCHAR(255) NOT NULL,"
+		      			+"PRIMARY KEY (person, movie))";
 		st.executeUpdate(movie);
 		st.executeUpdate(person);
 		st.executeUpdate(actor);
@@ -50,6 +48,7 @@ public class MovieExplorer {
 	private PreparedStatement insertMovieStmt;
 	private PreparedStatement insertPersonStmt;
 	private PreparedStatement insertActorStmt;
+	private PreparedStatement getActorsToAMovieStmt;
 	private PreparedStatement getMoviesBetweenYearsStmt;
 	
 	// TODO Exercise 12.1e declare prepared statements here 

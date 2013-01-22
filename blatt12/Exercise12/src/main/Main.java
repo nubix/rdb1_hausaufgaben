@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import java.sql.DriverManager;
 import java.util.*;
 import java.io.*;
-
+import model.Movie;
 
 public class Main {
 
