@@ -1,0 +1,18 @@
+README
+
+---- TODO
+75:MovieExplorer.java Query prüfen
+Generelle funktion Prüfen, programm wurde nur geschrieben und auf Ausfürbarkeit getestet. 
+
+
+
+---- USAGE
+
+Compile with:
+javac -classpath lib/:src src/main/Main.java
+
+Execute with:
+java -classpath lib/db2jcc4.jar:src/ main.Main
+
+Compile&Execute:
+javac -classpath lib/:src src/main/Main.java && java -classpath lib/db2jcc4.jar:src/ main.Main
