@@ -1,47 +1,53 @@
 package main;
+
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.DriverManager;
+import java.util.*;
+import java.io.*;
 
 
 public class Main {
+
 	public static void main(String[] args) {
-		/*
-		 * If you use db2, please use the connection.properties file to manage your user name and password.
-		 * The usage of a Properties file in Java is as follows:
-		 * 
-		 *   // First create a new Properties object:
-		 *   Properties props = new Properties();
-		 * 
-		 *   // Then load the properties contained in the properties file:
-		 *   props.load(new FileInputStream(new File("connection.properties")));
-		 * 
-		 *   // you can then read the properties (e.g. the user name):
-		 *   String user = props.getProperty("user");
-		 * 
-		 */
-		
+
 		Connection conn = null;
 		try {
-			conn = getConnection();
+			Properties props = new Properties();
+			props.load(new FileInputStream(new File("connection.properties")));
+
+			conn = getConnection(props);
 			MovieExplorer movieExplorer = new MovieExplorer(conn);
-			// TODO 12.1d: insert the movies described in the exercise sheet
-		} catch(SQLException ex) {
+			Movie [] movies = {new Movie(1, "movie 1", 1999),
+							   new Movie(2, "movie 2", 1980),
+							   new Movie(3, "movie 3", 2005),
+							   new Movie(4, "movie 4", 2003)};
+			for(Movie m : movies) {
+				movieExplorer.insertMovie(m);
+			}
+
+		} catch(Exception ex) {
 			ex.printStackTrace();
 		}
 	}
 	
-	// if you use db2, the getConnection method should receive a Properties object to get the relevant data for the connection
-	// if you use derby this is not really necessary
-	public static Connection getConnection(/*Properties connectionProps*/) throws SQLException {
+	/**
+	* Receives connection Properties 
+	* 
+	* @param connectionProps Object containing properties for connection
+	* @throws SQLException if an error happens
+	* @return Object representing the connection to the databaseserver 
+	*/
+	public static Connection getConnection(Properties connectionProps) throws SQLException {
 		/*
-		 * If you use derby, the connection URL has the following pattern (text in angle brackets has to be replaced respectively):
-		 *     jdbc:derby:<dbname>;create=true
-		 *     Example: jdbc:derby:testdb;create=true
-		 *     
-		 * If you use db2 please follow the instructions contained in the lecture slides.
+		 * Copy 'n Paste from Slides
 		 */
-		 
-		// TODO Exercise 12.1a
-		throw new RuntimeException("Not implemented. Please implement this method!");
+		return DriverManager.getConnection(
+					"jdbc:db2://" + connectionProps.getProperty("server") + ":" +
+					connectionProps.getProperty("port") + "/" +
+					connectionProps.getProperty("database"),
+					connectionProps.getProperty("user"),
+					connectionProps.getProperty("password")
+					);
 	}
 }

@@ -13,33 +13,43 @@ import model.Person;
   * A class to wrap some data maipulation and querying tasks for the application
   */
 public class MovieExplorer {
+
+	/**
+	 * This method creates all necessary tables 
+	 *
+	 * @param conn the Object representing the connection
+	 * @throws SQLException if something goes wrong
+	 */
 	public static void createSchema(Connection conn) throws SQLException {
-		// TODO Exercise 12.1b: Create the following tables:
-		/*
-		 * CREATE TABLE movie(
-		 *     id INTEGER NOT NULL PRIMARY KEY,
-		 *     title VARCHAR(255) NOT NULL,
-		 *     "year" INTEGER
-		 * )
-		 * 
-		 * CREATE TABLE person(
-		 *     id INTEGER NOT NULL PRIMARY KEY,
-		 *     name VARCHAR(255) NOT NULL,
-		 *     gender CHAR(1) CHECK (gender IN ('f', 'm')),
-		 *     birthday CHAR(10)
-		 * )
-		 * 
-		 * CREATE TABLE actor(
-		 *     person INTEGER NOT NULL REFERENCES person,
-		 *     movie INTEGER NOT NULL REFERENCES movie,
-		 *     role VARCHAR(255) NOT NULL,
-		 *     PRIMARY KEY (person, movie)
-		 * )
-		 */
-		throw new RuntimeException("Not implemented. Please implement this method!");
+		Statement st = conn.createStatement();
+
+		String movie = "CREATE TABLE movie(
+		      id INTEGER NOT NULL PRIMARY KEY,
+		      title VARCHAR(255) NOT NULL,
+		      "year" INTEGER
+		  )";
+		  
+		String person = "CREATE TABLE person(
+		      id INTEGER NOT NULL PRIMARY KEY,
+		      name VARCHAR(255) NOT NULL,
+		      gender CHAR(1) CHECK (gender IN ('f', 'm')),
+		      birthday CHAR(10)
+		  )";
+		  
+		String actor = "CREATE TABLE actor(
+		      person INTEGER NOT NULL REFERENCES person,
+		      movie INTEGER NOT NULL REFERENCES movie,
+		      role VARCHAR(255) NOT NULL,
+		      PRIMARY KEY (person, movie)
+		  )";
+		st.executeUpdate(movie);
+		st.executeUpdate(person);
+		st.executeUpdate(actor);
 	}
 	
 	private PreparedStatement insertMovieStmt;
+	private PreparedStatement insertPersonStmt;
+	private PreparedStatement insertActorStmt;
 	private PreparedStatement getMoviesBetweenYearsStmt;
 	
 	// TODO Exercise 12.1e declare prepared statements here 
@@ -50,16 +60,20 @@ public class MovieExplorer {
 			throw new IllegalArgumentException("Connecton must not be null");
 		}
 		
-		// TODO Exercise 12.1c: Ensure that the schema is created here
-		// use the static method MovieExplorer.createSchema(Connection) method complete this task
-		// Handle the case where the tables are already set
-		
+		try {
+			MovieExplorer.createSchema(conn);
+		} catch (SQLException ex) {
+			System.err.println("Seems like the tables already exist.");
+		}
+
 		insertMovieStmt = conn.prepareStatement("INSERT INTO movie(id, title, \"year\") VALUES (?, ?, ?)");
 		getMoviesBetweenYearsStmt = conn.prepareStatement("SELECT id, title, \"year\" FROM movie WHERE \"year\" >= ? AND \"year\" <= ?");
 		
-		// TODO Exercise 12.1e prepare the INSERT statements here 
-		
+		insertPersonStmt = conn.prepareStatement("INSERT INTO person(id, name, gender, birthday) VALUES (?, ?, ?, ?)");
+		insertActorStmt = conn.prepareStatement("INSERT INTO actor(person, movie, role) VALUES (?, ?, ?)");
+
 		// TODO Exercise 12.1f prepare the SELECT statements here 
+		getActorsToAMovieStmt = conn.prepareStatement("SELECT id, name, gender, birthday FROM person WHERE (?)");
 	}
 	
 	public void insertMovie(Movie movie) throws SQLException {
@@ -68,7 +82,8 @@ public class MovieExplorer {
 		insertMovieStmt.setInt(3, movie.getYear());
 		insertMovieStmt.executeUpdate();
 	}
-	
+
+
 	public List<Movie> getMoviesBetweenYears(int yearFrom, int yearTo) throws SQLException {
 		List<Movie> movies = new ArrayList<Movie>();
 		
@@ -85,18 +100,57 @@ public class MovieExplorer {
 		return movies;
 	}
 	
-	// TODO 12.1e implement the following methods analogous to the insertMovie method
+	/**
+	 * Inserts a new Person into the database
+	 *
+	 * @param person the object representing the Person to be inserted.
+	 * @throws SQLException if something goes wrong
+	 */
 	public void insertPerson(Person person) throws SQLException {
-		throw new RuntimeException("Not implemented. Please implement this method!");
+		insertPersonStmt.setInt(1, person.getId());
+		insertPersonStmt.setString(2, person.getName());
+		insertPersonStmt.setString(3, person.getGender());
+		insertPersonStmt.setString(4, person.getBirthday());
+		insertPersonStmt.executeUpdate();
 	}
 	
+	/**
+	 * Inserts a new actor into the database
+	 *
+	 * @param personId the referencing id of the corresponding person.§
+	 * @param movieId the referencing id of the movie in question.
+	 * @param role the role the actor played in the movie
+	 * @throws SQLException if something goes wrong
+	 */
 	public void insertActorTuple(int personId, int movieId, String role) throws SQLException {
-		throw new RuntimeException("Not implemented. Please implement this method!");
+		insertActorStmt.setInt(1, personId);
+		insertActorStmt.setInt(2, movieId);
+		insertActorStmt.setString(3, role);
+		insertActorStmt.executeUpdate();
 	}
 	
-	// TODO 12.1f implement the following method analogous to the getMoviesBetweenYears method
+	/**
+	 * Get a list of all person who had been an actor in a certain movie.
+	 *
+	 * @param movieId the id of the movie in question
+	 * @return The list of all persons.
+	 * @throws SQLException if something goes wrong
+	 */
 	public List<Person> getActorsToAMovie(int movieId) throws SQLException {
-		throw new RuntimeException("Not implemented. Please implement this method!");
+		List<Person> persons = new ArrayList<Person>();
+		
+		getActorsToAMovieStmt.setInt(1, movieId);
+		ResultSet personsResultSet = getActorsToAMovieStmt.executeQuery();
+
+		while(personsResultSet.next()) {
+			int id = personsResultSet.getInt(1);
+			String name = personsResultSet.getString(2);
+			String gender = personsResultSet.getString(3);
+			String birthday = personsResultSet.getString(4);
+			persons.add(new Person(id, name, gender, birthday));
+		}
+		
+		return persons;
 	}
 }
 
