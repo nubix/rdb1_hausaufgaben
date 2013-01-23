@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import java.sql.DriverManager;
 import java.util.*;
 import java.io.*;
-import model.Movie;
+import model.*;
 
 public class Main {
 
@@ -18,21 +18,26 @@ public class Main {
 
 			conn = getConnection(props);
 			MovieExplorer movieExplorer = new MovieExplorer(conn);
+
+			/*
+			 * Inserting movies into database
+			 * fails if already there.
+			 */
 			Movie [] movies = {new Movie(1, "movie 1", 1999),
 							   new Movie(2, "movie 2", 1980),
 							   new Movie(3, "movie 3", 2005),
 							   new Movie(4, "movie 4", 2003)};
+
 			for(Movie m : movies) {
 				movieExplorer.insertMovie(m);
-			}
-
+			});			
 		} catch(Exception ex) {
 			ex.printStackTrace();
 		}
 	}
 	
 	/**
-	* Receives connection Properties 
+	* Creates a new DB2 database connection 
 	* 
 	* @param connectionProps Object containing properties for connection
 	* @throws SQLException if an error happens

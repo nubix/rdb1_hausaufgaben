@@ -59,6 +59,9 @@ public class MovieExplorer {
 			throw new IllegalArgumentException("Connecton must not be null");
 		}
 		
+		/*
+		 * Tries to create neccesary tables, outputs
+		 */
 		try {
 			MovieExplorer.createSchema(conn);
 		} catch (SQLException ex) {
@@ -68,12 +71,18 @@ public class MovieExplorer {
 		insertMovieStmt = conn.prepareStatement("INSERT INTO movie(id, title, \"year\") VALUES (?, ?, ?)");
 		getMoviesBetweenYearsStmt = conn.prepareStatement("SELECT id, title, \"year\" FROM movie WHERE \"year\" >= ? AND \"year\" <= ?");
 		
+		/*
+		 * Needed for person and actor insertion
+		 */
 		insertPersonStmt = conn.prepareStatement("INSERT INTO person(id, name, gender, birthday) VALUES (?, ?, ?, ?)");
 		insertActorStmt = conn.prepareStatement("INSERT INTO actor(person, movie, role) VALUES (?, ?, ?)");
 
+		/*
+		 * Needed for getActorsToAMovie
+		 */
 		getActorsToAMovieStmt = conn.prepareStatement("SELECT p.id, p.name, p.gender, p.birthday FROM person p, actor a WHERE a.movie = ? AND p.id = a.person");
 	}
-	
+	/
 	public void insertMovie(Movie movie) throws SQLException {
 		insertMovieStmt.setInt(1, movie.getId());
 		insertMovieStmt.setString(2, movie.getTitle());
