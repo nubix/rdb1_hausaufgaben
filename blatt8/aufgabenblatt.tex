@@ -86,11 +86,11 @@
       \item Name of all persons who played a role in a »parody« of any movie.\hfill
 \begin{lstlisting}
 SELECT p.name
-FROM Movie m, Person p, actor a, hasGenre hg
+FROM Movie m, Person p, actor a, ``connection co''
 WHERE p.id = a.person
 AND a.movie = m.id
-AND m.id = hg.movie
-AND hg.genre = 'parody';
+AND m.id = ``co''.movie
+AND ``co.type'' = 'parody';
 \end{lstlisting}
 
       \item Names of all persons who were born in July.\hfill\\
@@ -108,7 +108,7 @@ JOIN director d
 ON (m.id = d.movie) 
 GROUP BY m.id; 
 \end{lstlisting}
-
+\textcolor{red}{Nur gruppieren reicht nicht!}
 
       \item Id, name and number of movies the person acted in for each person. The result should also include those persons who never played a role in a movie yet.\hfill
 \begin{lstlisting}
@@ -122,7 +122,7 @@ SELECT p.id, p.name, '0'
 FROM Person p, actor a 
 WHERE a.person <> p.id;
 \end{lstlisting}
-
+\textcolor{red}{Left Join tut genau das gewollte!}
 
       \item Titles of all movies in which »Ted Codd« played a role but »Ray Boyce« did not.\hfill
 \begin{lstlisting}
@@ -147,7 +147,7 @@ JOIN actor a ON (p.id = a.person)
 JOIN director d ON (a.person = d.person) AND (a.movie = d.movie) 
 WHERE COUNT(p.id) > 1;
 \end{lstlisting}
- 
+ \textcolor{red}{Subquery fehlt!}
 
       \item Considering the average number of movies persons played roles in. Return the names of all persons who played roles in more movies than the average.\hfill
 \begin{lstlisting}
@@ -168,23 +168,12 @@ WHERE  played > av.average;
 \item What is the difference between the WHERE and the HAVING clause? \hfill\\\\
  Der erste Unterschied w\"are, dass die WHERE-Klausel vor der \textbf{GROUP-BY}-Klausel verwendet wird, die HAVING-Klausel immer danach benutzt wird. Bei der Verwendung von \textbf{HAVING} wird erst eine komplette Abfrage ausgef\"uhrt, dann gruppiert und am Ende der Bedingungen an die Abfrage angepasst. Bei \textbf{WHERE} werden erst die entsprechenden Zeilen herausgesucht und am Ende gruppiert zur\"uckgegeben. \\
 \item Would SQL have the same expressiveness if the HAVING clause would not exist? \hfill\\
-Nein. In der \textbf{WHERE}-Klausel werden Vorbedingungen definiert, durch die \textbf{GROUP-BY}-Klausel wird die Selektion gruppiert und optionale Nachbedingungen (z.B Funktionen) werden in der \textbf{HAVING}-Klausel beschrieben. Des Weiteren ist Aggregation in der \textbf{WHERE}-Klausel verboten. Beispielsweise will man alle Institute des Informatikzweigs der TU Braunschweig mit mehr als 10 Mitarbeitern die ein höheres Monatsgehalt als 5000 Euro bekommen. \\
-\begin{lstlisting}
-SELECT Institut, COUNT(*) AS 'Anzahl der Mitarbeiter'
-FROM Mitarbeiter 
-WHERE Monatsgehalt > 5000
-GROUP BY Institut
-HAVING COUNT(*) > 10;
-\end{lstlisting}
-W\"urde man die \textbf{HAVING}-Klausel weglassen und stattdessen die \textbf{WHERE}-Klausel folgenderma{\ss}en definieren: \\
-\begin{lstlisting}[numbers=none]
-WHERE Monatsgehalt > 5000 AND COUNT(*) > 10
-\end{lstlisting}
-Dann w\"urde man einen Fehler wegen Aggregation bekommen, da in der \textbf{WHERE}-Klausel Aggregation verboten ist. \\
+\textcolor{red}{Ja.} \\
 \item What is the difference between correlated and uncorrelated subqueries? \hfill\\\\
 Falls die WHERE-Klausel der inneren Abfrage (Subquery) ein Attribut aus einer Relation verwendet, das in der \"au{\ss}eren Abfrage deklariert wurde, sind beide Abfragen korreliert. D.h die innere Abfrage muss f\"ur jedes Tupel der \"au{\ss}eren Abfrage neu bewertet werden. Da dies ineffizient ist, sollte man Unterabfragen (Subqueries) vermeiden und falls m\"oglich, auf JOINS zur\"uckgreifen. \\
 \item What is the difference between a set and a bag? How can you enforce the DBMS to return a set instead of a bag? \\\\
 Bags sind multiple Mengen von Zeilen. Duplikate sind standardm\"a{\ss}ig erlaubt, k\"onnen jedoch beim Anfragen eliminiert werden. Jeder einzelne Wert ist eine Zeilenmenge. Bags werden oft auch Ergebnismenge genannt. Letztlich ist es dasselbe, bis auf die Tatsache, dass sich Ergebnismengen durch die ORDER BY - Operation zu einer Listen machen lassen.
+\textcolor{red}{Sets erlauben keine Duplikate.}
 
  \end{enumerate}
 \end{document}

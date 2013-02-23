@@ -81,19 +81,19 @@
                         \pi_{name} (&\\
                             &(\pi_{name}(Person\Join_{Person.id = actor.id}actor)\\
                             &\Join_{actor.movie = hasGenre.movie}\sigma_{hasGenre.Genre=\textrm{'action'}}hasGenre)\\
-                         \vee &\\
+                         \textcolor{red}{Vereinigung} &\\
                             &(\pi_{name}(Person\Join_{Person.id = director.id}director)\\
                             &\Join_{director.movie = hasGenre.movie}\sigma_{hasGenre.Genre=\textrm{'action'}}hasGenre)\\
                         )
                       \end{align*}
         \item [TRC] \begin{align*}
                     \{ p.name\,|\,& Person(p) \wedge ( \\
-                        &\forall a (actor(a) \wedge a.person = p.id) \\
+                        &\textcolor{red}{\exists} a (actor(a) \wedge a.person = p.id) \\
                         &\wedge ( \exists hg ( hasGenre(hg) \wedge a.movie=hg.movie) \\
                         &  hg.genre = \textrm{'action'}) \\
                         \vee & \\
-                        &\forall a (director(a) \wedge a.person = p.id) \\
-                        &\wedge ( \exists hg ( hasGenre(hg) \wedge a.movie=hg.movie) \\
+                        &\textcolor{red}{\exists d} (director(\textcolor{red}{d}) \wedge \textcolor{red}{d}.person = p.id) \\
+                        &\wedge ( \exists hg ( hasGenre(hg) \wedge \textcolor{red}{d}.movie=hg.movie) \\
                         &  hg.genre = \textrm{'action'}) \\
                       )\}
                     \end{align*}
@@ -103,7 +103,7 @@
                   & ( \exists id, gender, birth(Person(id, name, gender, birth)) \\
                   & \wedge \exists person, movie, role(actor(person, movie, role) \wedge id = person) \\
                   & \wedge \exists movie, genre(hasGenre(movie, genre) \wedge genre = \textrm('action'))) \\
-                  \wedge \\
+                  \textcolor{red}{\vee} \\
                   & (\exists id, gender, birth(Person(id, name, gender, birth)) \\
                   & \wedge \exists person, movie(director(person, movie) \wedge id = person) \\
                   & \wedge \exists movie, genre(hasGenre(movie,genre) \wedge genre = \textrm('action'))) \\
@@ -123,23 +123,22 @@
                       \end{align*}
           \item [TRC] \begin{align*}
                       \{ t_1.name | & \\
-                      & ((Person(t_1) \wedge actor(t_2) \wedge t_1.id=t_2.person) \\
-                      & Movie(t_3) \wedge t_2.movie = t_3.id \wedge t_3.name=\textit{'The mighty Oracle'})\\
+                      & ((Person(t_1) \wedge \textcolor{red}{\exists t2( actor(t_2))} \wedge t_1.id=t_2.person  \textcolor{red}{ \wedge \, \exists t3(} \\
+                      & Movie(t_3) \wedge t_2.movie = t_3.id \wedge t_3.name=\textit{'The mighty Oracle'})\textcolor{red}{))}\\
                       \wedge\\
-                      & ((Person(t_4) \wedge actor(t_5) \wedge t_4.id=t_5.person) \\
-                      & Movie(t_6) \wedge t_5.movie = t_6.id \wedge \neg(t_3.name=\textit{'The mighty Oracle'})\\
+                      & (\textcolor{red}{\exists t4}(Person(t_4) \wedge \textcolor{red}{\exists t5(}actor(t_5) \wedge t_4.id=t_5.person \textcolor{red}{ \wedge \, \exists t6(} \\
+                      & Movie(t_6) \wedge t_5.movie = t_6.id \wedge \neg(t_3.name=\textit{'The mighty Oracle'})\textcolor{red}{)}\\
                       \wedge \\
-                     & \neg(t_4.id = t_1.id)
-                      \}
+                     & \neg(t_4.id = t_1.id)\textcolor{red}{)) \}}
                       \end{align*}
           \item [DRC] \begin{align*}
                       \{ name | & \\
-                      & (\exists id, gender, birth (Person(id, name, gender, birth))\\
+                      & (\exists id, gender, birth (Person(id, name, gender, birth)\\
                       &\wedge \\
-                      & \exists person,movie,role(actor(person, movie, role) \wedge id = person))\\
+                      & \exists person,movie,role(actor(person, movie, role) \wedge id = person)\\
                       \wedge &\\
-                      & (\exists id, title, year (Movie(id, title, year)\\
-                      & \wedge id = movie \wedge title=\textit{'The mighty Oracle'}))\\
+                      & (\exists \textcolor{red}{mid}, title, year (Movie(\textcolor{red}{mid}, title, year)\\
+                      & \wedge \textcolor{red}{mid} = movie \wedge title=\textit{'The mighty Oracle'}))\textcolor{red}{)}\\
                       &\\
                       \wedge\,\,\,\,\, &\\
                       &\\
@@ -147,14 +146,14 @@
                       &\wedge \\
                       & \exists person1,movie1,role1(actor(person1, movie1, role1) \wedge id1 = person1))\\
                       \wedge &\\
-                      & (\exists id1, title1, year1 (Movie(id1, title1, year1)\\
-                      & \wedge id1 = movie1 \wedge \neg(title1=\textit{'The mighty Oracle'}))\\
+                      & (\exists \textcolor{red}{mid1}, title1, year1 (Movie(\textcolor{red}{mid1}, title1, year1)\\
+                      & \wedge \textcolor{red}{mid1} = movie1 \wedge \neg(title1=\textit{'The mighty Oracle'}))\\
                       &\\
                       \wedge\,\,\,\,\, &\\
                       &\\
-                      \neg(id = id1)
-                      \}
+                      \neg(id = id1)\textcolor{red}{)))\}}
                       \end{align*}
+                      \textcolor{red}{Ansonsten Komplikationen mit oberer id.(Vorsichtig mit Klammern umgehen, da sonst gebundene Variablen weiter unten nicht mehr sichtbar sind!)}
         \end{description}
     \end{enumerate}
 \aufgabe{2}

@@ -204,11 +204,11 @@
 
 \aufgabe{4}
   \tt{Student = (matno, name, (address(street, no, zip, city)), {telephone(prefno, no)})}
-
+  
   \begin{tikzpicture}[scale=1, every edge/.style={draw=blue, very thick}]
     \node[entity] (student) {Student};
 
-    \node[attribute] (matno) at ([shift={(60:2)}]student) {matno} edge (student);
+    \node[attribute] (matno) at ([shift={(60:2)}]student) {\underline{\textcolor{red}{matno}}} edge (student);
     \node[attribute] (name) at ([shift={(20:3)}]student) {name} edge (student);
     \node[attribute] (adress) at ([shift={(-5:5)}]student) {address} edge (student);
       \node[attribute] (street) at ([shift={(30:3)}]adress) {street} edge (adress);
@@ -220,7 +220,7 @@
         \node[attribute] (prefno) at ([shift={(-60:2.5)}]telephone) {prefno} edge (telephone);
         \node[attribute] (no) at ([shift={(-120:2.5)}]telephone) {no} edge (telephone);    
   \end{tikzpicture}
-
+  
 \newpage
 \aufgabe{5}
 
@@ -236,17 +236,17 @@
       \node[attribute] [above right=of halle] {\underline{Id}} edge (halle);
       \node[attribute] [right=of halle] {Name} edge (halle);
 
-    \node[relationship] (r1) [below=of halle] {enthält} edge node[right]{(1,1)} (halle);
+    \node[ident relationship] (r1) [below=of halle] {enthält} edge node[right]{(\textcolor{red}{0,*})} (halle);
 
-    \node[entity] (stand) [below=of r1] {Stand} edge[double, line width=1pt] node[right]{(1,*)} (r1);
-      \node[attribute] [below=of stand] {Nummer} edge (stand);
+    \node[weak entity] (stand) [below=of r1] {Stand} edge[double, line width=1pt] node[right]{(1,*)} (r1);
+      \node[attribute] [below=of stand] {\underline{\textcolor{red}{Nummer}}} edge (stand);
 
-    \node[relationship] (r2) [right=of stand] {mietet} edge[double, line width=1pt] node[above]{(1,*)} (stand);
+    \node[relationship] (r2) [right=of stand] {mietet} edge[double, line width=1pt] node[above]{(\textcolor{red}{1,1})} (stand);
 
-    \node[entity] (firma) [below=of r2] {Firma} edge node[right]{(1,1)} (r2);
+    \node[entity] (firma) [below=of r2] {Firma} edge node[right]{(\textcolor{red}{1,*})} (r2);
       \node[attribute] [right=of firma] {\underline{Name}} edge (firma);
 
-    \node[ident relationship] (r3) [below=of firma] {belegt um} edge node[right]{(0,*)} (firma);
+    \node[relationship] (r3) [below=of firma] {belegt um} edge node[right]{(0,*)} (firma);
       \node[attribute] [below left=of r3] {Beginn} edge (r3);
       \node[attribute] [below=of r3] {Ende} edge (r3);
 

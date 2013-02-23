@@ -114,7 +114,7 @@
   Im zweiten CREATE-VIEW-Statement wird ein VIEW f\"ur den ersten VIEW erstellt, der alle weiblichen Personen raussucht, die im Juli Geburtstag haben. Nebenbei enth\"alt das erste Statement eine einfache WHERE-Klausel f\"ur den VIEW, das zweite Statement enth\"alt eine erweiterte WHERE-Klausel mit LIKE. Des Weiteren enth\"alt das zweite Statement ein CHECK-OPTION. Eine Sicht hit Pr\"ufoption veranlasst die Verarbeitung aller Zeilen die in der Selektion f\"ur diese Sicht ge\"andert oder eingef\"ugt wurden.  \item Given that there is no person with id higher than 4 stored in the persons table. Which of the following tuples can be inserted into the \textit{females\_born\_in\_july} view? Explain your answer.
   \begin{enumerate}[1.]
   \item (5, 'Bill', 'm', '19.07.1980')
-  \\\\Wird nicht eingef\"ugt weil Bill nicht weiblich, sondern m\"annlich ist. Da also die Spalte Geschlecht nicht erf\"ullt wurde, findet auch kein 'INSERT' statt.
+  \\\\\textcolor{red}{Wird eingef\"ugt, da im View keine Bedingung f\"ur das Geschlecht steht, und da Bill im Juli Geburtstag hat, wird er eingef\"ugt.}
   \item (6, 'Jill', 'w', '21.11.1985')
   \\\\Wird ebenfalls nicht eingef\"ugt, weil Jill zwar im Gegensatz zu Bill weiblich ist, jedoch hat sie im November und nicht im Juli ihren Geburtstag. Es findet ebenfalls kein 'INSERT' statt.
   \item (7, 'Ann', 'w', '02.07.1979')
@@ -132,7 +132,7 @@
     \begin{enumerate}[1.]
     \item in a table with high write ratio and low read ratio
     \item in a table with high read ratio and low write ratio
-    \\\\Da ein Index dazu verwendet wird die Datenbankabfrage bzw. den Datenbankabruf schneller zu machen, ist es logischerweise sinnvoller einen Index in einer Tabellen zu erstellen, die nicht so ein schnellen Datenabruf besitzt. Also Tabelle (1).
+    \\\\\textcolor{red}{Tabelle (2) ist sinnvoller.}
     \end{enumerate}
     \item Does it make sense to create an index on the primary key columns of a table? Explain your answer. \\\\
     Prim\"arschl\"ussel haben standardm\"a{\ss}ig schon einen Index. Also braucht man keinen Index mehr auf den Prim\"arschl\"ussel.
@@ -140,7 +140,7 @@
     \aufgabe{4}
       \begin{enumerate}[a.]
       \item How do you suppress the behavior that every statement is executed separately in the first place? \\\\
-      Durch Speicherpunkte (Savepoints) kann man eine Transaktion in mehrere Teile unterteilen, um Schritt f\"ur Schritt die Datenbank zu ver\"andern. \\\\
+      \textcolor{red}{Zu allererst auto\_commit ausstellen.} Durch Speicherpunkte (Savepoints) kann man eine Transaktion in mehrere Teile unterteilen, um Schritt f\"ur Schritt die Datenbank zu ver\"andern \\\\
       Beispiel:
       \begin{lstlisting}
       DELETE FROM held

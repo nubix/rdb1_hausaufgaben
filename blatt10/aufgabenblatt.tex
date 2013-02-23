@@ -86,8 +86,8 @@
     \item What is a lossless decomposition? Please explain in your own words. \\\\
     Verlustlose Dekomposition bzw. verlustlose Zerlegung bedeutet, dass man Schritt f\"ur Schritt sicher Redundanz oder auch Modifizierungsanomalien von einer Datenbank entfernt, wobei die gesammte Aussagekraft der Original-Daten erhalten bleibt.
     \item Give a relation schema with one single relation R(A, B, C, D) and a functional dependency B $  \rightarrow $  CD. Apply Heath's theorem to decompose R into two Relation R1 and R2 using the given functional dependency. \\
-    $ \Pi_{BCD} $ \\
-    $ \Pi_{BA} $ \\
+    $ \Pi_{BCD} \textcolor{red}{R_{1} (B,C,D)} $ \\
+    $ \Pi_{BA} \textcolor{red}{R_{2} (A,B)} $ \\
   \end{enumerate}
 
 \aufgabe{2}
@@ -135,7 +135,8 @@
     $ F = \{{BC\} \rightarrow \{D}\}, \{{B\} \rightarrow \{C}\}, \{{B\} \rightarrow \{D}\}, \{{B\} \rightarrow \{E}\}, \{{B\} \rightarrow \{F}\}, \{{C}\} \rightarrow \{{A}\} $ \\\\
     Da $ \{{B}\} \rightarrow \{{C}\} $ und $ \{{C}\} \rightarrow \{{A}\} $ gilt auch $ \{{B}\} \rightarrow \{{A}\} $ \\\\ $ F = \{{BC\} \rightarrow \{D}\}, \{{B\} \rightarrow \{C}\}, \{{B\} \rightarrow \{D}\}, \{{B\} \rightarrow \{E}\}, \{{B\} \rightarrow \{F}\}, \{{B}\} \rightarrow \{{A}\} $ \\\\
     Da $ \{{B}\} \rightarrow \{{C}\}  $ und $ \{{B}\} \rightarrow \{{D}\} $ l\"asst sich $ \{{BC}\} \rightarrow \{{D}\} $ ebenfalls k\"urzen und man erh\"alt als minimales \"Aquivalent zu F Folgendes: \\\\
-        $ F = \{{B\} \rightarrow \{A}\}, \{{B\} \rightarrow \{C}\}, \{{B\} \rightarrow \{D}\}, \{{B\} \rightarrow \{E}\}, \{{B\} \rightarrow \{F}\} $ \\\\
+        $ F = \{{B\} \rightarrow \{A}\}, \{{B\} \rightarrow \{C}\}, \{{B\} \rightarrow \{D}\}, \{{B\} \rightarrow \{E}\}, \{{B\} \rightarrow \{F}\} $ \\
+        $ \textcolor{red}{F' = \{BC \rightarrow D, B \rightarrow E, D \rightarrow E, D \rightarrow F, C \rightarrow A \}} $ \\\\
     \item Normalize the schema into BCNF. Use Heath's theorem to split up the given relation and note the functional dependency used for each step. Intermediate results should include a normalized schema in 2NF (but not in 3NF) and 3NF (but not in BCNF) (Hint: The functional dependency used to decompose the relation may also be part of F+)
   \end{enumerate}
 

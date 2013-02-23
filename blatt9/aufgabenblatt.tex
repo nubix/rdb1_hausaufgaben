@@ -97,13 +97,14 @@ CREATE TABLE Employee (
 CREATE TABLE PhoneNumbers (
   employeeempnr int(11) NOT NULL, 
   phoneNr       varchar(255));
-
+  --PRIMARY KEY ( employeeempnr, phoneNr )
+  
 -- Die Abteilung hat einen Leiter
 CREATE TABLE Department (
-  house   int(10) NOT NULL, 
+  house   --CHAR(1)-- NOT NULL, 
   nr      int(10) NOT NULL, 
-  manager int(11) NOT NULL, 
-  budget  int(10), 
+  manager int(11) NOT NULL --REFERENCES employee,
+  budget  --float(10), 
   PRIMARY KEY (house, nr));
 
 -- Das Projekt wird uber eine Relationentabelle mit den
@@ -115,17 +116,18 @@ CREATE TABLE Project (
 
 -- Relationentabelle um Mitarbeiter mit einem Projekt zu verknuepfen
 CREATE TABLE Employee_Project (
-  employeeempnr int(11) NOT NULL, 
-  projectname   varchar(255) NOT NULL, 
+  employeeempnr int(11) NOT NULL --REFERENCES employee ON DELETE CASCADE,
+  projectname   varchar(255) NOT NULL --REFERENCES project ON DELETE CASCADE,
   PRIMARY KEY (employeeempnr, projectname));
 
 -- Die offenen Tickets werden hier gespeichert.
 CREATE TABLE Ticket (
-  nr          int(10) NOT NULL AUTO_INCREMENT, 
+  nr          int(10) NOT NULL AUTO_INCREMENT,  ---abhaengig vom Projekt
+  --project varchar(255) NOT NULL REFERENCES project on DELETE CASCADE,
   title       varchar(255), 
   description varchar(255), 
-  importance  int(10), 
-  PRIMARY KEY (nr));
+  importance  --varchar(255) CHECK(importance IN('minor', 'medium', 'major')),
+  PRIMARY KEY (nr,--project));
 
 -- Relationentabelle um Tickets einem Projekt zuzuordnen
 CREATE TABLE Project_Ticket (
@@ -141,8 +143,8 @@ CREATE TABLE Employee_Ticket (
   ticketnr      int(10) NOT NULL, 
   start         timestamp NOT NULL, 
   end           timestamp NULL, 
-  PRIMARY KEY (employeeempnr, 
-  ticketnr));
+  --project varchar(200) NOT NULL REFERENCES Project
+  PRIMARY KEY (employeeempnr, ticketnr,--project));
 
 -- Fremdschluesselabhaengigkeiten erstellen
 ALTER TABLE PhoneNumbers
@@ -216,7 +218,7 @@ ALTER TABLE Employee_Ticket
    \item \begin{lstlisting} 
 	DROP TABLE person
   \end{lstlisting}
-  Die gesamte Tabelle \textbf{person} wird aus der Datenbank gel\"oscht. Alle restlichen Relationen bleibt unver\"andert, nur die Tabelle \textbf{person} wird aus der Datenbank entfernt. 
+  \textcolor{red}{Es passiert nichts, alle Relationen bleiben unver\"andert, da noch andere Tabellen auf Person referenzieren.}
  
 
  \end{enumerate}   

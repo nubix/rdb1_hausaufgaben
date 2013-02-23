@@ -79,28 +79,28 @@
       $
       \pi _{Person.id, Person.name}\\
       \sigma _{Movie.title=`{The\, legacy\, of\, Codd`}}\\
-      (Movie\Join_{Movie.id = actor.movie} \sigma _{actor.role = \neg null} actor)
+      (Movie\Join_{Movie.id = actor.movie} \sigma _{actor.role = \neg null\textcolor{red}{ <-geht nicht }} actor)
       $
+      \textcolor{red}{Person.id und Person.name muss aus Person geholt werden, nicht angeben.}
     \item The names of all persons, who at least once acted and directed in the same movie.\hfill\\
       $
       \pi _{Person.name}\\
-      \sigma _{actor.person = director.person \,\wedge\, actor.movie = director.movie}\\
+      \sigma _{actor.person = director.person \,\wedge\, actor.movie = director.movie \, \textcolor{red}{\wedge\, Person.id=actor.person}}\\
       (actor \times Director \times Person)
       $
     \item The number of parodies to the movie ``Adventures with relational databases``.
       $
-      \pi_{\mathfrak{F}_{count(Movie.title)}} \\
+      \pi_{\mathfrak{F}_{count(\textcolor{red}{from})}} \\
       \sigma_{Movie.title = '\textrm{Adventures with relational databases}' \,\wedge\, connection.type = 'parody'}\\
       (Movie\Join_{connection.to = Movie.id}connection)
       $
 
     \item Genres that are not assigned to any movie at all. \hfill \\
       $
-      \pi _{Genre.name} \\
-      (\pi _{Genre.name}(Genre \Join _{Genre.name = hasGenre.genre} Genre )\\
+      (\pi _{Genre.name} \textcolor{red}{Genre}) \\
       \backslash
         \\
-        \pi _{Genre.name} \sigma _{Genre.name = hasGenre.genre} (Genre \Join _{Movie.id = hasGenre.movie} hasGenre))
+        \textcolor{red}{(\pi _{hasGenre.genre}hasGenre)}
       $
     \item The titles of movies that are a ``sequel`` of a ``parody``. \\
       $\pi_{Movie.title} \\
@@ -129,7 +129,7 @@
    \item Doppelte Werte bzw. Duplikate gehen bei der Aggregation ebenfalls doppelt ein.
    \item Vereinigung: Beide Relationen m\"ussen dieselbe Anzahl an Attributen besitzen dessen Namen \"ubereinstimmen. 
    \\ Schnitt: M\"ussen dieselbe Anzahl an Argumenten in den einzelnen Tupeln besitzen, Namen m\"ussen \"ubereinstimmen
-   \\ Differenz: 
+   \\ Differenz: \textcolor{red}{Es gilt f\"ur alle Differenz dasselbe, wie bei Schnitt oder Vereinigung}
 
    \item \begin{displaymath} R \Join _{\theta} S =  \sigma _{\theta} (R \times S) \end{displaymath}
  \end{enumerate}
@@ -137,5 +137,6 @@
 $ \pi _{s}\, (A\, \cap \, B) = (\pi _{s} \, A)\, \cap \,(\pi _{s}\, B)$
 \\\\ \textbf{A} = \textbf{Kurse} | \textbf{B} = \textbf{Songs} | \texttt{s} = \texttt{Titel} 
 \\\\Wir haben beispielsweise eine Relation \textbf{Kurse} mit den Attributen \texttt{Kursnummer} und \texttt{Titel} (exemplarisch f\"ur A). Ebenso haben wir eine Relation \textbf{Songs} mit den Attributen \texttt{Songnummer} und ebenfalls einem \texttt{Titel} (exemplarisch f\"ur B). Der \texttt{Titel} steht in unserem Fall f\"ur das Attribut s. Links vom Gleichheitszeichen wird also erst die Schnittmenge aus Tupeln zwischen \textbf{Kurse} und \textbf{Songs} erstellt, von der Ergebnisrelation werden dann die \texttt{Titel} projiziert. Rechts vom Gleichheitszeichen werden jeweils erst die \texttt{Titel} der \textbf{Kurse} sowie die \texttt{Titel} der \textbf{Songs} projiziert. Aus den beiden Ergebnisrelationen wird dann die Schnittmenge an Tupeln erstellt. Es kann also passieren, wenn auch sehr unwahrscheinlich, dass ein \texttt{Titel} eines \textbf{Songs} genauso lautet wie der \texttt{Titel} eines \textbf{Kurses}. Es ist also nicht dieselbe Schnittmenge an Tupeln wie auf der linken Seite vom Gleichheitszeichen. Auf der linken Seite vom Gleichheitszeichen muss, damit man gleiche Tupel erh\"alt nicht nur der \texttt{Titel} gleich sein sondern auch die \texttt{Nummer} der Song- oder Kurstitel. Da dies jedoch auf jedenfall nicht so h\"aufig vorkommen wird, wie zwei identische \texttt{Titel}, erh\"alt man auf der linken Seite vom Gleichheitszeichen eine andere Schnittmenge an Tupeln.
+\textcolor{red}{Sch\"oner w\"aren anschauliche Tabellen.}
 \end{document}
 
