@@ -11,7 +11,7 @@ import model.Movie;
 import model.Person;
 
 /**
-  * A class to wrap some data maipulation and querying tasks for the application
+  * A class to wrap some data manipulation and querying tasks for the application
   */
 public class MovieExplorer {
 
@@ -56,7 +56,7 @@ public class MovieExplorer {
 	
 	public MovieExplorer(Connection conn) throws SQLException {
 		if(conn == null) {
-			throw new IllegalArgumentException("Connecton must not be null");
+			throw new IllegalArgumentException("Connection must not be null");
 		}
 		
 		/*
